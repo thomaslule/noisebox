@@ -3,6 +3,16 @@ const buttonsDic = [
   { index: 1, name: 'B' },
   { index: 2, name: 'X' },
   { index: 3, name: 'Y' },
+  { index: 4, name: 'LB' },
+  { index: 5, name: 'RB' },
+  { index: 8, name: 'BACK' },
+  { index: 9, name: 'START' },
+  { index: 10, name: 'LSTICK' },
+  { index: 11, name: 'RSTICK' },
+  { index: 12, name: 'PAD_UP' },
+  { index: 13, name: 'PAD_DOWN' },
+  { index: 14, name: 'PAD_LEFT' },
+  { index: 15, name: 'PAD_RIGHT' },
 ];
 
 const previousButtonsState = buttonsDic.map(button => ({ index: button.index, pressed: false }));
@@ -81,16 +91,12 @@ const updateTriggerStatus = (trigger, value) => {
 };
 
 const updateStatus = (gamepad) => {
-  updateButtonStatus(0, gamepad.buttons[0].pressed);
-  updateButtonStatus(1, gamepad.buttons[1].pressed);
-  updateButtonStatus(2, gamepad.buttons[2].pressed);
-  updateButtonStatus(3, gamepad.buttons[3].pressed);
-  updateAxisStatus(0, gamepad.axes[0].toFixed(1));
-  updateAxisStatus(1, gamepad.axes[1].toFixed(1));
-  updateAxisStatus(2, gamepad.axes[2].toFixed(1));
-  updateAxisStatus(3, gamepad.axes[3].toFixed(1));
-  updateTriggerStatus(6, gamepad.buttons[6].value.toFixed(1));
-  updateTriggerStatus(7, gamepad.buttons[7].value.toFixed(1));
+  [0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15]
+    .forEach(index => updateButtonStatus(index, gamepad.buttons[index].pressed));
+  [0, 1, 2, 3]
+    .forEach(index => updateAxisStatus(index, gamepad.axes[index].toFixed(1)));
+  [6, 7]
+    .forEach(index => updateTriggerStatus(index, gamepad.buttons[index].value.toFixed(1)));
 };
 
 const updateLoop = () => {
