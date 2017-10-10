@@ -25,7 +25,7 @@ export default props => (
           <FormControl
             type="number"
             value={props.component.params.frequency}
-            onChange={e => props.onChangeFrequency(props.component.id, e.target.value)}
+            onChange={e => props.onChangeFrequency(props.component.id, Number(e.target.value))}
             required
           />
         </Col>
