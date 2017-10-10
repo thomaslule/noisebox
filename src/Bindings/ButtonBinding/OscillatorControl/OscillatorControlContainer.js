@@ -5,8 +5,8 @@ import { changeType, changeSetFrequencyParams } from './oscillatorControlActions
 const mapStateToProps = (state, ownProps) => ({
   button: ownProps.button,
   oscillator: ownProps.oscillator,
-  type: state.gamepadMapping.find(b => b.button === ownProps.button).effect.type,
-  params: state.gamepadMapping.find(b => b.button === ownProps.button).effect.params,
+  type: state.bindings.find(b => b.button === ownProps.button).effect.type,
+  params: state.bindings.find(b => b.button === ownProps.button).effect.params,
 });
 
 const mapDispatchToProps = {

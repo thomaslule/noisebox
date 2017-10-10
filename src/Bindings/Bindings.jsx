@@ -2,7 +2,7 @@ import React from 'react';
 import { Panel, ListGroup, ListGroupItem, FormControl, Button, Col, ControlLabel, FormGroup, Form } from 'react-bootstrap';
 import ButtonBinding from './ButtonBinding';
 
-class GamepadMapping extends React.Component {
+class Bindings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,4 +50,4 @@ class GamepadMapping extends React.Component {
   }
 }
 
-export default GamepadMapping;
+export default Bindings;

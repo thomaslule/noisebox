@@ -5,7 +5,7 @@ import { changeComponent } from './buttonBindingActions';
 const mapStateToProps = (state, ownProps) => ({
   button: ownProps.button,
   components: state.components,
-  selectedComponent: state.gamepadMapping.find(b => b.button === ownProps.button).component,
+  selectedComponent: state.bindings.find(b => b.button === ownProps.button).component,
 });
 
 const mapDispatchToProps = {

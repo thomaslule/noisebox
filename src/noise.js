@@ -17,7 +17,7 @@ export default (params) => {
     return null;
   });
   resetBindings();
-  params.gamepadMapping.forEach((binding) => {
+  params.bindings.forEach((binding) => {
     if (binding.component === 'none' || binding.effect.type === 'none') return;
     const comp = components.find(c => c.id === binding.component).component;
     let effect = () => null;
