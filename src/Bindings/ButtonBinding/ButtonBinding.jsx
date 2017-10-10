@@ -8,7 +8,7 @@ export default (props) => {
     <ListGroupItem>
       <Form horizontal>
         <FormGroup>
-          <Col componentClass={ControlLabel} md={3}>Button</Col>
+          <Col componentClass={ControlLabel} md={3}>Action</Col>
           <Col componentClass={FormControl.Static} md={9}>{props.button}</Col>
         </FormGroup>
         <FormGroup>

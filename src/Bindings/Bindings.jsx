@@ -24,7 +24,7 @@ class Bindings extends React.Component {
       <ListGroupItem>
         <Form horizontal>
           <FormGroup>
-            <Col componentClass={ControlLabel} md={3}>Button</Col>
+            <Col componentClass={ControlLabel} md={3}>Action</Col>
             <Col md={9}>
               <FormControl value={this.state.selectedButton} onChange={e => this.handleChangeButton(e.target.value)} componentClass="select">
                 {this.state.availableButtons.map(b => <option value={b} key={b}>{b}</option>)}
