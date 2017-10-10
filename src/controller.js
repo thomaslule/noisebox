@@ -96,9 +96,9 @@ const updateStatus = (gamepad) => {
   [0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15]
     .forEach(index => updateButtonStatus(index, gamepad.buttons[index].pressed));
   [0, 1, 2, 3]
-    .forEach(index => updateAxisStatus(index, gamepad.axes[index].toFixed(1)));
+    .forEach(index => updateAxisStatus(index, gamepad.axes[index].toFixed(2)));
   [6, 7]
-    .forEach(index => updateTriggerStatus(index, gamepad.buttons[index].value.toFixed(1)));
+    .forEach(index => updateTriggerStatus(index, gamepad.buttons[index].value.toFixed(2)));
 };
 
 const updateLoop = () => {
