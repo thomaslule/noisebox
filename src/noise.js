@@ -4,7 +4,9 @@ import { resetBindings, onPress, onRelease, onMoveStick, onMoveTrigger } from '.
 let components = [];
 
 export default (params) => {
-  components.forEach(c => c.component.stop());
+  components.forEach((c) => {
+    if (c.component.stop) c.component.stop();
+  });
   components = params.components.map((component) => {
     if (component.type === 'oscillator') {
       const o = new Tone.Oscillator();
@@ -12,6 +14,13 @@ export default (params) => {
       o.frequency.value = component.params.frequency;
       if (component.params.toMaster) o.toMaster();
       o.start();
+      return { id: component.id, component: o, fixedFrequency: component.params.frequency };
+    }
+    if (component.type === 'filter') {
+      const o = new Tone.Filter();
+      o.type = component.params.type;
+      o.frequency.value = component.params.frequency;
+      if (component.params.toMaster) o.toMaster();
       return { id: component.id, component: o, fixedFrequency: component.params.frequency };
     }
     return null;

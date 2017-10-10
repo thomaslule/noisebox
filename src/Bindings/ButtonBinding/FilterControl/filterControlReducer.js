@@ -1,5 +1,5 @@
 export default (state, action) => {
-  if (action.type === 'OSCILLATOR_CONTROL_CHANGE_TYPE') {
+  if (action.type === 'FILTER_CONTROL_CHANGE_TYPE') {
     let params;
     if (action.value === 'none') params = {};
     if (action.value === 'set_frequency') params = { frequency: 440 };
@@ -9,8 +9,8 @@ export default (state, action) => {
       params,
     };
   }
-  if (action.type === 'OSCILLATOR_CONTROL_CHANGE_TYPE'
-    || action.type === 'OSCILLATOR_CONTROL_CHANGE_PARAMS') {
+  if (action.type === 'FILTER_CONTROL_CHANGE_TYPE'
+    || action.type === 'FILTER_CONTROL_CHANGE_PARAMS') {
     return { ...state, params: action.params };
   }
   return state;

@@ -42,7 +42,7 @@ class Bindings extends React.Component {
   }
 
   render() {
-    const bindings = this.props.bindings.map(binding => (<ButtonBinding key={binding.button} button={binding.button} />));
+    const bindings = this.props.bindings.map(binding => (<ButtonBinding key={binding.button} binding={binding} />));
     const add = this.state.availableActions ? (
       <ListGroupItem>
         <Form horizontal>

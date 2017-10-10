@@ -1,9 +1,16 @@
 import React from 'react';
 import { Form, ListGroupItem, FormControl, Col, ControlLabel, FormGroup, Button } from 'react-bootstrap';
 import OscillatorControl from './OscillatorControl';
+import FilterControl from './FilterControl';
 
 export default (props) => {
-  const control = props.selectedComponent === 'none' ? null : <OscillatorControl button={props.button} oscillator={props.selectedComponent} />;
+  let control;
+  if (props.selectedComponentType === 'oscillator') {
+    control = <OscillatorControl button={props.button} oscillator={props.selectedComponent} />;
+  }
+  if (props.selectedComponentType === 'filter') {
+    control = <FilterControl button={props.button} />;
+  }
   return (
     <ListGroupItem>
       <Form horizontal>

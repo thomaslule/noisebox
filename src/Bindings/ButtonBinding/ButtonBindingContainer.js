@@ -3,9 +3,10 @@ import ButtonBinding from './ButtonBinding';
 import { changeComponent, deleteBinding } from './buttonBindingActions';
 
 const mapStateToProps = (state, ownProps) => ({
-  button: ownProps.button,
+  button: ownProps.binding.button,
   components: state.components,
-  selectedComponent: state.bindings.find(b => b.button === ownProps.button).component,
+  selectedComponent: ownProps.binding.component,
+  selectedComponentType: (state.components.find(c => c.id === ownProps.binding.component) || { type: 'none' }).type,
 });
 
 const mapDispatchToProps = {
