@@ -1,13 +1,33 @@
 import React from 'react';
+import { Panel, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import Oscillator from './Oscillator';
 
 export default (props) => {
   const components = props.components.map((component) => {
     if (component.type === 'oscillator') {
-      return (<Oscillator key={component.id} type={component.params.type} frequency={component.params.frequency} toMaster={component.params.toMaster} />);
+      return (
+        <Oscillator
+          key={component.id}
+          id={component.id}
+          type={component.params.type}
+          frequency={component.params.frequency}
+          toMaster={component.params.toMaster}
+        />
+      );
     }
     return null;
   });
-  const add = <button onClick={() => props.addComponent()}>Add</button>;
-  return <div>{components}{add}</div>;
+  const add = (
+    <ListGroupItem>
+      <Button onClick={() => props.addComponent()}>Add</Button>
+    </ListGroupItem>
+  );
+  return (
+    <Panel header="Components">
+      <ListGroup fill>
+        {components}
+        {add}
+      </ListGroup>
+    </Panel>
+  );
 };

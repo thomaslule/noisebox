@@ -3,9 +3,10 @@ import Oscillator from './Oscillator';
 import { changeType, changeFrequency, changeToMaster } from './oscillatorActions';
 
 const mapStateToProps = (state, ownProps) => ({
-  type: ownProps.type,
-  frequency: ownProps.frequency,
-  toMaster: ownProps.toMaster,
+  id: ownProps.id,
+  type: state.components.find(c => c.id === ownProps.id).params.type,
+  frequency: state.components.find(c => c.id === ownProps.id).params.frequency,
+  toMaster: state.components.find(c => c.id === ownProps.id).params.toMaster,
 });
 
 const mapDispatchToProps = {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Panel, ListGroup, ListGroupItem, FormControl, Button, Col, ControlLabel, FormGroup, Form } from 'react-bootstrap';
 import ButtonBinding from './ButtonBinding';
 
 class GamepadMapping extends React.Component {
@@ -19,13 +20,33 @@ class GamepadMapping extends React.Component {
 
   render() {
     const bindings = this.props.bindings.map(binding => (<ButtonBinding key={binding.button} button={binding.button} />));
-    const buttonChoice = (
-      <select value={this.state.selectedButton} onChange={e => this.handleChangeButton(e.target.value)}>
-        {this.state.availableButtons.map(b => <option value={b} key={b}>{b}</option>)}
-      </select>
+    const add = (
+      <ListGroupItem>
+        <Form horizontal>
+          <FormGroup>
+            <Col componentClass={ControlLabel} md={3}>Button</Col>
+            <Col md={9}>
+              <FormControl value={this.state.selectedButton} onChange={e => this.handleChangeButton(e.target.value)} componentClass="select">
+                {this.state.availableButtons.map(b => <option value={b} key={b}>{b}</option>)}
+              </FormControl>
+            </Col>
+          </FormGroup>
+          <FormGroup>
+            <Col mdOffset={3} md={9}>
+              <Button onClick={() => this.props.addBinding(this.state.selectedButton)}>Add</Button>
+            </Col>
+          </FormGroup>
+        </Form>
+      </ListGroupItem>
     );
-    const add = <button onClick={() => this.props.addBinding(this.state.selectedButton)}>Add</button>;
-    return <div>{bindings}{buttonChoice}{add}</div>;
+    return (
+      <Panel header="Bindings">
+        <ListGroup fill>
+          {bindings}
+          {add}
+        </ListGroup>
+      </Panel>
+    );
   }
 }
 
