@@ -15,3 +15,8 @@ export const changeToMaster = (id, value) => ({
   id,
   value,
 });
+
+export const deleteOscillator = id => ({
+  type: 'COMPONENT_DELETE',
+  id,
+});

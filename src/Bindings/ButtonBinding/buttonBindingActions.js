@@ -3,3 +3,8 @@ export const changeComponent = (button, component) => ({
   button,
   component,
 });
+
+export const deleteBinding = button => ({
+  type: 'DELETE_BINDING',
+  button,
+});

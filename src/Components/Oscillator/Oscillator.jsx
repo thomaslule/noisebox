@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroupItem, Form, FormGroup, ControlLabel, Col, FormControl, Checkbox } from 'react-bootstrap';
+import { ListGroupItem, Form, FormGroup, ControlLabel, Col, FormControl, Checkbox, Button } from 'react-bootstrap';
 
 export default props => (
   <ListGroupItem>
@@ -34,6 +34,11 @@ export default props => (
         <Col componentClass={ControlLabel} md={3}>To master</Col>
         <Col md={9}>
           <Checkbox checked={props.component.params.toMaster} onChange={e => props.onChangeToMaster(props.component.id, e.target.checked)} />
+        </Col>
+      </FormGroup>
+      <FormGroup>
+        <Col mdOffset={3} md={9}>
+          <Button onClick={() => props.onDelete(props.component.id)}>Delete</Button>
         </Col>
       </FormGroup>
     </Form>

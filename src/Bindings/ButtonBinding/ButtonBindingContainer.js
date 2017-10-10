@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ButtonBinding from './ButtonBinding';
-import { changeComponent } from './buttonBindingActions';
+import { changeComponent, deleteBinding } from './buttonBindingActions';
 
 const mapStateToProps = (state, ownProps) => ({
   button: ownProps.button,
@@ -10,6 +10,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = {
   onChangeComponent: changeComponent,
+  onDelete: deleteBinding,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ButtonBinding);

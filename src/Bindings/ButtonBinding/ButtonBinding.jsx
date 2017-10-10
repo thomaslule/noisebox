@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, ListGroupItem, FormControl, Col, ControlLabel, FormGroup } from 'react-bootstrap';
+import { Form, ListGroupItem, FormControl, Col, ControlLabel, FormGroup, Button } from 'react-bootstrap';
 import OscillatorControl from './OscillatorControl';
 
 export default (props) => {
@@ -21,6 +21,11 @@ export default (props) => {
           </Col>
         </FormGroup>
         {control}
+        <FormGroup>
+          <Col mdOffset={3} md={9}>
+            <Button onClick={() => props.onDelete(props.button)}>Delete</Button>
+          </Col>
+        </FormGroup>
       </Form>
     </ListGroupItem>);
 };
