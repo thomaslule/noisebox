@@ -9,7 +9,7 @@ export default (params) => {
       const o = new Tone.Oscillator();
       o.type = component.params.type;
       o.frequency.value = component.params.frequency;
-      if (component.params.to_master) o.toMaster();
+      if (component.params.toMaster) o.toMaster();
       o.start();
       return o;
     }
