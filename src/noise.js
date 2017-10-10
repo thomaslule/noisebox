@@ -1,5 +1,5 @@
 import Tone from 'tone';
-import { resetBindings, onPress } from './controller';
+import { resetBindings, onPress, onRelease } from './controller';
 
 let components = [];
 
@@ -22,6 +22,8 @@ export default (params) => {
     const comp = components.find(c => c.id === binding.component).component;
     let effect = () => null;
     if (binding.effect.type === 'set_frequency') effect = () => { comp.frequency.value = binding.effect.params.frequency; };
-    onPress(binding.button, effect);
+    const [action, button] = binding.button.split(' ');
+    if (action === 'press') onPress(button, effect);
+    if (action === 'release') onRelease(button, effect);
   });
 };
