@@ -1,5 +1,5 @@
 import Tone from 'tone';
-import { resetBindings, onPress, onRelease, onMoveStick } from './controller';
+import { resetBindings, onPress, onRelease, onMoveStick, onMoveTrigger } from './controller';
 
 let components = [];
 
@@ -36,5 +36,6 @@ export default (params) => {
     if (action === 'press') onPress(button, effect);
     if (action === 'release') onRelease(button, effect);
     if (action === 'move' && button.includes('STICK')) onMoveStick(button, effect);
+    if (action === 'move' && (button === 'LT' || button === 'RT')) onMoveTrigger(button, effect);
   });
 };
