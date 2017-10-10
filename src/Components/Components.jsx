@@ -2,9 +2,9 @@ import React from 'react';
 import Oscillator from './Oscillator';
 
 export default (props) => {
-  const components = props.components.map((component, index) => {
+  const components = props.components.map((component) => {
     if (component.type === 'oscillator') {
-      return (<Oscillator key={index} type={component.params.type} frequency={component.params.frequency} toMaster={component.params.toMaster} />);
+      return (<Oscillator key={component.id} type={component.params.type} frequency={component.params.frequency} toMaster={component.params.toMaster} />);
     }
     return null;
   });

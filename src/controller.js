@@ -129,4 +129,10 @@ export const onMoveTrigger = (triggerName, callback) => {
   getFromIndex(triggersCallbacks, triggerIndex).onMove = callback;
 };
 
+export const resetBindings = () => {
+  buttonsCallbacks.map(binding => ({ ...binding, onPress: noop, onRelease: noop }));
+  axisCallbacks.map(binding => ({ ...binding, onMove: noop }));
+  triggersCallbacks.map(binding => ({ ...binding, onMove: noop }));
+};
+
 updateLoop();
