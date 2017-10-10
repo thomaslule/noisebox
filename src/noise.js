@@ -7,6 +7,9 @@ export default (params) => {
   components.forEach((c) => {
     if (c.component.stop) c.component.stop();
   });
+  if (params.muteAll) {
+    return;
+  }
   components = params.components.map((component) => {
     if (component.type === 'oscillator') {
       const o = new Tone.Oscillator();
