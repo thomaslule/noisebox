@@ -1,9 +1,10 @@
 let id = 0;
 
-export const addComponent = () => {
+export const addComponent = (componentType = 'oscillator') => {
   id += 1;
   return {
     type: 'COMPONENTS_ADD',
-    id: `oscillator ${id}`,
+    id: `${componentType} ${id}`,
+    componentType,
   };
 };

@@ -1,14 +1,17 @@
-export const changeType = value => ({
+export const changeType = (id, value) => ({
   type: 'OSCILLATOR_CHANGE_TYPE',
+  id,
   value,
 });
 
-export const changeFrequency = value => ({
+export const changeFrequency = (id, value) => ({
   type: 'OSCILLATOR_CHANGE_FREQUENCY',
+  id,
   value,
 });
 
-export const changeToMaster = value => ({
+export const changeToMaster = (id, value) => ({
   type: 'OSCILLATOR_CHANGE_TO_MASTER',
+  id,
   value,
 });

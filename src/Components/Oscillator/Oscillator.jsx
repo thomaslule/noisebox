@@ -6,12 +6,12 @@ export default props => (
     <Form horizontal>
       <FormGroup>
         <Col componentClass={ControlLabel} md={3}>Name</Col>
-        <Col componentClass={FormControl.Static} md={9}>{props.id}</Col>
+        <Col componentClass={FormControl.Static} md={9}>{props.component.id}</Col>
       </FormGroup>
       <FormGroup>
         <Col componentClass={ControlLabel} md={3}>Type</Col>
         <Col md={9}>
-          <FormControl value={props.type} onChange={e => props.onChangeType(e.target.value)} componentClass="select">
+          <FormControl value={props.component.params.type} onChange={e => props.onChangeType(props.component.id, e.target.value)} componentClass="select">
             <option value="sine">sine</option>
             <option value="square">square</option>
             <option value="triangle">triangle</option>
@@ -24,8 +24,8 @@ export default props => (
         <Col md={9}>
           <FormControl
             type="number"
-            value={props.frequency}
-            onChange={e => props.onChangeFrequency(e.target.value)}
+            value={props.component.params.frequency}
+            onChange={e => props.onChangeFrequency(props.component.id, e.target.value)}
             required
           />
         </Col>
@@ -33,7 +33,7 @@ export default props => (
       <FormGroup>
         <Col componentClass={ControlLabel} md={3}>To master</Col>
         <Col md={9}>
-          <Checkbox checked={props.toMaster} onChange={e => props.onChangeToMaster(e.target.checked)} />
+          <Checkbox checked={props.component.params.toMaster} onChange={e => props.onChangeToMaster(props.component.id, e.target.checked)} />
         </Col>
       </FormGroup>
     </Form>

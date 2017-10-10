@@ -8,10 +8,7 @@ export default (props) => {
       return (
         <Oscillator
           key={component.id}
-          id={component.id}
-          type={component.params.type}
-          frequency={component.params.frequency}
-          toMaster={component.params.toMaster}
+          component={component}
         />
       );
     }
