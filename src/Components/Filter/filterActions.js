@@ -10,8 +10,8 @@ export const changeFrequency = (id, value) => ({
   value,
 });
 
-export const changeToMaster = (id, value) => ({
-  type: 'FILTER_CHANGE_TO_MASTER',
+export const changeConnectTo = (id, value) => ({
+  type: 'FILTER_CHANGE_CONNECT_TO',
   id,
   value,
 });

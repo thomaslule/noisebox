@@ -15,18 +15,33 @@ export default (params) => {
       const o = new Tone.Oscillator();
       o.type = component.params.type;
       o.frequency.value = component.params.frequency;
-      if (component.params.toMaster) o.toMaster();
       o.start();
-      return { id: component.id, component: o, fixedFrequency: component.params.frequency };
+      return {
+        id: component.id,
+        connectTo: component.connectTo,
+        component: o,
+        fixedFrequency: component.params.frequency,
+      };
     }
     if (component.type === 'filter') {
       const o = new Tone.Filter();
       o.type = component.params.type;
       o.frequency.value = component.params.frequency;
-      if (component.params.toMaster) o.toMaster();
-      return { id: component.id, component: o, fixedFrequency: component.params.frequency };
+      return {
+        id: component.id,
+        connectTo: component.connectTo,
+        component: o,
+        fixedFrequency: component.params.frequency,
+      };
     }
     return null;
+  });
+  components.forEach((c) => {
+    if (c.connectTo === 'master') {
+      c.component.toMaster();
+    } else {
+      c.component.connect(components.find(c2 => c2.id === c.connectTo).component);
+    }
   });
   resetBindings();
   params.bindings.forEach((binding) => {
