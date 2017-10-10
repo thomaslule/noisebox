@@ -1,3 +1,5 @@
+const noop = () => null;
+
 const buttonsDic = [
   { index: 0, name: 'A' },
   { index: 1, name: 'B' },
@@ -18,7 +20,7 @@ const buttonsDic = [
 const previousButtonsState = buttonsDic.map(button => ({ index: button.index, pressed: false }));
 
 const buttonsCallbacks = buttonsDic.map(button => (
-  { index: button.index, onPress: [], onRelease: [] }
+  { index: button.index, onPress: noop, onRelease: noop }
 ));
 
 const axisDic = [
@@ -31,7 +33,7 @@ const axisDic = [
 const previousAxisState = axisDic.map(axis => ({ index: axis.index, value: 0 }));
 
 const axisCallbacks = axisDic.map(axis => (
-  { index: axis.index, onMove: [] }
+  { index: axis.index, onMove: noop }
 ));
 
 const triggersDic = [
@@ -42,19 +44,19 @@ const triggersDic = [
 const previousTriggersState = triggersDic.map(trigger => ({ index: trigger.index, value: 0 }));
 
 const triggersCallbacks = triggersDic.map(trigger => (
-  { index: trigger.index, onMove: [] }
+  { index: trigger.index, onMove: noop }
 ));
 
 const getFromIndex = (collection, index) => collection.find(entry => entry.index === index);
 const getFromName = (collection, name) => collection.find(entry => entry.name === name);
 
 const buttonPressed = (button) => {
-  getFromIndex(buttonsCallbacks, button).onPress.forEach(callback => callback());
+  getFromIndex(buttonsCallbacks, button).onPress();
   getFromIndex(previousButtonsState, button).pressed = true;
 };
 
 const buttonReleased = (button) => {
-  getFromIndex(buttonsCallbacks, button).onRelease.forEach(callback => callback());
+  getFromIndex(buttonsCallbacks, button).onRelease();
   getFromIndex(previousButtonsState, button).pressed = false;
 };
 
@@ -69,7 +71,7 @@ const updateButtonStatus = (button, pressed) => {
 };
 
 const axisMoved = (axis, value) => {
-  getFromIndex(axisCallbacks, axis).onMove.forEach(callback => callback(value));
+  getFromIndex(axisCallbacks, axis).onMove(value);
   getFromIndex(previousAxisState, axis).value = value;
 };
 
@@ -80,7 +82,7 @@ const updateAxisStatus = (axis, value) => {
 };
 
 const triggerMoved = (trigger, value) => {
-  getFromIndex(triggersCallbacks, trigger).onMove.forEach(callback => callback(value));
+  getFromIndex(triggersCallbacks, trigger).onMove(value);
   getFromIndex(previousTriggersState, trigger).value = value;
 };
 
@@ -109,22 +111,22 @@ const updateLoop = () => {
 
 export const onPress = (buttonName, callback) => {
   const buttonIndex = getFromName(buttonsDic, buttonName).index;
-  getFromIndex(buttonsCallbacks, buttonIndex).onPress.push(callback);
+  getFromIndex(buttonsCallbacks, buttonIndex).onPress = callback;
 };
 
 export const onRelease = (buttonName, callback) => {
   const buttonIndex = getFromName(buttonsDic, buttonName).index;
-  getFromIndex(buttonsCallbacks, buttonIndex).onRelease.push(callback);
+  getFromIndex(buttonsCallbacks, buttonIndex).onRelease = callback;
 };
 
 export const onMoveStick = (axisName, callback) => {
   const axisIndex = getFromName(axisDic, axisName).index;
-  getFromIndex(axisCallbacks, axisIndex).onMove.push(callback);
+  getFromIndex(axisCallbacks, axisIndex).onMove = callback;
 };
 
 export const onMoveTrigger = (triggerName, callback) => {
   const triggerIndex = getFromName(triggersDic, triggerName).index;
-  getFromIndex(triggersCallbacks, triggerIndex).onMove.push(callback);
+  getFromIndex(triggersCallbacks, triggerIndex).onMove = callback;
 };
 
 updateLoop();
