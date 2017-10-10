@@ -6,7 +6,7 @@ class Bindings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      availableButtons: ['press A', 'release A', 'press B', 'release B'],
+      availableButtons: ['press A', 'release A', 'press B', 'release B', 'move RSTICK_Y', 'move RSTICK_X'],
       selectedButton: 'press A',
     };
   }

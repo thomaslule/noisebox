@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import OscillatorControl from './OscillatorControl';
-import { changeType, changeSetFrequencyParams } from './oscillatorControlActions';
+import { changeType, changeParams } from './oscillatorControlActions';
 
 const mapStateToProps = (state, ownProps) => ({
   button: ownProps.button,
@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = {
   onChangeType: changeType,
-  onChangeSetFrequencyParams: changeSetFrequencyParams,
+  onChangeParams: changeParams,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OscillatorControl);

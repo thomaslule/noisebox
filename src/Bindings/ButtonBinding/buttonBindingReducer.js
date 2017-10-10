@@ -7,7 +7,7 @@ export default (state, action) => {
     case 'BINDING_CHANGE_COMPONENT':
       return (action.button === state.button) ? { ...state, component: action.component, effect: oscillatorControlReducer(undefined, action) } : state;
     case 'OSCILLATOR_CONTROL_CHANGE_TYPE':
-    case 'OSCILLATOR_CONTROL_CHANGE_SET_FREQUENCY_PARAMS':
+    case 'OSCILLATOR_CONTROL_CHANGE_PARAMS':
       return (action.button === state.button) ? { ...state, effect: oscillatorControlReducer(state.effect, action) } : state;
     default: return state;
   }
