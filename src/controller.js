@@ -135,4 +135,10 @@ export const resetBindings = () => {
   triggersCallbacks.map(binding => ({ ...binding, onMove: noop }));
 };
 
+export const buttonsList = () => buttonsDic.map(dic => dic.name);
+
+export const axisList = () => axisDic.map(dic => dic.name);
+
+export const triggersList = () => triggersDic.map(dic => dic.name);
+
 updateLoop();
