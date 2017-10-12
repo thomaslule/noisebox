@@ -1,6 +1,7 @@
 import React from 'react';
-import { Panel, ListGroup, ListGroupItem, Button, Form, FormGroup, Col, FormControl, ControlLabel } from 'react-bootstrap';
+import { Panel, ListGroup, ListGroupItem, Form } from 'react-bootstrap';
 import Component from './Component';
+import { Button, Select } from '../Shared';
 import { getAll, getDefault } from './componentsDictionary';
 
 const defaultComponent = getDefault().name;
@@ -27,37 +28,25 @@ class Components extends React.Component {
   }
 
   render() {
-    const components = this.props.components.map(component => (
-      <Component key={component.id} component={component} />
-    ));
-    const add = (
-      <ListGroupItem>
-        <Form horizontal>
-          <FormGroup>
-            <Col componentClass={ControlLabel} md={3}>Component</Col>
-            <Col md={9}>
-              <FormControl
-                value={this.state.selectedComponent}
-                onChange={e => this.handleChangeComponent(e.target.value)}
-                componentClass="select"
-              >
-                {getAll().map(c => <option value={c.name} key={c.name}>{c.text}</option>)}
-              </FormControl>
-            </Col>
-          </FormGroup>
-          <FormGroup>
-            <Col mdOffset={3} md={9}>
-              <Button onClick={() => this.handleClickAdd()}>Add</Button>
-            </Col>
-          </FormGroup>
-        </Form>
-      </ListGroupItem>
-    );
     return (
       <Panel header="Components">
         <ListGroup fill>
-          {components}
-          {add}
+          {this.props.components.map(component =>
+            <Component key={component.id} component={component} />)}
+          <ListGroupItem>
+            <Form horizontal>
+              <Select
+                label="Component"
+                value={this.state.selectedComponent}
+                onChange={e => this.handleChangeComponent(e.target.value)}
+                options={getAll().map(c => ({ text: c.text, value: c.name }))}
+              />
+              <Button
+                onClick={() => this.handleClickAdd()}
+                text="Add"
+              />
+            </Form>
+          </ListGroupItem>
         </ListGroup>
       </Panel>
     );
