@@ -1,19 +1,15 @@
-let oscillatorId = 1;
-let filterId = 1;
+import { getAll } from './componentsDictionary';
+
+let ids = getAll().map(c => ({
+  name: c.name,
+  currentId: 0,
+}));
 
 export const addComponent = (componentType) => {
-  let id;
-  if (componentType === 'oscillator') {
-    id = oscillatorId;
-    oscillatorId += 1;
-  }
-  if (componentType === 'filter') {
-    id = filterId;
-    filterId += 1;
-  }
+  ids = ids.map(c => (c.name === componentType ? { ...c, currentId: c.currentId + 1 } : c));
   return {
-    type: 'COMPONENTS_ADD',
-    id: `${componentType} ${id}`,
+    type: 'COMPONENT_ADD',
+    id: `${componentType} ${ids.find(c => c.name === componentType).currentId}`,
     componentType,
   };
 };

@@ -1,13 +1,15 @@
 import React from 'react';
 import { Panel, ListGroup, ListGroupItem, Button, Form, FormGroup, Col, FormControl, ControlLabel } from 'react-bootstrap';
-import Oscillator from './Oscillator';
-import Filter from './Filter';
+import Component from './Component';
+import { getAll, getDefault } from './componentsDictionary';
+
+const defaultComponent = getDefault().name;
 
 class Components extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedComponent: 'oscillator',
+      selectedComponent: defaultComponent,
     };
   }
 
@@ -19,30 +21,27 @@ class Components extends React.Component {
 
   handleClickAdd() {
     this.setState({
-      selectedComponent: 'oscillator',
+      selectedComponent: defaultComponent,
     });
     this.props.addComponent(this.state.selectedComponent);
   }
 
   render() {
-    const components = this.props.components.map((component) => {
-      if (component.type === 'oscillator') {
-        return <Oscillator key={component.id} component={component} />;
-      }
-      if (component.type === 'filter') {
-        return <Filter key={component.id} component={component} />;
-      }
-      return null;
-    });
+    const components = this.props.components.map(component => (
+      <Component key={component.id} component={component} />
+    ));
     const add = (
       <ListGroupItem>
         <Form horizontal>
           <FormGroup>
             <Col componentClass={ControlLabel} md={3}>Component</Col>
             <Col md={9}>
-              <FormControl value={this.state.selectedComponent} onChange={e => this.handleChangeComponent(e.target.value)} componentClass="select">
-                <option value="oscillator">oscillator</option>
-                <option value="filter">filter</option>
+              <FormControl
+                value={this.state.selectedComponent}
+                onChange={e => this.handleChangeComponent(e.target.value)}
+                componentClass="select"
+              >
+                {getAll().map(c => <option value={c.name} key={c.name}>{c.text}</option>)}
               </FormControl>
             </Col>
           </FormGroup>
