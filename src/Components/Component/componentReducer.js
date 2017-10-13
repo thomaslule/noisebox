@@ -6,7 +6,6 @@ export default (state, action) => {
     return {
       id: action.id,
       type: action.componentType,
-      connectTo: 'master',
       params: get(action.componentType).defaultParams,
     };
   }
@@ -14,9 +13,6 @@ export default (state, action) => {
     const cloned = clone(state);
     cloned.params[action.param] = action.value;
     return cloned;
-  }
-  if (action.type === 'COMPONENT_CHANGE_CONNECT_TO') {
-    return { ...state, connectTo: action.value };
   }
   return state;
 };

@@ -1,3 +1,4 @@
+import Tone from 'tone';
 import { createComponent } from './componentsDictionary';
 import { createEffect } from './effectsDictionary';
 import { resetBindings, onPress, onRelease, onMove } from './controller';
@@ -12,11 +13,18 @@ export default (params) => {
     return;
   }
   components = params.components.map(component => createComponent(component));
-  components.forEach((c) => {
-    if (c.connectTo === 'master') {
-      c.component.toMaster();
+  components.push({
+    id: 'master',
+    component: Tone.Master,
+    currentParams: {},
+  });
+  params.connections.forEach(({ fromComponent, toComponent, toInput }) => {
+    const from = components.find(c => c.id === fromComponent);
+    const to = components.find(c => c.id === toComponent);
+    if (toInput === 'main') {
+      from.component.connect(to.component);
     } else {
-      c.component.connect(components.find(c2 => c2.id === c.connectTo).component);
+      to.component.connect(to.component[toInput]);
     }
   });
   resetBindings();

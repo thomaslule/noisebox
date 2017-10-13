@@ -49,7 +49,6 @@ const dic = [
       return {
         id: component.id,
         component: o,
-        connectTo: component.connectTo,
         currentParams: component.params,
       };
     },
@@ -84,7 +83,6 @@ const dic = [
       return {
         id: component.id,
         component: o,
-        connectTo: component.connectTo,
         currentParams: component.params,
       };
     },
