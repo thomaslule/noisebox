@@ -5,11 +5,13 @@ let ids = getAll().map(c => ({
   currentId: 0,
 }));
 
-export const addComponent = (componentType) => {
+const newId = (componentType) => {
   ids = ids.map(c => (c.name === componentType ? { ...c, currentId: c.currentId + 1 } : c));
-  return {
-    type: 'COMPONENT_ADD',
-    id: `${componentType} ${ids.find(c => c.name === componentType).currentId}`,
-    componentType,
-  };
+  return ids.find(c => c.name === componentType).currentId;
 };
+
+export const addComponent = componentType => ({
+  type: 'COMPONENT_ADD',
+  id: `${componentType} ${newId(componentType)}`,
+  componentType,
+});

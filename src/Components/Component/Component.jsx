@@ -8,6 +8,7 @@ const paramToField = (param, props) => {
     return (
       <NumberField
         key={param.name}
+        label={param.text}
         value={props.component.params[param.name]}
         onChange={e => props.onChangeParam(props.component.id, param.name, Number(e.target.value))}
       />
@@ -30,7 +31,7 @@ const paramToField = (param, props) => {
 export default props => (
   <ListGroupItem>
     <Form horizontal>
-      <Label text="Name" value={props.component.id} />
+      <Label label="Name" value={props.component.id} />
       {get(props.component.type).params.map(param => paramToField(param, props))}
       <Select
         label="Connect to"

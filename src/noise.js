@@ -45,21 +45,21 @@ export default (params) => {
   });
   resetBindings();
   params.bindings.forEach((binding) => {
-    if (binding.component === 'none' || binding.effect.type === 'none') return;
+    if (binding.component === 'none' || binding.effect === 'none') return;
     const comp = components.find(c => c.id === binding.component);
     let effect = () => null;
-    if (binding.effect.type === 'set_frequency') {
+    if (binding.effect === 'set_frequency') {
       effect = () => {
-        comp.fixedFrequency = Number(binding.effect.params.frequency);
+        comp.fixedFrequency = Number(binding.params.frequency);
         comp.component.frequency.value = comp.fixedFrequency;
       };
     }
-    if (binding.effect.type === 'move_frequency') {
+    if (binding.effect === 'move_frequency') {
       effect = (value) => {
-        comp.component.frequency.value = Number(comp.fixedFrequency) + (Number(value) * Number(binding.effect.params.sensibility));
+        comp.component.frequency.value = Number(comp.fixedFrequency) + (Number(value) * Number(binding.params.sensibility));
       };
     }
-    const [action, button] = binding.button.split(' ');
+    const [action, button] = binding.action.split(' ');
     if (action === 'press') onPress(button, effect);
     if (action === 'release') onRelease(button, effect);
     if (action === 'move' && button.includes('STICK')) onMoveStick(button, effect);
