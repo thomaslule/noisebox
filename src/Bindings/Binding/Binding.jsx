@@ -1,31 +1,6 @@
 import React from 'react';
 import { Form, ListGroupItem } from 'react-bootstrap';
-import { Label, Select, Button, NumberField } from '../../Shared';
-
-const paramToField = (param, props) => {
-  if (param.type === 'number') {
-    return (
-      <NumberField
-        key={param.name}
-        label={param.text}
-        value={props.params[param.name]}
-        onChange={e => props.onChangeParam(param.name, Number(e.target.value))}
-      />
-    );
-  }
-  if (param.type === 'select') {
-    return (
-      <Select
-        key={param.name}
-        label={param.text}
-        value={props.params[param.name]}
-        onChange={e => props.onChangeParam(param.name, e.target.value)}
-        options={param.options.map(o => ({ text: o, value: o }))}
-      />
-    );
-  }
-  return null;
-};
+import { Label, Select, Button, ParamField } from '../../Shared';
 
 export default props => (
   <ListGroupItem>
@@ -51,7 +26,14 @@ export default props => (
       }
       {
         props.effect !== 'none'
-        ? props.paramFields.map(p => paramToField(p, props))
+        ? props.paramFields.map(param => (
+          <ParamField
+            param={param}
+            value={props.params[param.name]}
+            onChange={props.onChangeParam}
+            key={param.name}
+          />
+        ))
         : null
       }
       <Button text="Delete" onClick={() => props.onDelete()} />

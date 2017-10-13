@@ -12,10 +12,10 @@ const mapStateToProps = (state, ownProps) => ({
     .map(c => c.id),
 });
 
-const mapDispatchToProps = {
-  onChangeParam: changeParam,
-  onChangeConnectTo: changeConnectTo,
-  onDelete: remove,
-};
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onChangeParam: (param, value) => dispatch(changeParam(ownProps.component.id, param, value)),
+  onChangeConnectTo: value => dispatch(changeConnectTo(ownProps.component.id, value)),
+  onDelete: () => dispatch(remove(ownProps.component.id)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);
