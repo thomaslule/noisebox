@@ -119,14 +119,14 @@ export const onRelease = (buttonName, callback) => {
   getFromIndex(buttonsCallbacks, buttonIndex).onRelease = callback;
 };
 
-export const onMoveStick = (axisName, callback) => {
-  const axisIndex = getFromName(axisDic, axisName).index;
-  getFromIndex(axisCallbacks, axisIndex).onMove = callback;
-};
-
-export const onMoveTrigger = (triggerName, callback) => {
-  const triggerIndex = getFromName(triggersDic, triggerName).index;
-  getFromIndex(triggersCallbacks, triggerIndex).onMove = callback;
+export const onMove = (controlName, callback) => {
+  if (axisDic.map(a => a.name).includes(controlName)) {
+    const axisIndex = getFromName(axisDic, controlName).index;
+    getFromIndex(axisCallbacks, axisIndex).onMove = callback;
+  } else if (triggersDic.map(a => a.name).includes(controlName)) {
+    const triggerIndex = getFromName(triggersDic, controlName).index;
+    getFromIndex(triggersCallbacks, triggerIndex).onMove = callback;
+  }
 };
 
 export const resetBindings = () => {

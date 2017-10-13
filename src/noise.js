@@ -1,6 +1,6 @@
 import { createComponent } from './componentsDictionary';
 import { createEffect } from './effectsDictionary';
-import { resetBindings, onPress, onRelease, onMoveStick, onMoveTrigger } from './controller';
+import { resetBindings, onPress, onRelease, onMove } from './controller';
 
 let components = [];
 
@@ -27,7 +27,6 @@ export default (params) => {
     const [action, button] = binding.action.split(' ');
     if (action === 'press') onPress(button, effect);
     if (action === 'release') onRelease(button, effect);
-    if (action === 'move' && button.includes('STICK')) onMoveStick(button, effect);
-    if (action === 'move' && (button === 'LT' || button === 'RT')) onMoveTrigger(button, effect);
+    if (action === 'move') onMove(button, effect);
   });
 };
