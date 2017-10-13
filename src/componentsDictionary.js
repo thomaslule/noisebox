@@ -29,7 +29,7 @@ const dic = [
         id: component.id,
         component: o,
         connectTo: component.connectTo,
-        fixedFrequency: component.params.frequency,
+        currentParams: component.params,
       };
     },
   },
@@ -48,18 +48,22 @@ const dic = [
         type: 'select',
         options: ['lowpass', 'highpass', 'bandpass', 'lowshelf', 'highshelf', 'notch', 'allpass', 'peaking'],
       },
+      {
+        name: 'gain',
+        text: 'Gain',
+        type: 'number',
+      },
     ],
-    defaultParams: { type: 'lowpass', frequency: 440 },
+    defaultParams: { type: 'lowpass', frequency: 440, gain: 0 },
     hasInput: true,
     create: (component) => {
-      const o = new Tone.Filter();
-      o.type = component.params.type;
-      o.frequency.value = component.params.frequency;
+      const o = new Tone.Filter(component.params.frequency, component.params.type);
+      o.gain.value = component.params.gain;
       return {
         id: component.id,
         component: o,
         connectTo: component.connectTo,
-        fixedFrequency: component.params.frequency,
+        currentParams: component.params,
       };
     },
   },
