@@ -5,10 +5,10 @@ import { Label, Select, Button, ParamField } from '../../Shared';
 export default props => (
   <ListGroupItem>
     <Form horizontal>
-      <Label label="Action" value={props.action} />
+      <Label label="Action" value={props.binding.action} />
       <Select
         label="Component"
-        value={props.component}
+        value={props.binding.component}
         onChange={e => props.onChangeComponent(e.target.value)}
         options={[{ text: 'none', value: 'none' }].concat(props.components.map(c => ({ text: c, value: c })))}
       />
@@ -17,7 +17,7 @@ export default props => (
         ? (
           <Select
             label="Effect"
-            value={props.effect}
+            value={props.binding.effect}
             onChange={e => props.onChangeEffect(e.target.value)}
             options={props.availableEffects.map(e => ({ text: e, value: e }))}
           />
@@ -25,11 +25,11 @@ export default props => (
         : null
       }
       {
-        props.effect !== 'none'
+        props.binding.effect !== 'none'
         ? props.paramFields.map(param => (
           <ParamField
             param={param}
-            value={props.params[param.name]}
+            value={props.binding.params[param.name]}
             onChange={props.onChangeParam}
             key={param.name}
           />

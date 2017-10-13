@@ -30,7 +30,7 @@ class Bindings extends React.Component {
     return (
       <Panel header="Bindings">
         <ListGroup fill>
-          {this.props.bindings.map(binding => <Binding key={binding.id} {...binding} />)}
+          {this.props.bindings.map(binding => <Binding key={binding.id} binding={binding} />)}
           <ListGroupItem>
             <Form horizontal>
               <Select
