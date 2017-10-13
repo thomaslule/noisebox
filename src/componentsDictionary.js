@@ -38,6 +38,7 @@ const dic = [
     defaultParams: {
       type: 'sine', frequency: 440, detune: 0, volume: 0, mute: false,
     },
+    inputs: [],
     hasInput: false,
     create: (component) => {
       const o = new Tone.Oscillator(component.params.frequency, component.params.type);
@@ -75,6 +76,7 @@ const dic = [
       },
     ],
     defaultParams: { type: 'lowpass', frequency: 440, gain: 0 },
+    inputs: ['self', 'frequency'],
     hasInput: true,
     create: (component) => {
       const o = new Tone.Filter(component.params.frequency, component.params.type);
