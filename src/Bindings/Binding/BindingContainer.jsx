@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Binding from './Binding';
 import { changeComponent, changeEffect, changeParam, remove } from './bindingActions';
-import { get, effectsFor } from './effectsDictionary';
+import { get, effectsFor } from '../../effectsDictionary';
 
 class BindingWrap extends React.Component {
   componentDidMount() {

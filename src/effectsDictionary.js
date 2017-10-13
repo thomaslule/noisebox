@@ -1,4 +1,4 @@
-import actions from '../actionsDictionary';
+import actions from './actionsDictionary';
 
 const effects = [
   {

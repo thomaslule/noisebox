@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Component from './Component';
 import { changeParam, changeConnectTo, remove } from './componentActions';
-import { get } from '../componentsDictionary';
+import { get } from '../../componentsDictionary';
 
 const mapStateToProps = (state, { component }) => ({
   component,

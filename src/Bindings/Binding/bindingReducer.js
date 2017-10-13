@@ -1,5 +1,5 @@
 import clone from 'clone';
-import { get } from './effectsDictionary';
+import { get } from '../../effectsDictionary';
 
 export default (state = [], action) => {
   if (action.type === 'BINDING_ADD') {

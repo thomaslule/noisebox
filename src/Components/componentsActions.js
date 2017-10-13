@@ -1,4 +1,4 @@
-import { getAll } from './componentsDictionary';
+import { getAll } from '../componentsDictionary';
 
 let ids = getAll().map(c => ({
   name: c.name,

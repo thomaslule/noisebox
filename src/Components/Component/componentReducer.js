@@ -1,5 +1,5 @@
 import clone from 'clone';
-import { get } from '../componentsDictionary';
+import { get } from '../../componentsDictionary';
 
 export default (state, action) => {
   if (action.type === 'COMPONENT_ADD') {

@@ -1,4 +1,4 @@
-import { buttonsList, axisList, triggersList } from '../controller';
+import { buttonsList, axisList, triggersList } from './controller';
 
 const axisActions = axisList().map(a => ({ type: 'move', id: `move ${a}` }));
 const triggersActions = triggersList().map(t => ({ type: 'move', id: `move ${t}` }));
