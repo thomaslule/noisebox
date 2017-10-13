@@ -106,6 +106,17 @@ const effects = [
       component.component.detune.value = Number(component.currentParams.detune) + (Number(value) * Number(params.sensibility));
     },
   },
+  {
+    name: 'switch_mute',
+    text: 'Switch mute',
+    actionType: 'press',
+    components: ['oscillator'],
+    params: [],
+    initParams: {},
+    create: (params, component) => () => {
+      component.component.mute = !component.component.mute;
+    },
+  },
 ];
 
 export const effectsFor = (actionId, component) => {
