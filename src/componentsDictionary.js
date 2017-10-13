@@ -17,13 +17,25 @@ const dic = [
         text: 'Frequency',
         type: 'number',
       },
+      {
+        name: 'volume',
+        text: 'Volume',
+        type: 'number',
+      },
+      {
+        name: 'detune',
+        text: 'Detune',
+        type: 'number',
+      },
     ],
-    defaultParams: { type: 'sine', frequency: 440 },
+    defaultParams: {
+      type: 'sine', frequency: 440, volume: 0, detune: 0,
+    },
     hasInput: false,
     create: (component) => {
-      const o = new Tone.Oscillator();
-      o.type = component.params.type;
-      o.frequency.value = component.params.frequency;
+      const o = new Tone.Oscillator(component.params.frequency, component.params.type);
+      o.volume.value = component.params.volume;
+      o.detune.value = component.params.detune;
       o.start();
       return {
         id: component.id,

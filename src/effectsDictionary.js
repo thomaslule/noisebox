@@ -71,6 +71,41 @@ const effects = [
       component.component.gain.value = Number(component.currentParams.gain) + (Number(value) * Number(params.sensibility));
     },
   },
+  {
+    name: 'set_detune',
+    text: 'Set detune',
+    actionType: 'press',
+    components: ['oscillator'],
+    params: [
+      {
+        name: 'detune',
+        text: 'Detune',
+        type: 'number',
+      },
+    ],
+    initParams: { detune: 0 },
+    create: (params, component) => () => {
+      component.currentParams.detune = Number(params.detune);
+      component.component.detune.value = Number(params.detune);
+    },
+  },
+  {
+    name: 'move_detune',
+    text: 'Move detune',
+    actionType: 'move',
+    components: ['oscillator'],
+    params: [
+      {
+        name: 'sensibility',
+        text: 'Sensibility',
+        type: 'number',
+      },
+    ],
+    initParams: { sensibility: 100 },
+    create: (params, component) => (value) => {
+      component.component.detune.value = Number(component.currentParams.detune) + (Number(value) * Number(params.sensibility));
+    },
+  },
 ];
 
 export const effectsFor = (actionId, component) => {
