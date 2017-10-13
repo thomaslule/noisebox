@@ -13,7 +13,7 @@ export default ({
   onDelete,
 }) => (
   <ListGroupItem>
-    <Form horizontal>
+    <Form horizontal onSubmit={e => e.preventDefault()}>
       <Label label="Action" value={binding.action} />
       <Select
         label="Component"

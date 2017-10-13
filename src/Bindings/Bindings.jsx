@@ -32,7 +32,7 @@ class Bindings extends React.Component {
         <ListGroup fill>
           {this.props.bindings.map(binding => <Binding key={binding.id} binding={binding} />)}
           <ListGroupItem>
-            <Form horizontal>
+            <Form horizontal onSubmit={e => e.preventDefault()}>
               <Select
                 label="Action"
                 value={this.state.selectedAction}

@@ -33,7 +33,7 @@ class Components extends React.Component {
           {this.props.components.map(component =>
             <Component key={component.id} component={component} />)}
           <ListGroupItem>
-            <Form horizontal>
+            <Form horizontal onSubmit={e => e.preventDefault()}>
               <Select
                 label="Component"
                 value={this.state.selectedComponent}

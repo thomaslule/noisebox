@@ -6,7 +6,7 @@ export default ({
   component, paramFields, connectToComponents, onChangeParam, onChangeConnectTo, onDelete,
 }) => (
   <ListGroupItem>
-    <Form horizontal>
+    <Form horizontal onSubmit={e => e.preventDefault()}>
       <Label label="Name" value={component.id} />
       {paramFields.map(param => (
         <ParamField
