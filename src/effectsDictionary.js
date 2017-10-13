@@ -14,6 +14,10 @@ const effects = [
       },
     ],
     initParams: { frequency: 440 },
+    create: (params, component) => () => {
+      component.fixedFrequency = Number(params.frequency);
+      component.component.frequency.value = component.fixedFrequency;
+    },
   },
   {
     name: 'move_frequency',
@@ -28,6 +32,9 @@ const effects = [
       },
     ],
     initParams: { sensibility: 100 },
+    create: (params, component) => (value) => {
+      component.component.frequency.value = Number(component.fixedFrequency) + (Number(value) * Number(params.sensibility));
+    },
   },
 ];
 
@@ -39,3 +46,5 @@ export const effectsFor = (actionId, component) => {
 };
 
 export const get = effect => effects.find(e => e.name === effect);
+
+export const createEffect = (effect, params, component) => get(effect).create(params, component);

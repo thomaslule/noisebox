@@ -1,4 +1,5 @@
 import clone from 'clone';
+import Tone from 'tone';
 
 const dic = [
   {
@@ -19,6 +20,18 @@ const dic = [
     ],
     defaultParams: { type: 'sine', frequency: 440 },
     hasInput: false,
+    create: (component) => {
+      const o = new Tone.Oscillator();
+      o.type = component.params.type;
+      o.frequency.value = component.params.frequency;
+      o.start();
+      return {
+        id: component.id,
+        component: o,
+        connectTo: component.connectTo,
+        fixedFrequency: component.params.frequency,
+      };
+    },
   },
   {
     name: 'filter',
@@ -38,9 +51,22 @@ const dic = [
     ],
     defaultParams: { type: 'lowpass', frequency: 440 },
     hasInput: true,
+    create: (component) => {
+      const o = new Tone.Filter();
+      o.type = component.params.type;
+      o.frequency.value = component.params.frequency;
+      return {
+        id: component.id,
+        component: o,
+        connectTo: component.connectTo,
+        fixedFrequency: component.params.frequency,
+      };
+    },
   },
 ];
 
 export const get = component => dic.find(c => c.name === component);
 
 export const getAll = () => clone(dic);
+
+export const createComponent = component => get(component.type).create(component);
