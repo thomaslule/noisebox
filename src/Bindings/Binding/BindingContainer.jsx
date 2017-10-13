@@ -22,32 +22,32 @@ class BindingWrap extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const componentDef = state.components.find(c => c.id === ownProps.binding.component);
+const mapStateToProps = (state, { binding }) => {
+  const componentDef = state.components.find(c => c.id === binding.component);
   const availableEffects = effectsFor(
-    ownProps.binding.action,
+    binding.action,
     componentDef ? componentDef.type : 'none',
   );
-  const shouldSetEffect = ownProps.binding.component !== 'none'
-    && ownProps.binding.effect === 'none'
+  const shouldSetEffect = binding.component !== 'none'
+    && binding.effect === 'none'
     && availableEffects.length > 0;
   return ({
-    binding: ownProps.binding,
+    binding,
     components: state.components.map(c => c.id),
     availableEffects: availableEffects.map(e => e.name),
     shouldSetEffect,
-    paramFields: ownProps.binding.effect !== 'none' ? get(ownProps.binding.effect).params : [],
+    paramFields: binding.effect !== 'none' ? get(binding.effect).params : [],
   });
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch, { binding }) => ({
   onChangeComponent: component => dispatch(changeComponent(
-    ownProps.binding.id,
+    binding.id,
     component,
   )),
-  onChangeEffect: effect => dispatch(changeEffect(ownProps.binding.id, effect)),
-  onChangeParam: (param, value) => dispatch(changeParam(ownProps.binding.id, param, value)),
-  onDelete: () => dispatch(remove(ownProps.binding.id)),
+  onChangeEffect: effect => dispatch(changeEffect(binding.id, effect)),
+  onChangeParam: (param, value) => dispatch(changeParam(binding.id, param, value)),
+  onDelete: () => dispatch(remove(binding.id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BindingWrap);
