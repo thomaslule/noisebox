@@ -7,7 +7,7 @@ let components = [];
 
 export default (params) => {
   components.forEach((c) => {
-    if (c.component.stop) c.component.stop();
+    if (c.id !== 'master') c.component.dispose();
   });
   if (params.muteAll) {
     return;
