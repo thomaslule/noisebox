@@ -39,7 +39,6 @@ const dic = [
       type: 'sine', frequency: 440, detune: 0, volume: 0, mute: false,
     },
     inputs: [],
-    hasInput: false,
     create: (component) => {
       const o = new Tone.Oscillator(component.params.frequency, component.params.type);
       o.volume.value = component.params.volume;
@@ -76,13 +75,51 @@ const dic = [
     ],
     defaultParams: { type: 'lowpass', frequency: 440, gain: 0 },
     inputs: ['main', 'frequency'],
-    hasInput: true,
     create: (component) => {
       const o = new Tone.Filter(component.params.frequency, component.params.type);
       o.gain.value = component.params.gain;
       return {
         id: component.id,
         component: o,
+        currentParams: component.params,
+      };
+    },
+  },
+  {
+    name: 'lfo',
+    text: 'LFO',
+    params: [
+      {
+        name: 'frequency',
+        text: 'Frequency',
+        type: 'number',
+      },
+      {
+        name: 'min',
+        text: 'Min',
+        type: 'number',
+      },
+      {
+        name: 'max',
+        text: 'Max',
+        type: 'number',
+      },
+      {
+        name: 'amplitude',
+        text: 'Amplitude',
+        type: 'number',
+      },
+    ],
+    defaultParams: {
+      frequency: 5, min: 0, max: 1, amplitude: 1,
+    },
+    inputs: [],
+    create: (component) => {
+      const lfo = new Tone.LFO(component.params.frequency, component.params.min, component.params.max);
+      lfo.amplitude.value = component.params.amplitude;
+      return {
+        id: component.id,
+        component: lfo,
         currentParams: component.params,
       };
     },
