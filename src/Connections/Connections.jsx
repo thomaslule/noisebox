@@ -7,7 +7,8 @@ const Connection = ({
 }) => {
   const toSelectValueIndex = allInputs
     .findIndex(c => c.component === connection.toComponent && c.input === connection.toInput);
-  const toSelectOptions = allInputs.map((i, index) => ({ text: `${i.component} ${i.input}`, value: index }));
+  const toSelectOptions = allInputs
+    .map((i, index) => ({ text: `${i.component} ${i.input === 'main' ? '' : i.input}`, value: index }));
   return (
     <ListGroupItem>
       <Form horizontal onSubmit={e => e.preventDefault()}>

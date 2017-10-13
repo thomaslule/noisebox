@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
   return {
     connections: state.connections,
     allComponents: state.components.map(c => c.id),
-    allInputs: [{ component: 'master', input: 'self' }].concat(componentsInputs),
+    allInputs: [{ component: 'master', input: 'main' }].concat(componentsInputs),
   };
 };
 

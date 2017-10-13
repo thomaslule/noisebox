@@ -76,7 +76,7 @@ const dic = [
       },
     ],
     defaultParams: { type: 'lowpass', frequency: 440, gain: 0 },
-    inputs: ['self', 'frequency'],
+    inputs: ['main', 'frequency'],
     hasInput: true,
     create: (component) => {
       const o = new Tone.Filter(component.params.frequency, component.params.type);
