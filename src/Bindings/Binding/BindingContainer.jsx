@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Binding from './Binding';
 import { changeComponent, changeEffect, changeParam, remove } from './bindingActions';
-import { effectsFor } from './effectsDictionary';
+import { get, effectsFor } from './effectsDictionary';
 
 class BindingWrap extends React.Component {
   componentDidMount() {
@@ -36,6 +36,7 @@ const mapStateToProps = (state, ownProps) => {
     components: state.components.map(c => c.id),
     availableEffects: availableEffects.map(e => e.name),
     shouldSetEffect,
+    paramFields: ownProps.effect !== 'none' ? get(ownProps.effect).params : [],
   });
 };
 

@@ -44,5 +44,3 @@ const dic = [
 export const get = component => dic.find(c => c.name === component);
 
 export const getAll = () => clone(dic);
-
-export const getDefault = () => clone(dic[0]);

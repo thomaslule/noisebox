@@ -1,7 +1,6 @@
 import React from 'react';
 import { ListGroupItem, Form } from 'react-bootstrap';
 import { Label, NumberField, Select, Button } from '../../Shared';
-import { get } from '../componentsDictionary';
 
 const paramToField = (param, props) => {
   if (param.type === 'number') {
@@ -32,7 +31,7 @@ export default props => (
   <ListGroupItem>
     <Form horizontal>
       <Label label="Name" value={props.component.id} />
-      {get(props.component.type).params.map(param => paramToField(param, props))}
+      {props.paramFields.map(param => paramToField(param, props))}
       <Select
         label="Connect to"
         value={props.component.connectTo}

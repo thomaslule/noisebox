@@ -5,6 +5,7 @@ import { get } from '../componentsDictionary';
 
 const mapStateToProps = (state, ownProps) => ({
   component: ownProps.component,
+  paramFields: get(ownProps.component.type).params,
   connectToComponents: state.components
     .filter(c => c.id !== ownProps.component.id)
     .filter(c => get(c.type).hasInput)

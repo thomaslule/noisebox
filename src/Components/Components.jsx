@@ -2,15 +2,14 @@ import React from 'react';
 import { Panel, ListGroup, ListGroupItem, Form } from 'react-bootstrap';
 import Component from './Component';
 import { Button, Select } from '../Shared';
-import { getAll, getDefault } from './componentsDictionary';
-
-const defaultComponent = getDefault().name;
 
 class Components extends React.Component {
   constructor(props) {
     super(props);
+    this.componentDefs = props.componentDefs.map(c => ({ text: c.text, value: c.name }));
+    this.defaultComponent = this.componentDefs[0].value;
     this.state = {
-      selectedComponent: defaultComponent,
+      selectedComponent: this.defaultComponent,
     };
   }
 
@@ -21,10 +20,10 @@ class Components extends React.Component {
   }
 
   handleClickAdd() {
-    this.setState({
-      selectedComponent: defaultComponent,
-    });
     this.props.addComponent(this.state.selectedComponent);
+    this.setState({
+      selectedComponent: this.defaultComponent,
+    });
   }
 
   render() {
@@ -39,7 +38,7 @@ class Components extends React.Component {
                 label="Component"
                 value={this.state.selectedComponent}
                 onChange={e => this.handleChangeComponent(e.target.value)}
-                options={getAll().map(c => ({ text: c.text, value: c.name }))}
+                options={this.componentDefs}
               />
               <Button
                 onClick={() => this.handleClickAdd()}

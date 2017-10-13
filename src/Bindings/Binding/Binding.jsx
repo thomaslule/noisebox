@@ -1,7 +1,6 @@
 import React from 'react';
 import { Form, ListGroupItem } from 'react-bootstrap';
 import { Label, Select, Button, NumberField } from '../../Shared';
-import { get } from './effectsDictionary';
 
 const paramToField = (param, props) => {
   if (param.type === 'number') {
@@ -52,7 +51,7 @@ export default props => (
       }
       {
         props.effect !== 'none'
-        ? get(props.effect).params.map(p => paramToField(p, props))
+        ? props.paramFields.map(p => paramToField(p, props))
         : null
       }
       <Button text="Delete" onClick={() => props.onDelete()} />
