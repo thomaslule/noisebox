@@ -1,11 +1,12 @@
 import React from 'react';
 import { PageHeader, Grid, Row, Col } from 'react-bootstrap';
 import MuteAll from './MuteAll';
+import Error from './Error';
 import Components from './Components';
 import Connections from './Connections';
 import Bindings from './Bindings';
+import ShareLink from './ShareLink';
 import StateJson from './StateJson';
-import Error from './Error';
 
 export default () => (
   <Grid>
@@ -14,6 +15,9 @@ export default () => (
     <Row>
       <Col md={6}><Components /><Connections /></Col>
       <Col md={6}><Bindings /></Col>
+    </Row>
+    <Row>
+      <Col md={12}><ShareLink /></Col>
     </Row>
     <Row>
       <Col md={12}><StateJson /></Col>
