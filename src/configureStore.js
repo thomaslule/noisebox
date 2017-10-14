@@ -3,18 +3,10 @@ import logger from 'redux-logger';
 import reducer from './reducer';
 import noise from './noise';
 import { errorAction, noErrorAction } from './Error/errorActions';
+import { changeStateJson } from './StateJson/stateJsonActions';
 
 export default () => {
-  const createStoreWithHash = () => {
-    if (window.location.hash.length > 1) {
-      const initialState = JSON.parse(atob(window.location.hash.substring(1)));
-      window.history.pushState('', document.title, window.location.pathname + window.location.search);
-      return createStore(reducer, initialState, applyMiddleware(logger));
-    }
-    return createStore(reducer, applyMiddleware(logger));
-  };
-
-  const store = createStoreWithHash();
+  const store = createStore(reducer, applyMiddleware(logger));
 
   store.subscribe(() => {
     const state = store.getState();
@@ -25,6 +17,12 @@ export default () => {
       if (!state.error) store.dispatch(errorAction(e));
     }
   });
+
+  if (window.location.hash.length > 1) {
+    const stateJson = atob(window.location.hash.substring(1));
+    window.history.pushState('', document.title, window.location.pathname + window.location.search);
+    store.dispatch(changeStateJson(stateJson));
+  }
 
   noise(store.getState());
 

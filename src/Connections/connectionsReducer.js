@@ -1,3 +1,5 @@
+import { setCurrentId } from './connectionsId';
+
 export default (state = [], action) => {
   if (action.type === 'CONNECTION_ADD') {
     return [...state, {
@@ -23,6 +25,11 @@ export default (state = [], action) => {
   if (action.type === 'COMPONENT_DELETE') {
     return state
       .filter(c => (c.fromComponent !== action.component && c.toComponent !== action.component));
+  }
+  if (action.type === 'STATE_JSON_CHANGED') {
+    const maxId = state.map(b => b.id).reduce((a, b) => (a > b ? a : b), 0);
+    setCurrentId(maxId);
+    return state;
   }
   return state;
 };

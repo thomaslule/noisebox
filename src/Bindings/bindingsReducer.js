@@ -1,4 +1,5 @@
 import bindingReducer from './Binding/bindingReducer';
+import { setCurrentId } from './bindingsId';
 
 export default (state = [], action) => {
   if (action.type === 'BINDING_ADD') {
@@ -12,6 +13,11 @@ export default (state = [], action) => {
   }
   if (action.type === 'COMPONENT_DELETE') {
     return state.map(b => (b.component === action.component ? bindingReducer(b, action) : b));
+  }
+  if (action.type === 'STATE_JSON_CHANGED') {
+    const maxId = state.map(b => b.id).reduce((a, b) => (a > b ? a : b), 0);
+    setCurrentId(maxId);
+    return state;
   }
   return state;
 };

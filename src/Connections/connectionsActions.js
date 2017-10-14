@@ -1,9 +1,4 @@
-let id = 0;
-
-const newId = () => {
-  id += 1;
-  return id;
-};
+import { newId } from './connectionsId';
 
 export const addConnection = (fromComponent, toComponent, toInput) => ({
   type: 'CONNECTION_ADD',
