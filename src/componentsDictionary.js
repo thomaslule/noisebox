@@ -147,6 +147,63 @@ const dic = [
       };
     },
   },
+  {
+    name: 'envelope',
+    text: 'Envelope',
+    params: [
+      {
+        name: 'attack',
+        text: 'Attack',
+        type: 'number',
+      },
+      {
+        name: 'decay',
+        text: 'Decay',
+        type: 'number',
+      },
+      {
+        name: 'sustain',
+        text: 'Sustain',
+        type: 'number',
+      },
+      {
+        name: 'release',
+        text: 'Release',
+        type: 'number',
+      },
+      {
+        name: 'attackCurve',
+        text: 'Attack curve',
+        type: 'select',
+        options: ['linear', 'exponential', 'sine', 'cosine', 'bounce', 'ripple', 'step'],
+      },
+      {
+        name: 'releaseCurve',
+        text: 'Release curve',
+        type: 'select',
+        options: ['linear', 'exponential', 'sine', 'cosine', 'bounce', 'ripple', 'step'],
+      },
+    ],
+    defaultParams: {
+      attack: 0.01, decay: 0.1, sustain: 0.5, release: 1, attackCurve: 'linear', releaseCurve: 'linear',
+    },
+    inputs: [],
+    create: (component) => {
+      const envelope = new Tone.Envelope(
+        component.params.attack,
+        component.params.decay,
+        component.params.sustain,
+        component.params.release,
+      );
+      envelope.attackCurve = component.params.attackCurve;
+      envelope.releaseCurve = component.params.releaseCurve;
+      return {
+        id: component.id,
+        component: envelope,
+        currentParams: component.params,
+      };
+    },
+  },
 ];
 
 export const get = component => dic.find(c => c.name === component);

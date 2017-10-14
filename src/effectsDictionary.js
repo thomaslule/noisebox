@@ -81,6 +81,45 @@ const effects = [
   createMoveNumberParamEffect('amplitude', 'Amplitude', ['lfo'], 1),
   createSetSelectParamEffect('type', 'Type', ['oscillator', 'lfo'], ['sine', 'square', 'triangle', 'sawtooth'], 'sine'),
   {
+    name: 'trigger_attack',
+    text: 'Trigger attack',
+    actionType: 'press',
+    components: ['envelope'],
+    params: [],
+    initParams: {},
+    create: (params, component) => () => {
+      component.component.triggerAttack();
+    },
+  },
+  {
+    name: 'trigger_release',
+    text: 'Trigger release',
+    actionType: 'press',
+    components: ['envelope'],
+    params: [],
+    initParams: {},
+    create: (params, component) => () => {
+      component.component.triggerRelease();
+    },
+  },
+  {
+    name: 'trigger_attack_release',
+    text: 'Trigger attack release',
+    actionType: 'press',
+    components: ['envelope'],
+    params: [
+      {
+        name: 'duration',
+        text: 'Duration',
+        type: 'number',
+      },
+    ],
+    initParams: { duration: 0.5 },
+    create: (params, component) => () => {
+      component.component.triggerAttackRelease(params.duration);
+    },
+  },
+  {
     name: 'switch_mute',
     text: 'Switch mute',
     actionType: 'press',
