@@ -80,6 +80,7 @@ const effects = [
   createSetNumberParamEffect('amplitude', 'Amplitude', ['lfo'], 0),
   createMoveNumberParamEffect('amplitude', 'Amplitude', ['lfo'], 1),
   createSetSelectParamEffect('type', 'Type', ['oscillator', 'lfo'], ['sine', 'square', 'triangle', 'sawtooth'], 'sine'),
+  createSetSelectParamEffect('type', 'Type', ['noise'], ['white', 'brown', 'pink'], 'white'),
   {
     name: 'trigger_attack',
     text: 'Trigger attack',

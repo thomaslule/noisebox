@@ -225,6 +225,21 @@ const dic = [
     inputs: ['main', 'gain'],
     constructor: Tone.Gain,
   },
+  {
+    name: 'noise',
+    text: 'Noise',
+    params: [
+      {
+        name: 'type',
+        text: 'Type',
+        type: 'select',
+        options: ['white', 'brown', 'pink'],
+      },
+    ],
+    defaultParams: { type: 'white' },
+    inputs: [],
+    constructor: Tone.Noise,
+  },
 ];
 
 export const get = component => dic.find(c => c.name === component);
