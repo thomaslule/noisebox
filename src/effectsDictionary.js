@@ -5,7 +5,7 @@ const effects = [
     name: 'set_frequency',
     text: 'Set frequency',
     actionType: 'press',
-    components: ['oscillator', 'filter'],
+    components: ['oscillator', 'filter', 'lfo'],
     params: [
       {
         name: 'frequency',
@@ -23,7 +23,7 @@ const effects = [
     name: 'move_frequency',
     text: 'Move frequency',
     actionType: 'move',
-    components: ['oscillator', 'filter'],
+    components: ['oscillator', 'filter', 'lfo'],
     params: [
       {
         name: 'sensibility',
@@ -72,6 +72,41 @@ const effects = [
     },
   },
   {
+    name: 'set_q',
+    text: 'Set Q',
+    actionType: 'press',
+    components: ['filter'],
+    params: [
+      {
+        name: 'Q',
+        text: 'Q',
+        type: 'number',
+      },
+    ],
+    initParams: { Q: 1 },
+    create: (params, component) => () => {
+      component.currentParams.Q = Number(params.Q);
+      component.component.Q.value = Number(params.Q);
+    },
+  },
+  {
+    name: 'move_q',
+    text: 'Move Q',
+    actionType: 'move',
+    components: ['filter'],
+    params: [
+      {
+        name: 'sensibility',
+        text: 'Sensibility',
+        type: 'number',
+      },
+    ],
+    initParams: { sensibility: 10 },
+    create: (params, component) => (value) => {
+      component.component.Q.value = Number(component.currentParams.Q) + (Number(value) * Number(params.sensibility));
+    },
+  },
+  {
     name: 'set_detune',
     text: 'Set detune',
     actionType: 'press',
@@ -104,6 +139,41 @@ const effects = [
     initParams: { sensibility: 100 },
     create: (params, component) => (value) => {
       component.component.detune.value = Number(component.currentParams.detune) + (Number(value) * Number(params.sensibility));
+    },
+  },
+  {
+    name: 'set_amplitude',
+    text: 'Set amplitude',
+    actionType: 'press',
+    components: ['lfo'],
+    params: [
+      {
+        name: 'amplitude',
+        text: 'Amplitude',
+        type: 'number',
+      },
+    ],
+    initParams: { detune: 0 },
+    create: (params, component) => () => {
+      component.currentParams.amplitude = Number(params.amplitude);
+      component.component.amplitude.value = Number(params.amplitude);
+    },
+  },
+  {
+    name: 'move_amplitude',
+    text: 'Move amplitude',
+    actionType: 'move',
+    components: ['lfo'],
+    params: [
+      {
+        name: 'sensibility',
+        text: 'Sensibility',
+        type: 'number',
+      },
+    ],
+    initParams: { sensibility: 1 },
+    create: (params, component) => (value) => {
+      component.component.amplitude.value = Number(component.currentParams.amplitude) + (Number(value) * Number(params.sensibility));
     },
   },
   {

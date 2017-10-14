@@ -72,9 +72,16 @@ const dic = [
         text: 'Gain',
         type: 'number',
       },
+      {
+        name: 'Q',
+        text: 'Q',
+        type: 'number',
+      },
     ],
-    defaultParams: { type: 'lowpass', frequency: 440, gain: 0 },
-    inputs: ['main', 'frequency'],
+    defaultParams: {
+      type: 'lowpass', frequency: 440, gain: 0, Q: 1,
+    },
+    inputs: ['main', 'frequency', 'gain', 'Q'],
     create: (component) => {
       const o = new Tone.Filter(component.params.frequency, component.params.type);
       o.gain.value = component.params.gain;
@@ -111,9 +118,9 @@ const dic = [
       },
     ],
     defaultParams: {
-      frequency: 1, min: 0, max: 100, amplitude: 1,
+      frequency: 1, min: 100, max: 300, amplitude: 1,
     },
-    inputs: [],
+    inputs: ['frequency', 'amplitude'],
     create: (component) => {
       const lfo = new Tone.LFO(component.params.frequency, component.params.min, component.params.max);
       lfo.amplitude.value = component.params.amplitude;
