@@ -17,7 +17,7 @@ const buttonsDic = [
 
 const previousButtonsState = buttonsDic.map(button => ({ index: button.index, pressed: false }));
 
-const buttonsCallbacks = buttonsDic.map(button => (
+let buttonsCallbacks = buttonsDic.map(button => (
   { index: button.index, onPress: [], onRelease: [] }
 ));
 
@@ -30,7 +30,7 @@ const axisDic = [
 
 const previousAxisState = axisDic.map(axis => ({ index: axis.index, value: 0 }));
 
-const axisCallbacks = axisDic.map(axis => (
+let axisCallbacks = axisDic.map(axis => (
   { index: axis.index, onMove: [] }
 ));
 
@@ -41,7 +41,7 @@ const triggersDic = [
 
 const previousTriggersState = triggersDic.map(trigger => ({ index: trigger.index, value: 0 }));
 
-const triggersCallbacks = triggersDic.map(trigger => (
+let triggersCallbacks = triggersDic.map(trigger => (
   { index: trigger.index, onMove: [] }
 ));
 
@@ -128,9 +128,9 @@ export const onMove = (controlName, callback) => {
 };
 
 export const resetBindings = () => {
-  buttonsCallbacks.map(binding => ({ ...binding, onPress: [], onRelease: [] }));
-  axisCallbacks.map(binding => ({ ...binding, onMove: [] }));
-  triggersCallbacks.map(binding => ({ ...binding, onMove: [] }));
+  buttonsCallbacks = buttonsCallbacks.map(binding => ({ ...binding, onPress: [], onRelease: [] }));
+  axisCallbacks = axisCallbacks.map(binding => ({ ...binding, onMove: [] }));
+  triggersCallbacks = triggersCallbacks.map(binding => ({ ...binding, onMove: [] }));
 };
 
 export const buttonsList = () => buttonsDic.map(dic => dic.name);
