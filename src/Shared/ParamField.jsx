@@ -8,7 +8,7 @@ export default ({ param, value, onChange }) => {
         key={param.name}
         label={param.text}
         value={value}
-        onChange={e => onChange(param.name, Number(e.target.value))}
+        onChange={e => onChange(param.name, e.target.value)}
       />
     );
   }

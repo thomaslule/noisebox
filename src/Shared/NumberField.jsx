@@ -6,7 +6,7 @@ export default props => (
     <Col componentClass={ControlLabel} md={3}>{props.label}</Col>
     <Col md={9}>
       <FormControl
-        type="number"
+        type="text"
         value={props.value}
         onChange={props.onChange}
         required
