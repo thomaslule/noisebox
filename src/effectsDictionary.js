@@ -79,7 +79,7 @@ const effects = [
   createMoveNumberParamEffect('detune', 'Detune', ['oscillator'], 100),
   createSetNumberParamEffect('amplitude', 'Amplitude', ['lfo'], 0),
   createMoveNumberParamEffect('amplitude', 'Amplitude', ['lfo'], 1),
-  createSetSelectParamEffect('type', 'Type', ['oscillator'], ['sine', 'square', 'triangle', 'sawtooth'], 'sine'),
+  createSetSelectParamEffect('type', 'Type', ['oscillator', 'lfo'], ['sine', 'square', 'triangle', 'sawtooth'], 'sine'),
   {
     name: 'switch_mute',
     text: 'Switch mute',

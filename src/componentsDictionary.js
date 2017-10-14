@@ -102,6 +102,12 @@ const dic = [
     text: 'LFO',
     params: [
       {
+        name: 'type',
+        text: 'Type',
+        type: 'select',
+        options: ['sine', 'square', 'triangle', 'sawtooth'],
+      },
+      {
         name: 'frequency',
         text: 'Frequency',
         type: 'number',
@@ -123,11 +129,15 @@ const dic = [
       },
     ],
     defaultParams: {
-      frequency: 1, min: 100, max: 300, amplitude: 1,
+      type: 'sine', frequency: 1, min: 100, max: 300, amplitude: 1,
     },
     inputs: ['frequency', 'amplitude'],
     create: (component) => {
-      const lfo = new Tone.LFO(component.params.frequency, component.params.min, component.params.max);
+      const lfo = new Tone.LFO(
+        component.params.frequency,
+        component.params.min,
+        component.params.max,
+      );
       lfo.amplitude.value = component.params.amplitude;
       lfo.start();
       return {
