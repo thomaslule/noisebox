@@ -44,18 +44,7 @@ const dic = [
       type: 'sine', frequency: 440, detune: 0, phase: 0, volume: 0, mute: false,
     },
     inputs: ['frequency'],
-    create: (component) => {
-      const o = new Tone.Oscillator(component.params.frequency, component.params.type);
-      o.volume.value = component.params.volume;
-      o.mute = component.params.mute;
-      o.detune.value = component.params.detune;
-      o.start();
-      return {
-        id: component.id,
-        component: o,
-        currentParams: component.params,
-      };
-    },
+    constructor: Tone.Oscillator,
   },
   {
     name: 'filter',
@@ -87,15 +76,7 @@ const dic = [
       type: 'lowpass', frequency: 440, gain: 0, Q: 1,
     },
     inputs: ['main', 'frequency', 'gain', 'Q'],
-    create: (component) => {
-      const o = new Tone.Filter(component.params.frequency, component.params.type);
-      o.gain.value = component.params.gain;
-      return {
-        id: component.id,
-        component: o,
-        currentParams: component.params,
-      };
-    },
+    constructor: Tone.Filter,
   },
   {
     name: 'lfo',
@@ -132,20 +113,7 @@ const dic = [
       type: 'sine', frequency: 1, min: 100, max: 300, amplitude: 1,
     },
     inputs: ['frequency', 'amplitude'],
-    create: (component) => {
-      const lfo = new Tone.LFO(
-        component.params.frequency,
-        component.params.min,
-        component.params.max,
-      );
-      lfo.amplitude.value = component.params.amplitude;
-      lfo.start();
-      return {
-        id: component.id,
-        component: lfo,
-        currentParams: component.params,
-      };
-    },
+    constructor: Tone.LFO,
   },
   {
     name: 'envelope',
@@ -188,21 +156,7 @@ const dic = [
       attack: 0.01, decay: 0.1, sustain: 0.5, release: 1, attackCurve: 'linear', releaseCurve: 'linear',
     },
     inputs: [],
-    create: (component) => {
-      const envelope = new Tone.Envelope(
-        component.params.attack,
-        component.params.decay,
-        component.params.sustain,
-        component.params.release,
-      );
-      envelope.attackCurve = component.params.attackCurve;
-      envelope.releaseCurve = component.params.releaseCurve;
-      return {
-        id: component.id,
-        component: envelope,
-        currentParams: component.params,
-      };
-    },
+    constructor: Tone.Envelope,
   },
   {
     name: 'scaled_envelope',
@@ -255,14 +209,7 @@ const dic = [
       attack: 0.01, decay: 0.1, sustain: 0.5, release: 1, min: 0, max: 1, attackCurve: 'linear', releaseCurve: 'linear',
     },
     inputs: [],
-    create: (component) => {
-      const envelope = new Tone.ScaledEnvelope(component.params);
-      return {
-        id: component.id,
-        component: envelope,
-        currentParams: component.params,
-      };
-    },
+    constructor: Tone.ScaledEnvelope,
   },
   {
     name: 'gain',
@@ -276,14 +223,7 @@ const dic = [
     ],
     defaultParams: { gain: 1 },
     inputs: ['main', 'gain'],
-    create: (component) => {
-      const envelope = new Tone.Gain(component.params.gain);
-      return {
-        id: component.id,
-        component: envelope,
-        currentParams: component.params,
-      };
-    },
+    constructor: Tone.Gain,
   },
 ];
 
@@ -291,4 +231,12 @@ export const get = component => dic.find(c => c.name === component);
 
 export const getAll = () => clone(dic);
 
-export const createComponent = component => get(component.type).create(component);
+export const createComponent = (component) => {
+  const c = new (get(component.type).constructor)(component.params);
+  if (c.start) c.start();
+  return {
+    id: component.id,
+    component: c,
+    currentParams: component.params,
+  };
+};
