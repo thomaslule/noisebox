@@ -23,6 +23,11 @@ const dic = [
         type: 'number',
       },
       {
+        name: 'phase',
+        text: 'Phase',
+        type: 'number',
+      },
+      {
         name: 'volume',
         text: 'Volume',
         type: 'number',
@@ -36,7 +41,7 @@ const dic = [
       },
     ],
     defaultParams: {
-      type: 'sine', frequency: 440, detune: 0, volume: 0, mute: false,
+      type: 'sine', frequency: 440, detune: 0, phase: 0, volume: 0, mute: false,
     },
     inputs: ['frequency'],
     create: (component) => {
