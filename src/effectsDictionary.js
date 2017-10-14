@@ -44,6 +44,30 @@ const createMoveNumberParamEffect = (name, text, components, initVal) => ({
   },
 });
 
+const createSetSelectParamEffect = (name, text, components, options, initVal) => {
+  const initParams = {};
+  initParams[name] = initVal;
+  return {
+    name: `set_${name}`,
+    text: `Set ${text}`,
+    actionType: 'press',
+    components,
+    params: [
+      {
+        name,
+        text,
+        type: 'select',
+        options,
+      },
+    ],
+    initParams,
+    create: (params, component) => () => {
+      component.currentParams[name] = params[name];
+      component.component[name] = params[name];
+    },
+  };
+};
+
 const effects = [
   createSetNumberParamEffect('frequency', 'Frequency', ['oscillator', 'filter', 'lfo'], 440),
   createMoveNumberParamEffect('frequency', 'Frequency', ['oscillator', 'filter', 'lfo'], 100),
@@ -55,6 +79,7 @@ const effects = [
   createMoveNumberParamEffect('detune', 'Detune', ['oscillator'], 100),
   createSetNumberParamEffect('amplitude', 'Amplitude', ['lfo'], 0),
   createMoveNumberParamEffect('amplitude', 'Amplitude', ['lfo'], 1),
+  createSetSelectParamEffect('type', 'Type', ['oscillator'], ['sine', 'square', 'triangle', 'sawtooth'], 'sine'),
   {
     name: 'switch_mute',
     text: 'Switch mute',
