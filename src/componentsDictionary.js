@@ -205,6 +205,66 @@ const dic = [
     },
   },
   {
+    name: 'scaled_envelope',
+    text: 'Scaled envelope',
+    params: [
+      {
+        name: 'attack',
+        text: 'Attack',
+        type: 'number',
+      },
+      {
+        name: 'decay',
+        text: 'Decay',
+        type: 'number',
+      },
+      {
+        name: 'sustain',
+        text: 'Sustain',
+        type: 'number',
+      },
+      {
+        name: 'release',
+        text: 'Release',
+        type: 'number',
+      },
+      {
+        name: 'min',
+        text: 'Min',
+        type: 'number',
+      },
+      {
+        name: 'max',
+        text: 'Max',
+        type: 'number',
+      },
+      {
+        name: 'attackCurve',
+        text: 'Attack curve',
+        type: 'select',
+        options: ['linear', 'exponential', 'sine', 'cosine', 'bounce', 'ripple', 'step'],
+      },
+      {
+        name: 'releaseCurve',
+        text: 'Release curve',
+        type: 'select',
+        options: ['linear', 'exponential', 'sine', 'cosine', 'bounce', 'ripple', 'step'],
+      },
+    ],
+    defaultParams: {
+      attack: 0.01, decay: 0.1, sustain: 0.5, release: 1, min: 0, max: 1, attackCurve: 'linear', releaseCurve: 'linear',
+    },
+    inputs: [],
+    create: (component) => {
+      const envelope = new Tone.ScaledEnvelope(component.params);
+      return {
+        id: component.id,
+        component: envelope,
+        currentParams: component.params,
+      };
+    },
+  },
+  {
     name: 'gain',
     text: 'Gain',
     params: [

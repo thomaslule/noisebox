@@ -84,7 +84,7 @@ const effects = [
     name: 'trigger_attack',
     text: 'Trigger attack',
     actionType: 'press',
-    components: ['envelope'],
+    components: ['envelope', 'scaled_envelope'],
     params: [],
     initParams: {},
     create: (params, component) => () => {
@@ -95,7 +95,7 @@ const effects = [
     name: 'trigger_release',
     text: 'Trigger release',
     actionType: 'press',
-    components: ['envelope'],
+    components: ['envelope', 'scaled_envelope'],
     params: [],
     initParams: {},
     create: (params, component) => () => {
@@ -106,7 +106,7 @@ const effects = [
     name: 'trigger_attack_release',
     text: 'Trigger attack release',
     actionType: 'press',
-    components: ['envelope'],
+    components: ['envelope', 'scaled_envelope'],
     params: [
       {
         name: 'duration',
