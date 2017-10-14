@@ -5,10 +5,12 @@ import Components from './Components';
 import Connections from './Connections';
 import Bindings from './Bindings';
 import StateJson from './StateJson';
+import Error from './Error';
 
 export default () => (
   <Grid>
     <PageHeader>noisebox <MuteAll /></PageHeader>
+    <Error />
     <Row>
       <Col md={6}><Components /><Connections /></Col>
       <Col md={6}><Bindings /></Col>

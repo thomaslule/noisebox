@@ -7,9 +7,11 @@ let components = [];
 
 export default (params) => {
   Tone.Master.mute = params.muteAll;
-  components.forEach((c) => {
-    if (c.id !== 'master') c.component.dispose();
-  });
+  if (!params.error) {
+    components.forEach((c) => {
+      if (c.id !== 'master') c.component.dispose();
+    });
+  }
 
   components = params.components.map(component => createComponent(component));
   components.push({
