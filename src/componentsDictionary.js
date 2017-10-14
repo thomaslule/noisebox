@@ -204,6 +204,27 @@ const dic = [
       };
     },
   },
+  {
+    name: 'gain',
+    text: 'Gain',
+    params: [
+      {
+        name: 'gain',
+        text: 'Gain',
+        type: 'number',
+      },
+    ],
+    defaultParams: { gain: 1 },
+    inputs: ['main', 'gain'],
+    create: (component) => {
+      const envelope = new Tone.Gain(component.params.gain);
+      return {
+        id: component.id,
+        component: envelope,
+        currentParams: component.params,
+      };
+    },
+  },
 ];
 
 export const get = component => dic.find(c => c.name === component);

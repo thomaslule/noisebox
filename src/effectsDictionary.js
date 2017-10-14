@@ -71,8 +71,8 @@ const createSetSelectParamEffect = (name, text, components, options, initVal) =>
 const effects = [
   createSetNumberParamEffect('frequency', 'Frequency', ['oscillator', 'filter', 'lfo'], 440),
   createMoveNumberParamEffect('frequency', 'Frequency', ['oscillator', 'filter', 'lfo'], 100),
-  createSetNumberParamEffect('gain', 'Gain', ['filter'], 0),
-  createMoveNumberParamEffect('gain', 'Gain', ['filter'], 10),
+  createSetNumberParamEffect('gain', 'Gain', ['filter', 'gain'], 0),
+  createMoveNumberParamEffect('gain', 'Gain', ['filter', 'gain'], 10),
   createSetNumberParamEffect('Q', 'Q', ['filter'], 1),
   createMoveNumberParamEffect('Q', 'Q', ['filter'], 10),
   createSetNumberParamEffect('detune', 'Detune', ['oscillator'], 0),
