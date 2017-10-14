@@ -6,27 +6,28 @@ import { resetBindings, onPress, onRelease, onMove } from './controller';
 let components = [];
 
 export default (params) => {
+  Tone.Master.mute = params.muteAll;
   components.forEach((c) => {
     if (c.id !== 'master') c.component.dispose();
   });
-  if (params.muteAll) {
-    return;
-  }
+
   components = params.components.map(component => createComponent(component));
   components.push({
     id: 'master',
     component: Tone.Master,
     currentParams: {},
   });
+
   params.connections.forEach(({ fromComponent, toComponent, toInput }) => {
     const from = components.find(c => c.id === fromComponent);
     const to = components.find(c => c.id === toComponent);
     if (toInput === 'main') {
       from.component.connect(to.component);
     } else {
-      to.component.connect(to.component[toInput]);
+      from.component.connect(to.component[toInput]);
     }
   });
+
   resetBindings();
   params.bindings.forEach((binding) => {
     if (binding.component === 'none' || binding.effect === 'none') return;
