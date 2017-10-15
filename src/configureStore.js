@@ -4,6 +4,7 @@ import reducer from './reducer';
 import noise from './noise';
 import { errorAction, noErrorAction } from './Error/errorActions';
 import { changeStateJson } from './StateJson/stateJsonActions';
+import { unzip } from './zip';
 
 export default () => {
   const store = createStore(reducer, applyMiddleware(logger));
@@ -19,7 +20,7 @@ export default () => {
   });
 
   if (window.location.hash.length > 1) {
-    const stateJson = atob(window.location.hash.substring(1));
+    const stateJson = unzip(window.location.hash.substring(1));
     window.history.pushState('', document.title, window.location.pathname + window.location.search);
     store.dispatch(changeStateJson(stateJson));
   }
