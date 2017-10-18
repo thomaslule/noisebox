@@ -6,7 +6,7 @@ export default (state = [], action) => {
     return [...state, componentReducer(null, action)];
   }
   if (action.type === 'COMPONENT_DELETE') {
-    return state.filter(c => c.id !== action.component);
+    return state.filter(c => c.id !== action.componentId);
   }
   if (['COMPONENT_CHANGE_PARAM', 'COMPONENT_CHANGE_CONNECT_TO'].includes(action.type)) {
     return state.map(c => (c.id === action.component ? componentReducer(c, action) : c));

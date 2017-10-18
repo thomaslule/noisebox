@@ -1,52 +1,22 @@
 import React from 'react';
 import { Panel, ListGroup, ListGroupItem, Form } from 'react-bootstrap';
 import Binding from './Binding';
-import { Select, Button } from '../Shared';
+import { SelectWithButton } from '../Shared';
 
-class Bindings extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedAction: props.actions[0],
-    };
-  }
-
-  handleChangeAction(value) {
-    this.setState({
-      ...this.state,
-      selectedAction: value,
-    });
-  }
-
-  handleClickAdd() {
-    this.props.addBinding(this.state.selectedAction);
-    this.setState({
-      ...this.state,
-      selectedAction: this.props.actions[0],
-    });
-  }
-
-  render() {
-    const { bindings, actions } = this.props;
-    return (
-      <Panel header="Bindings">
-        <ListGroup fill>
-          {bindings.map(binding => <Binding key={binding.id} binding={binding} />)}
-          <ListGroupItem>
-            <Form horizontal onSubmit={e => e.preventDefault()}>
-              <Select
-                label="Action"
-                value={this.state.selectedAction}
-                onChange={e => this.handleChangeAction(e.target.value)}
-                options={actions.map(a => ({ text: a, value: a }))}
-              />
-              <Button text="Add" onClick={() => this.handleClickAdd()} />
-            </Form>
-          </ListGroupItem>
-        </ListGroup>
-      </Panel>
-    );
-  }
-}
-
-export default Bindings;
+export default ({ bindings, actions, addBinding }) => (
+  <Panel header="Bindings">
+    <ListGroup fill>
+      {bindings.map(binding => <Binding key={binding.id} binding={binding} />)}
+      <ListGroupItem>
+        <Form horizontal onSubmit={e => e.preventDefault()}>
+          <SelectWithButton
+            label="Action"
+            options={actions.map(a => ({ text: a, value: a }))}
+            buttonText="Add"
+            onChoose={value => addBinding(value)}
+          />
+        </Form>
+      </ListGroupItem>
+    </ListGroup>
+  </Panel>
+);
