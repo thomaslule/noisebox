@@ -27,17 +27,18 @@ class Bindings extends React.Component {
   }
 
   render() {
+    const { bindings, actions } = this.props;
     return (
       <Panel header="Bindings">
         <ListGroup fill>
-          {this.props.bindings.map(binding => <Binding key={binding.id} binding={binding} />)}
+          {bindings.map(binding => <Binding key={binding.id} binding={binding} />)}
           <ListGroupItem>
             <Form horizontal onSubmit={e => e.preventDefault()}>
               <Select
                 label="Action"
                 value={this.state.selectedAction}
                 onChange={e => this.handleChangeAction(e.target.value)}
-                options={this.props.actions.map(a => ({ text: a, value: a }))}
+                options={actions.map(a => ({ text: a, value: a }))}
               />
               <Button text="Add" onClick={() => this.handleClickAdd()} />
             </Form>

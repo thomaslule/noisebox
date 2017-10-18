@@ -1,42 +1,42 @@
-import clone from 'clone';
-import { get } from '../../effectsDictionary';
+import effectReducer from './Effect/effectReducer';
 
 export default (state = [], action) => {
   if (action.type === 'BINDING_ADD') {
     return {
       id: action.id,
-      action: action.action,
-      component: 'none',
-      effect: 'none',
-      params: {},
+      actions: [action.action],
+      actionType: action.actionType,
+      effects: [],
     };
   }
-  if (action.type === 'BINDING_CHANGE_COMPONENT') {
+  if (action.type === 'BINDING_ACTION_ADD') {
     return {
       ...state,
-      component: action.component,
-      effect: 'none',
-      params: {},
+      actions: [...state.actions, action.action],
     };
   }
-  if (action.type === 'BINDING_CHANGE_EFFECT') {
+  if (action.type === 'BINDING_ACTION_DELETE') {
     return {
       ...state,
-      effect: action.effect,
-      params: get(action.effect).initParams,
+      actions: state.actions.filter(a => a !== action.action),
     };
   }
-  if (action.type === 'BINDING_CHANGE_PARAM') {
-    const newState = clone(state);
-    newState.params[action.param] = action.value;
-    return newState;
-  }
-  if (action.type === 'COMPONENT_DELETE') {
+  if (action.type === 'BINDING_EFFECT_ADD') {
     return {
       ...state,
-      component: 'none',
-      effect: 'none',
-      params: {},
+      effects: [...state.effects, effectReducer(null, action)],
+    };
+  }
+  if (action.type === 'BINDING_EFFECT_DELETE') {
+    return {
+      ...state,
+      effects: state.effects.filter(e => e.id !== action.effectId),
+    };
+  }
+  if (action.type.startsWith('BINDING_EFFECT_')) {
+    return {
+      ...state,
+      effects: state.effects.map(e => (e.id === action.effectId ? effectReducer(e, action) : e)),
     };
   }
   return state;

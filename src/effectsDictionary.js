@@ -1,5 +1,5 @@
 import Tone from 'tone';
-import actions from './actionsDictionary';
+import { getAll } from './componentsDictionary';
 
 const toHertz = val => Tone.Frequency(val).toFrequency();
 
@@ -69,6 +69,24 @@ const createSetSelectParamEffect = (name, text, components, options, initVal) =>
 };
 
 const effects = [
+  {
+    name: 'none',
+    text: 'None',
+    actionType: 'press',
+    components: getAll().map(c => c.name),
+    params: [],
+    initParams: {},
+    create: () => () => {},
+  },
+  {
+    name: 'none',
+    text: 'None',
+    actionType: 'move',
+    components: getAll().map(c => c.name),
+    params: [],
+    initParams: {},
+    create: () => () => {},
+  },
   createSetNumberParamEffect('frequency', 'Frequency', ['oscillator', 'filter', 'lfo'], 440),
   createMoveNumberParamEffect('frequency', 'Frequency', ['oscillator', 'filter', 'lfo'], 100),
   createSetNumberParamEffect('gain', 'Gain', ['filter', 'gain'], 0),
@@ -133,9 +151,8 @@ const effects = [
   },
 ];
 
-export const effectsFor = (actionId, component) => {
+export const effectsFor = (actionType, component) => {
   if (component === 'none') return [];
-  const actionType = actions.find(a => a.id === actionId).type;
   return effects.filter(e => e.actionType === actionType)
     .filter(e => e.components.includes(component));
 };

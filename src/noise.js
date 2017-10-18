@@ -31,13 +31,17 @@ export default (params) => {
   });
 
   resetBindings();
+
   params.bindings.forEach((binding) => {
-    if (binding.component === 'none' || binding.effect === 'none') return;
-    const comp = components.find(c => c.id === binding.component);
-    const effect = createEffect(binding.effect, binding.params, comp);
-    const [action, button] = binding.action.split(' ');
-    if (action === 'press') onPress(button, effect);
-    if (action === 'release') onRelease(button, effect);
-    if (action === 'move') onMove(button, effect);
+    binding.actions.forEach((action) => {
+      binding.effects.forEach((effect) => {
+        const comp = components.find(c => c.id === effect.componentId);
+        const effectToApply = createEffect(effect.effectId, effect.params, comp);
+        const [gesture, button] = action.split(' ');
+        if (gesture === 'press') onPress(button, effectToApply);
+        if (gesture === 'release') onRelease(button, effectToApply);
+        if (gesture === 'move') onMove(button, effectToApply);
+      });
+    });
   });
 };

@@ -1,5 +1,6 @@
 import bindingReducer from './Binding/bindingReducer';
-import { setCurrentId } from './bindingsId';
+import { setCurrentId as setBindingCurrentId } from './bindingsId';
+import { setCurrentId as setEffectCurrentId } from './Binding/effectsId';
 
 export default (state = [], action) => {
   if (action.type === 'BINDING_ADD') {
@@ -8,15 +9,21 @@ export default (state = [], action) => {
   if (action.type === 'BINDING_DELETE') {
     return state.filter(b => b.id !== action.binding);
   }
-  if (['BINDING_CHANGE_COMPONENT', 'BINDING_CHANGE_EFFECT', 'BINDING_CHANGE_PARAM', 'BINDING_DELETE'].includes(action.type)) {
+  if (action.type.startsWith('BINDING_')) {
     return state.map(b => (b.id === action.binding ? bindingReducer(b, action) : b));
   }
   if (action.type === 'COMPONENT_DELETE') {
     return state.map(b => (b.component === action.component ? bindingReducer(b, action) : b));
   }
   if (action.type === 'STATE_JSON_CHANGED') {
-    const maxId = state.map(b => b.id).reduce((a, b) => (a > b ? a : b), 0);
-    setCurrentId(maxId);
+    const maxBindingId = state.map(b => b.id).reduce((a, b) => (a > b ? a : b), 0);
+    setBindingCurrentId(maxBindingId);
+    const maxEffectsId = state
+      .map(b => b.effects)
+      .reduce((a, b) => a.concat(b), [])
+      .map(e => e.id)
+      .reduce((a, b) => (a > b ? a : b), 0);
+    setEffectCurrentId(maxEffectsId);
     return state;
   }
   return state;
