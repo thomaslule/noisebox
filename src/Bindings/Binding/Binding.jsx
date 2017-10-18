@@ -36,12 +36,14 @@ export default ({
       ) : null
     }
     {binding.effects.map(effect => (
-      <Effect
-        key={effect.id}
-        effect={effect}
-        bindingId={binding.id}
-        actionType={binding.actionType}
-      />
+      <Well>
+        <Effect
+          key={effect.id}
+          effect={effect}
+          bindingId={binding.id}
+          actionType={binding.actionType}
+        />
+      </Well>
     ))}
     {allComponentIds.length > 0 ? (
       <Well>
