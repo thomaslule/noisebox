@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroupItem, Form } from 'react-bootstrap';
+import { ListGroupItem, Form, Well } from 'react-bootstrap';
 import Action from './Action';
 import Effect from './Effect';
 import { Button, SelectWithButton } from '../../Shared';
@@ -43,18 +43,20 @@ export default ({
         actionType={binding.actionType}
       />
     ))}
-    <Form horizontal onSubmit={e => e.preventDefault()}>
-      {allComponentIds.length > 0 ? (
-        <SelectWithButton
-          label="Component"
-          options={allComponentIds.map(a => ({ text: a, value: a }))}
-          buttonText="Add"
-          onChoose={value => onAddEffect(value)}
-        />
+    {allComponentIds.length > 0 ? (
+      <Well>
+        <Form horizontal onSubmit={e => e.preventDefault()}>
+          <SelectWithButton
+            label="Component"
+            options={allComponentIds.map(a => ({ text: a, value: a }))}
+            buttonText="Add effect"
+            onChoose={value => onAddEffect(value)}
+          />
+        </Form>
+      </Well>
       ) : null}
-    </Form>
     <Form horizontal onSubmit={e => e.preventDefault()}>
-      <Button text="Delete" onClick={() => onDelete()} />
+      <Button text="Delete binding" onClick={() => onDelete()} />
     </Form>
   </ListGroupItem>
 );
