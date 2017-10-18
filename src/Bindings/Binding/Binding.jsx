@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroupItem, Form, Well, Col, ControlLabel, ButtonToolbar, FormGroup, FormControl } from 'react-bootstrap';
+import { ListGroupItem, Form, Well, Col, ControlLabel, ButtonToolbar, FormGroup } from 'react-bootstrap';
 import Action from './Action';
 import Effect from './Effect';
 import { Button, SelectWithButton } from '../../Shared';
