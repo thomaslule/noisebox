@@ -13,14 +13,13 @@ const mapStateToProps = (state, { binding }) => {
     binding,
     availableActions,
     canDeleteAction,
-    allComponentIds: state.components.map(c => c.id),
   });
 };
 
 const mapDispatchToProps = (dispatch, { binding }) => ({
   onAddAction: action => dispatch(addAction(binding.id, action)),
   onDeleteAction: action => dispatch(deleteAction(binding.id, action)),
-  onAddEffect: componentId => dispatch(addEffect(binding.id, componentId)),
+  onAddEffect: () => dispatch(addEffect(binding.id)),
   onDelete: () => dispatch(remove(binding.id)),
 });
 

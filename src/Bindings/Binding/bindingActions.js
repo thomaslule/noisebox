@@ -12,11 +12,10 @@ export const deleteAction = (bindingId, action) => ({
   action,
 });
 
-export const addEffect = (bindingId, componentId) => ({
+export const addEffect = bindingId => ({
   type: 'BINDING_EFFECT_ADD',
   effectId: newId(),
   bindingId,
-  componentId,
 });
 
 export const remove = bindingId => ({

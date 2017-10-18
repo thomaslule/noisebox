@@ -74,7 +74,7 @@ const effectTypes = [
     id: 'none',
     text: 'None',
     actionType: 'press',
-    components: getAll().map(c => c.id),
+    components: getAll().map(c => c.id).concat(['none']),
     params: [],
     initParams: {},
     create: () => () => {},
@@ -83,7 +83,7 @@ const effectTypes = [
     id: 'none',
     text: 'None',
     actionType: 'move',
-    components: getAll().map(c => c.id),
+    components: getAll().map(c => c.id).concat(['none']),
     params: [],
     initParams: {},
     create: () => () => {},
@@ -152,11 +152,9 @@ const effectTypes = [
   },
 ];
 
-export const effectTypesFor = (actionType, componentTypeId) => {
-  if (componentTypeId === 'none') return [];
-  return effectTypes.filter(e => e.actionType === actionType)
-    .filter(e => e.components.includes(componentTypeId));
-};
+export const effectTypesFor = (actionType, componentTypeId) => effectTypes
+  .filter(e => e.actionType === actionType)
+  .filter(e => e.components.includes(componentTypeId));
 
 export const get = effectTypeId => effectTypes.find(e => e.id === effectTypeId);
 

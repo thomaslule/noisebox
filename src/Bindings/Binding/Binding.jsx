@@ -1,8 +1,8 @@
 import React from 'react';
-import { ListGroupItem, Form, Well, Col, ControlLabel, ButtonToolbar, FormGroup } from 'react-bootstrap';
+import { ListGroupItem, Form, Well, Col, ControlLabel, ButtonGroup, ButtonToolbar, FormGroup, Button } from 'react-bootstrap';
 import Action from './Action';
 import Effect from './Effect';
-import { Button, SelectWithButton } from '../../Shared';
+import { SelectWithButton } from '../../Shared';
 
 export default ({
   binding,
@@ -10,17 +10,16 @@ export default ({
   onAddAction,
   canDeleteAction,
   onDeleteAction,
-  allComponentIds,
   onAddEffect,
   onDelete,
 }) => (
   <ListGroupItem>
-    <Well>
+    <Well bsSize="small">
       <Form horizontal onSubmit={e => e.preventDefault()}>
         <FormGroup>
           <Col componentClass={ControlLabel} md={3}>Actions</Col>
           <Col md={9}>
-            <ButtonToolbar>
+            <ButtonGroup>
               {binding.actions.map(action => (
                 <Action
                   key={action}
@@ -29,7 +28,7 @@ export default ({
                   onDelete={() => onDeleteAction(action)}
                 />
             ))}
-            </ButtonToolbar>
+            </ButtonGroup>
           </Col>
         </FormGroup>
       </Form>
@@ -47,29 +46,23 @@ export default ({
     }
     </Well>
     {binding.effects.map(effect => (
-      <Well>
+      <Well bsSize="small" key={effect.id}>
         <Effect
-          key={effect.id}
           effect={effect}
           bindingId={binding.id}
           actionType={binding.actionType}
         />
       </Well>
     ))}
-    {allComponentIds.length > 0 ? (
-      <Well>
-        <Form horizontal onSubmit={e => e.preventDefault()}>
-          <SelectWithButton
-            label="Component"
-            options={allComponentIds.map(a => ({ text: a, value: a }))}
-            buttonText="Add effect"
-            onChoose={value => onAddEffect(value)}
-          />
-        </Form>
-      </Well>
-      ) : null}
     <Form horizontal onSubmit={e => e.preventDefault()}>
-      <Button text="Delete binding" onClick={() => onDelete()} />
+      <FormGroup>
+        <Col mdOffset={3} md={9}>
+          <ButtonToolbar>
+            <Button onClick={() => onAddEffect()}>Add effect</Button>
+            <Button onClick={() => onDelete()}>Delete binding</Button>
+          </ButtonToolbar>
+        </Col>
+      </FormGroup>
     </Form>
   </ListGroupItem>
 );

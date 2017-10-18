@@ -5,6 +5,14 @@ export default (state = {}, action) => {
   if (action.type === 'BINDING_EFFECT_ADD') {
     return {
       id: action.effectId,
+      componentId: 'none',
+      effectTypeId: 'none',
+      params: [],
+    };
+  }
+  if (action.type === 'BINDING_EFFECT_CHANGE_COMPONENT_ID') {
+    return {
+      ...state,
       componentId: action.componentId,
       effectTypeId: 'none',
       params: [],
