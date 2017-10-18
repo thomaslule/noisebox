@@ -3,7 +3,7 @@ import Tone from 'tone';
 
 const dic = [
   {
-    name: 'oscillator',
+    id: 'oscillator',
     text: 'Oscillator',
     params: [
       {
@@ -47,7 +47,7 @@ const dic = [
     constructor: Tone.Oscillator,
   },
   {
-    name: 'filter',
+    id: 'filter',
     text: 'Filter',
     params: [
       {
@@ -79,7 +79,7 @@ const dic = [
     constructor: Tone.Filter,
   },
   {
-    name: 'lfo',
+    id: 'lfo',
     text: 'LFO',
     params: [
       {
@@ -116,7 +116,7 @@ const dic = [
     constructor: Tone.LFO,
   },
   {
-    name: 'envelope',
+    id: 'envelope',
     text: 'Envelope',
     params: [
       {
@@ -159,7 +159,7 @@ const dic = [
     constructor: Tone.Envelope,
   },
   {
-    name: 'scaled_envelope',
+    id: 'scaled_envelope',
     text: 'Scaled envelope',
     params: [
       {
@@ -212,7 +212,7 @@ const dic = [
     constructor: Tone.ScaledEnvelope,
   },
   {
-    name: 'gain',
+    id: 'gain',
     text: 'Gain',
     params: [
       {
@@ -226,7 +226,7 @@ const dic = [
     constructor: Tone.Gain,
   },
   {
-    name: 'noise',
+    id: 'noise',
     text: 'Noise',
     params: [
       {
@@ -242,16 +242,16 @@ const dic = [
   },
 ];
 
-export const get = component => dic.find(c => c.name === component);
+export const get = componentTypeId => dic.find(ct => ct.id === componentTypeId);
 
 export const getAll = () => clone(dic);
 
-export const createComponent = (component) => {
-  const c = new (get(component.type).constructor)(component.params);
+export const createNoiseComponent = (component) => {
+  const c = new (get(component.typeId).constructor)(component.params);
   if (c.start) c.start();
   return {
     id: component.id,
-    component: c,
+    toneComponent: c,
     currentParams: component.params,
   };
 };

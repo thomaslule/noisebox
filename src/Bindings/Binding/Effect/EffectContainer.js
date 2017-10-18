@@ -1,23 +1,23 @@
 import { connect } from 'react-redux';
 import Effect from './Effect';
-import { changeEffect, changeParam, remove } from './effectActions';
-import { get, effectsFor } from '../../../effectsDictionary';
+import { changeEffectType, changeParam, remove } from './effectActions';
+import { get, effectTypesFor } from '../../../effectTypesDictionary';
 
 const mapStateToProps = (state, { effect, actionType }) => {
   const component = state.components.find(c => c.id === effect.componentId);
-  const availableEffects = effectsFor(
+  const availableEffectTypes = effectTypesFor(
     actionType,
-    component.type,
+    component.typeId,
   );
   return ({
-    availableEffects: availableEffects.map(e => e.name),
+    availableEffectTypeIds: availableEffectTypes.map(e => e.id),
     effect,
-    paramFields: get(effect.effectId).params,
+    paramFields: get(effect.effectTypeId).params,
   });
 };
 
 const mapDispatchToProps = (dispatch, { effect, bindingId }) => ({
-  onChangeEffect: effectType => dispatch(changeEffect(bindingId, effect.id, effectType)),
+  onChangeEffectType: effectTypeId => dispatch(changeEffectType(bindingId, effect.id, effectTypeId)),
   onChangeParam: (param, value) => dispatch(changeParam(bindingId, effect.id, param, value)),
   onDelete: () => dispatch(remove(bindingId, effect.id)),
 });

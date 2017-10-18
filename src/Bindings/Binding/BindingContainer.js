@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import Binding from './Binding';
 import { addAction, deleteAction, addEffect, remove } from './bindingActions';
-import actions from './../../actionsDictionary';
+import actionDefs from './../../actionsDictionary';
 
 const mapStateToProps = (state, { binding }) => {
-  const availableActions = actions
+  const availableActions = actionDefs
     .filter(a => a.type === binding.actionType)
     .map(a => a.id)
     .filter(a => !binding.actions.includes(a));
@@ -13,14 +13,14 @@ const mapStateToProps = (state, { binding }) => {
     binding,
     availableActions,
     canDeleteAction,
-    allComponents: state.components.map(c => c.id),
+    allComponentIds: state.components.map(c => c.id),
   });
 };
 
 const mapDispatchToProps = (dispatch, { binding }) => ({
   onAddAction: action => dispatch(addAction(binding.id, action)),
   onDeleteAction: action => dispatch(deleteAction(binding.id, action)),
-  onAddEffect: component => dispatch(addEffect(binding.id, component)),
+  onAddEffect: componentId => dispatch(addEffect(binding.id, componentId)),
   onDelete: () => dispatch(remove(binding.id)),
 });
 

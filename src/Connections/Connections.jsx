@@ -3,25 +3,25 @@ import { Panel, ListGroup, ListGroupItem, Form } from 'react-bootstrap';
 import { Button, Select } from '../Shared';
 
 const Connection = ({
-  connection, allComponents, allInputs, onChangeFrom, onChangeTo, onDelete,
+  connection, allComponentIds, allInputs, onChangeFrom, onChangeTo, onDelete,
 }) => {
   const toSelectValueIndex = allInputs
-    .findIndex(c => c.component === connection.toComponent && c.input === connection.toInput);
+    .findIndex(c => c.componentId === connection.toComponentId && c.input === connection.toInput);
   const toSelectOptions = allInputs
-    .map((i, index) => ({ text: `${i.component} ${i.input === 'main' ? '' : i.input}`, value: index }));
+    .map((i, index) => ({ text: `${i.componentId} ${i.input === 'main' ? '' : i.input}`, value: index }));
   return (
     <ListGroupItem>
       <Form horizontal onSubmit={e => e.preventDefault()}>
         <Select
           label="From"
-          value={connection.fromComponent}
+          value={connection.fromComponentId}
           onChange={e => onChangeFrom(e.target.value)}
-          options={allComponents.map(c => ({ text: c, value: c }))}
+          options={allComponentIds.map(c => ({ text: c, value: c }))}
         />
         <Select
           label="To"
           value={toSelectValueIndex}
-          onChange={e => onChangeTo(allInputs[e.target.value].component, allInputs[e.target.value].input)}
+          onChange={e => onChangeTo(allInputs[e.target.value].componentId, allInputs[e.target.value].input)}
           options={toSelectOptions}
         />
         <Button onClick={onDelete} text="Delete" />
@@ -31,7 +31,7 @@ const Connection = ({
 };
 
 export default ({
-  connections, allComponents, allInputs, onChangeFrom, onChangeTo, onAdd, onDelete,
+  connections, allComponentIds, allInputs, onChangeFrom, onChangeTo, onAdd, onDelete,
 }) => (
   <Panel header="Connections">
     <ListGroup fill>
@@ -39,19 +39,21 @@ export default ({
         <Connection
           key={connection.id}
           connection={connection}
-          allComponents={allComponents}
+          allComponentIds={allComponentIds}
           allInputs={allInputs}
-          onChangeFrom={fromComponent => onChangeFrom(connection.id, fromComponent)}
-          onChangeTo={(toComponent, toInput) => onChangeTo(connection.id, toComponent, toInput)}
+          onChangeFrom={fromComponentId => onChangeFrom(connection.id, fromComponentId)}
+          onChangeTo={(toComponentId, toInput) => onChangeTo(connection.id, toComponentId, toInput)}
           onDelete={() => onDelete(connection.id)}
         />
       ))}
-      {allComponents.length > 0
+      {allComponentIds.length > 0
       ? (
         <ListGroupItem>
           <Form horizontal onSubmit={e => e.preventDefault()}>
             <Button
-              onClick={() => onAdd(allComponents[0], allInputs[0].component, allInputs[0].input)}
+              onClick={
+                () => onAdd(allComponentIds[0], allInputs[0].componentId, allInputs[0].input)
+              }
               text="Add"
             />
           </Form>

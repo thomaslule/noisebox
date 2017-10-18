@@ -1,13 +1,13 @@
-export const changeEffect = (bindingId, effectId, newEffect) => ({
-  type: 'BINDING_EFFECT_CHANGE_EFFECT',
-  binding: bindingId,
+export const changeEffectType = (bindingId, effectId, effectTypeId) => ({
+  type: 'BINDING_EFFECT_CHANGE_EFFECT_TYPE',
+  bindingId,
   effectId,
-  newEffect,
+  effectTypeId,
 });
 
 export const changeParam = (bindingId, effectId, param, value) => ({
   type: 'BINDING_EFFECT_CHANGE_PARAM',
-  binding: bindingId,
+  bindingId,
   effectId,
   param,
   value,
@@ -15,6 +15,6 @@ export const changeParam = (bindingId, effectId, param, value) => ({
 
 export const remove = (bindingId, effectId) => ({
   type: 'BINDING_EFFECT_DELETE',
-  binding: bindingId,
+  bindingId,
   effectId,
 });

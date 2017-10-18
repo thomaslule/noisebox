@@ -1,15 +1,16 @@
-import { getAll } from '../componentsDictionary';
+import { getAll } from '../componentTypesDictionary';
 
 let ids = getAll().map(c => ({
-  name: c.name,
+  componentTypeId: c.id,
   currentId: 0,
 }));
 
-export const newId = (componentType) => {
-  ids = ids.map(c => (c.name === componentType ? { ...c, currentId: c.currentId + 1 } : c));
-  return ids.find(c => c.name === componentType).currentId;
+export const newId = (componentTypeId) => {
+  ids = ids.map(c =>
+    (c.componentTypeId === componentTypeId ? { ...c, currentId: c.currentId + 1 } : c));
+  return ids.find(c => c.componentTypeId === componentTypeId).currentId;
 };
 
-export const setCurrentId = (componentType, currentId) => {
-  ids = ids.map(c => (c.name === componentType ? { ...c, currentId } : c));
+export const setCurrentId = (componentTypeId, currentId) => {
+  ids = ids.map(c => (c.componentTypeId === componentTypeId ? { ...c, currentId } : c));
 };

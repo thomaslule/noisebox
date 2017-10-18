@@ -1,20 +1,20 @@
 import clone from 'clone';
-import { get } from '../../../effectsDictionary';
+import { get } from '../../../effectTypesDictionary';
 
 export default (state = {}, action) => {
   if (action.type === 'BINDING_EFFECT_ADD') {
     return {
-      id: action.id,
-      componentId: action.component,
-      effectId: 'none',
+      id: action.effectId,
+      componentId: action.componentId,
+      effectTypeId: 'none',
       params: [],
     };
   }
-  if (action.type === 'BINDING_EFFECT_CHANGE_EFFECT') {
+  if (action.type === 'BINDING_EFFECT_CHANGE_EFFECT_TYPE') {
     return {
       ...state,
-      effectId: action.newEffect,
-      params: get(action.newEffect).initParams,
+      effectTypeId: action.effectTypeId,
+      params: get(action.effectTypeId).initParams,
     };
   }
   if (action.type === 'BINDING_EFFECT_CHANGE_PARAM') {

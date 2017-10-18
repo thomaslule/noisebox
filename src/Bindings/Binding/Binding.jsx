@@ -9,14 +9,14 @@ class Binding extends React.Component {
     super(props);
     this.state = {
       selectedAction: props.availableActions[0],
-      selectedComponent: props.allComponents[0],
+      selectedComponentId: props.allComponentIds[0],
     };
   }
 
   componentWillReceiveProps(newProps) {
     this.setState({
       ...this.state,
-      selectedComponent: newProps.allComponents[0],
+      selectedComponentId: newProps.allComponentIds[0],
     });
   }
 
@@ -38,15 +38,15 @@ class Binding extends React.Component {
   handleChangeComponent(value) {
     this.setState({
       ...this.state,
-      selectedComponent: value,
+      selectedComponentId: value,
     });
   }
 
   handleClickAddEffect() {
-    this.props.onAddEffect(this.state.selectedComponent);
+    this.props.onAddEffect(this.state.selectedComponentId);
     this.setState({
       ...this.state,
-      selectedComponent: this.props.allComponents[0],
+      selectedComponentId: this.props.allComponentIds[0],
     });
   }
 
@@ -56,7 +56,7 @@ class Binding extends React.Component {
       availableActions,
       canDeleteAction,
       onDeleteAction,
-      allComponents,
+      allComponentIds,
       onDelete,
     } = this.props;
     return (
@@ -88,11 +88,11 @@ class Binding extends React.Component {
         <Form horizontal onSubmit={e => e.preventDefault()}>
           <Select
             label="Component"
-            value={this.state.selectedComponent}
+            value={this.state.selectedComponentId}
             onChange={e => this.handleChangeComponent(e.target.value)}
-            options={allComponents.map(a => ({ text: a, value: a }))}
+            options={allComponentIds.map(a => ({ text: a, value: a }))}
           />
-          {this.state.selectedComponent
+          {this.state.selectedComponentId
             ? <Button text="Add" onClick={() => this.handleClickAddEffect()} />
             : null}
         </Form>

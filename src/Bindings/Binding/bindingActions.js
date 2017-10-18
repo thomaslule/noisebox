@@ -1,25 +1,25 @@
 import { newId } from './effectsId';
 
-export const addAction = (binding, action) => ({
+export const addAction = (bindingId, action) => ({
   type: 'BINDING_ACTION_ADD',
-  binding,
+  bindingId,
   action,
 });
 
-export const deleteAction = (binding, action) => ({
+export const deleteAction = (bindingId, action) => ({
   type: 'BINDING_ACTION_DELETE',
-  binding,
+  bindingId,
   action,
 });
 
-export const addEffect = (binding, component) => ({
+export const addEffect = (bindingId, componentId) => ({
   type: 'BINDING_EFFECT_ADD',
-  id: newId(),
-  binding,
-  component,
+  effectId: newId(),
+  bindingId,
+  componentId,
 });
 
-export const remove = binding => ({
+export const remove = bindingId => ({
   type: 'BINDING_DELETE',
-  binding,
+  bindingId,
 });

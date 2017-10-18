@@ -1,23 +1,23 @@
 import { newId } from './connectionsId';
 
-export const addConnection = (fromComponent, toComponent, toInput) => ({
+export const addConnection = (fromComponentId, toComponentId, toInput) => ({
   type: 'CONNECTION_ADD',
-  id: newId(),
-  fromComponent,
-  toComponent,
+  connectionId: newId(),
+  fromComponentId,
+  toComponentId,
   toInput,
 });
 
-export const changeFrom = (connectionId, fromComponent) => ({
+export const changeFrom = (connectionId, fromComponentId) => ({
   type: 'CONNECTION_CHANGE_FROM',
   connectionId,
-  fromComponent,
+  fromComponentId,
 });
 
-export const changeTo = (connectionId, toComponent, toInput) => ({
+export const changeTo = (connectionId, toComponentId, toInput) => ({
   type: 'CONNECTION_CHANGE_TO',
   connectionId,
-  toComponent,
+  toComponentId,
   toInput,
 });
 

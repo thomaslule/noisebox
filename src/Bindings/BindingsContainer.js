@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import Bindings from './Bindings';
 import { addBinding } from './bindingsActions';
-import actions from './../actionsDictionary';
+import actionDefs from './../actionsDictionary';
 
 const mapStateToProps = state => ({
   bindings: state.bindings,
-  actions: actions.map(a => a.id),
+  actions: actionDefs.map(a => a.id),
 });
 
 const mapDispatchToProps = {

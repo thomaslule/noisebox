@@ -1,7 +1,7 @@
 import { newId } from './componentsId';
 
-export const addComponent = componentType => ({
+export const addComponent = componentTypeId => ({
   type: 'COMPONENT_ADD',
-  id: `${componentType} ${newId(componentType)}`,
-  componentType,
+  componentId: `${componentTypeId} ${newId(componentTypeId)}`,
+  componentTypeId,
 });

@@ -1,12 +1,12 @@
 import clone from 'clone';
-import { get } from '../../componentsDictionary';
+import { get } from '../../componentTypesDictionary';
 
 export default (state, action) => {
   if (action.type === 'COMPONENT_ADD') {
     return {
-      id: action.id,
-      type: action.componentType,
-      params: get(action.componentType).defaultParams,
+      id: action.componentId,
+      typeId: action.componentTypeId,
+      params: get(action.componentTypeId).defaultParams,
     };
   }
   if (action.type === 'COMPONENT_CHANGE_PARAM') {

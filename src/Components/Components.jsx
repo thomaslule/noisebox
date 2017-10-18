@@ -6,23 +6,23 @@ import { Button, Select } from '../Shared';
 class Components extends React.Component {
   constructor(props) {
     super(props);
-    this.componentDefs = props.componentDefs.map(c => ({ text: c.text, value: c.name }));
-    this.defaultComponent = this.componentDefs[0].value;
+    this.componentTypeOptions = props.componentTypes.map(c => ({ text: c.text, value: c.id }));
+    this.defaultComponentType = this.componentTypeOptions[0].value;
     this.state = {
-      selectedComponent: this.defaultComponent,
+      selectedComponentType: this.defaultComponentType,
     };
   }
 
-  handleChangeComponent(newComponent) {
+  handleChangeComponentType(newComponent) {
     this.setState({
-      selectedComponent: newComponent,
+      selectedComponentType: newComponent,
     });
   }
 
   handleClickAdd() {
-    this.props.addComponent(this.state.selectedComponent);
+    this.props.addComponent(this.state.selectedComponentType);
     this.setState({
-      selectedComponent: this.defaultComponent,
+      selectedComponentType: this.defaultComponentType,
     });
   }
 
@@ -35,10 +35,10 @@ class Components extends React.Component {
           <ListGroupItem>
             <Form horizontal onSubmit={e => e.preventDefault()}>
               <Select
-                label="Component"
-                value={this.state.selectedComponent}
-                onChange={e => this.handleChangeComponent(e.target.value)}
-                options={this.componentDefs}
+                label="Component type"
+                value={this.state.selectedComponentType}
+                onChange={e => this.handleChangeComponentType(e.target.value)}
+                options={this.componentTypeOptions}
               />
               <Button
                 onClick={() => this.handleClickAdd()}

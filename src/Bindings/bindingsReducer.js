@@ -7,13 +7,13 @@ export default (state = [], action) => {
     return [...state, bindingReducer(null, action)];
   }
   if (action.type === 'BINDING_DELETE') {
-    return state.filter(b => b.id !== action.binding);
+    return state.filter(b => b.id !== action.bindingId);
   }
   if (action.type.startsWith('BINDING_')) {
-    return state.map(b => (b.id === action.binding ? bindingReducer(b, action) : b));
+    return state.map(b => (b.id === action.bindingId ? bindingReducer(b, action) : b));
   }
   if (action.type === 'COMPONENT_DELETE') {
-    return state.map(b => (b.component === action.component ? bindingReducer(b, action) : b));
+    return state.map(b => bindingReducer(b, action));
   }
   if (action.type === 'STATE_JSON_CHANGED') {
     const maxBindingId = state.map(b => b.id).reduce((a, b) => (a > b ? a : b), 0);

@@ -3,7 +3,7 @@ import effectReducer from './Effect/effectReducer';
 export default (state = [], action) => {
   if (action.type === 'BINDING_ADD') {
     return {
-      id: action.id,
+      id: action.bindingId,
       actions: [action.action],
       actionType: action.actionType,
       effects: [],
@@ -37,6 +37,12 @@ export default (state = [], action) => {
     return {
       ...state,
       effects: state.effects.map(e => (e.id === action.effectId ? effectReducer(e, action) : e)),
+    };
+  }
+  if (action.type === 'COMPONENT_DELETE') {
+    return {
+      ...state,
+      effects: state.effects.filter(e => e.componentId === action.componentId),
     };
   }
   return state;

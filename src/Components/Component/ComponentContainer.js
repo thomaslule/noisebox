@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import Component from './Component';
 import { changeParam, remove } from './componentActions';
-import { get } from '../../componentsDictionary';
+import { get } from '../../componentTypesDictionary';
 
 const mapStateToProps = (state, { component }) => ({
   component,
-  paramFields: get(component.type).params,
+  paramFields: get(component.typeId).params,
 });
 
 const mapDispatchToProps = (dispatch, { component }) => ({

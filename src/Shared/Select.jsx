@@ -1,16 +1,18 @@
 import React from 'react';
 import { FormGroup, Col, FormControl, ControlLabel } from 'react-bootstrap';
 
-export default props => (
+export default ({
+  label, value, onChange, options,
+}) => (
   <FormGroup>
-    <Col componentClass={ControlLabel} md={3}>{props.label}</Col>
+    <Col componentClass={ControlLabel} md={3}>{label}</Col>
     <Col md={9}>
       <FormControl
-        value={props.value}
-        onChange={props.onChange}
+        value={value}
+        onChange={onChange}
         componentClass="select"
       >
-        {props.options.map(o => <option value={o.value} key={o.value}>{o.text}</option>)}
+        {options.map(o => <option value={o.value} key={o.value}>{o.text}</option>)}
       </FormControl>
     </Col>
   </FormGroup>

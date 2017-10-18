@@ -3,20 +3,20 @@ import { setCurrentId } from './connectionsId';
 export default (state = [], action) => {
   if (action.type === 'CONNECTION_ADD') {
     return [...state, {
-      id: action.id,
-      fromComponent: action.fromComponent,
-      toComponent: action.toComponent,
+      id: action.connectionId,
+      fromComponentId: action.fromComponentId,
+      toComponentId: action.toComponentId,
       toInput: action.toInput,
     }];
   }
   if (action.type === 'CONNECTION_CHANGE_FROM') {
     return state.map(c => (c.id === action.connectionId
-      ? { ...c, fromComponent: action.fromComponent }
+      ? { ...c, fromComponentId: action.fromComponentId }
       : c));
   }
   if (action.type === 'CONNECTION_CHANGE_TO') {
     return state.map(c => (c.id === action.connectionId
-      ? { ...c, toComponent: action.toComponent, toInput: action.toInput }
+      ? { ...c, toComponentId: action.toComponentId, toInput: action.toInput }
       : c));
   }
   if (action.type === 'CONNECTION_DELETE') {
@@ -24,7 +24,7 @@ export default (state = [], action) => {
   }
   if (action.type === 'COMPONENT_DELETE') {
     return state
-      .filter(c => (c.fromComponent !== action.component && c.toComponent !== action.component));
+      .filter(c => (c.fromComponentId !== action.component && c.toComponentId !== action.component));
   }
   if (action.type === 'STATE_JSON_CHANGED') {
     const maxId = state.map(b => b.id).reduce((a, b) => (a > b ? a : b), 0);
