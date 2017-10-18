@@ -30,6 +30,8 @@ if (!gamepad.init()) {
   console.error('unsupported browser');
 }
 
+gamepad.deadzone = 0.1;
+
 export const onPress = (buttonName, callback) => {
   gamepad.bind(Gamepad.Event.BUTTON_DOWN, (e) => {
     if (e.control === buttons[buttonName]) callback();
