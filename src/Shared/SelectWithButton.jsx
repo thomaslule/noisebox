@@ -9,6 +9,12 @@ class SelectWithButton extends React.Component {
     };
   }
 
+  componentWillReceiveProps(props) {
+    this.setState({
+      selected: props.options[0].value,
+    });
+  }
+
   handleChange(newValue) {
     this.setState({
       selected: newValue,

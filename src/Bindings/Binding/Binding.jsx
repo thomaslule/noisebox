@@ -23,14 +23,18 @@ export default ({
         onDelete={() => onDeleteAction(action)}
       />
         ))}
-    <Form horizontal onSubmit={e => e.preventDefault()}>
-      <SelectWithButton
-        label="Action"
-        options={availableActions.map(a => ({ text: a, value: a }))}
-        buttonText="Add"
-        onChoose={value => onAddAction(value)}
-      />
-    </Form>
+    {
+      availableActions.length > 0 ? (
+        <Form horizontal onSubmit={e => e.preventDefault()}>
+          <SelectWithButton
+            label="Action"
+            options={availableActions.map(a => ({ text: a, value: a }))}
+            buttonText="Add"
+            onChoose={value => onAddAction(value)}
+          />
+        </Form>
+      ) : null
+    }
     {binding.effects.map(effect => (
       <Effect
         key={effect.id}
