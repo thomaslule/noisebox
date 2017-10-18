@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroupItem, Form, Well } from 'react-bootstrap';
+import { ListGroupItem, Form, Well, Col, ControlLabel, ButtonToolbar, FormGroup, FormControl } from 'react-bootstrap';
 import Action from './Action';
 import Effect from './Effect';
 import { Button, SelectWithButton } from '../../Shared';
@@ -15,19 +15,29 @@ export default ({
   onDelete,
 }) => (
   <ListGroupItem>
-    {binding.actions.map(action => (
-      <Action
-        key={action}
-        action={action}
-        canDelete={canDeleteAction}
-        onDelete={() => onDeleteAction(action)}
-      />
-        ))}
-    {
+    <Well>
+      <Form horizontal onSubmit={e => e.preventDefault()}>
+        <FormGroup>
+          <Col componentClass={ControlLabel} md={3}>Actions</Col>
+          <Col md={9}>
+            <ButtonToolbar>
+              {binding.actions.map(action => (
+                <Action
+                  key={action}
+                  action={action}
+                  canDelete={canDeleteAction}
+                  onDelete={() => onDeleteAction(action)}
+                />
+            ))}
+            </ButtonToolbar>
+          </Col>
+        </FormGroup>
+      </Form>
+      {
       availableActions.length > 0 ? (
         <Form horizontal onSubmit={e => e.preventDefault()}>
           <SelectWithButton
-            label="Action"
+            label=""
             options={availableActions.map(a => ({ text: a, value: a }))}
             buttonText="Add"
             onChoose={value => onAddAction(value)}
@@ -35,6 +45,7 @@ export default ({
         </Form>
       ) : null
     }
+    </Well>
     {binding.effects.map(effect => (
       <Well>
         <Effect
