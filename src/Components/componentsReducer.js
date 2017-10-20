@@ -12,12 +12,12 @@ export default (state = [], action) => {
     return state.map(c => (c.id === action.componentId ? componentReducer(c, action) : c));
   }
   if (action.type === 'STATE_JSON_CHANGED') {
-    state.map(c => c.type).forEach((type) => {
+    state.map(c => c.typeId).forEach((typeId) => {
       const maxId = state
-        .filter(c => c.type === type)
+        .filter(c => c.typeId === typeId)
         .map(c => Number(c.id.split(' ').pop()))
         .reduce((a, b) => (a > b ? a : b), 0);
-      setCurrentId(type, maxId);
+      setCurrentId(typeId, maxId);
     });
     return state;
   }
