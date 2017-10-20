@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Connections from './Connections';
 import { addConnection, changeFrom, changeTo, deleteConnection } from './connectionsActions';
+import { getConnections } from '../reducer';
 import { get } from '../componentTypesDictionary';
 
 const mapStateToProps = (state) => {
@@ -10,7 +11,7 @@ const mapStateToProps = (state) => {
     .map(c => c.inputs)
     .reduce((a, b) => a.concat(b), []);
   return {
-    connections: state.connections,
+    connections: getConnections(state),
     allComponentIds: state.components.map(c => c.id),
     allInputs: [{ componentId: 'master', input: 'main' }].concat(componentsInputs),
   };
