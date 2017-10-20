@@ -1,13 +1,12 @@
 import { connect } from 'react-redux';
 import Binding from './Binding';
 import { addAction, deleteAction, addEffect, remove } from './bindingActions';
-import actionDefs from './../../actionsDictionary';
+import { getAll } from './../../actionsDictionary';
 
 const mapStateToProps = (state, { binding }) => {
-  const availableActions = actionDefs
+  const availableActions = getAll()
     .filter(a => a.type === binding.actionType)
-    .map(a => a.id)
-    .filter(a => !binding.actions.includes(a));
+    .filter(a => !binding.actions.includes(a.id));
   const canDeleteAction = binding.actions.length > 1;
   return ({
     binding,

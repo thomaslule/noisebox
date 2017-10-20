@@ -1,30 +1,32 @@
+const clone = require('clone');
+
 const gamepad = new window.Gamepad();
 
-const buttons = {
-  A: 'FACE_1',
-  B: 'FACE_2',
-  X: 'FACE_3',
-  Y: 'FACE_4',
-  LB: 'LEFT_TOP_SHOULDER',
-  RB: 'RIGHT_TOP_SHOULDER',
-  BACK: 'SELECT_BACK',
-  START: 'START_FORWARD',
-  LSTICK: 'LEFT_STICK',
-  RSTICK: 'RIGHT_STICK',
-  PAD_UP: 'DPAD_UP',
-  PAD_DOWN: 'DPAD_DOWN',
-  PAD_LEFT: 'DPAD_LEFT',
-  PAD_RIGHT: 'DPAD_RIGHT',
-};
+const buttons = [
+  { standard: 'FACE_1', xbox360: 'A' },
+  { standard: 'FACE_2', xbox360: 'B' },
+  { standard: 'FACE_3', xbox360: 'X' },
+  { standard: 'FACE_4', xbox360: 'Y' },
+  { standard: 'LEFT_TOP_SHOULDER', xbox360: 'LB' },
+  { standard: 'RIGHT_TOP_SHOULDER', xbox360: 'RB' },
+  { standard: 'SELECT_BACK', xbox360: 'BACK' },
+  { standard: 'START_FORWARD', xbox360: 'START' },
+  { standard: 'LEFT_STICK', xbox360: 'LSTICK' },
+  { standard: 'RIGHT_STICK', xbox360: 'RSTICK' },
+  { standard: 'DPAD_UP', xbox360: 'PAD_UP' },
+  { standard: 'DPAD_DOWN', xbox360: 'PAD_DOWN' },
+  { standard: 'DPAD_LEFT', xbox360: 'PAD_LEFT' },
+  { standard: 'DPAD_RIGHT', xbox360: 'PAD_RIGHT' },
+];
 
-const axis = {
-  LSTICK_X: 'LEFT_STICK_X',
-  LSTICK_Y: 'LEFT_STICK_Y',
-  RSTICK_X: 'RIGHT_STICK_X',
-  RSTICK_Y: 'RIGHT_STICK_Y',
-  LT: 'LEFT_BOTTOM_SHOULDER',
-  RT: 'RIGHT_BOTTOM_SHOULDER',
-};
+const axis = [
+  { standard: 'LEFT_STICK_X', xbox360: 'LSTICK_X' },
+  { standard: 'LEFT_STICK_Y', xbox360: 'LSTICK_Y' },
+  { standard: 'RIGHT_STICK_X', xbox360: 'RSTICK_X' },
+  { standard: 'RIGHT_STICK_Y', xbox360: 'RSTICK_Y' },
+  { standard: 'LEFT_BOTTOM_SHOULDER', xbox360: 'LT' },
+  { standard: 'RIGHT_BOTTOM_SHOULDER', xbox360: 'RT' },
+];
 
 if (!gamepad.init()) {
   console.error('unsupported browser');
@@ -34,19 +36,19 @@ gamepad.deadzone = 0.1;
 
 export const onPress = (buttonName, callback) => {
   gamepad.bind(Gamepad.Event.BUTTON_DOWN, (e) => {
-    if (e.control === buttons[buttonName]) callback();
+    if (e.control === buttonName) callback();
   });
 };
 
 export const onRelease = (buttonName, callback) => {
   gamepad.bind(Gamepad.Event.BUTTON_UP, (e) => {
-    if (e.control === buttons[buttonName]) callback();
+    if (e.control === buttonName) callback();
   });
 };
 
 export const onMove = (controlName, callback) => {
   gamepad.bind(Gamepad.Event.AXIS_CHANGED, (e) => {
-    if (e.axis === axis[controlName]) callback(e.value);
+    if (e.axis === controlName) callback(e.value);
   });
 };
 
@@ -54,6 +56,6 @@ export const resetBindings = () => {
   gamepad.unbind();
 };
 
-export const buttonsList = () => Object.keys(buttons);
+export const buttonsList = () => clone(buttons);
 
-export const axisList = () => Object.keys(axis);
+export const axisList = () => clone(axis);

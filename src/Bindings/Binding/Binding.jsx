@@ -23,7 +23,7 @@ export default ({
               {binding.actions.map(action => (
                 <Action
                   key={action}
-                  action={action}
+                  actionId={action}
                   canDelete={canDeleteAction}
                   onDelete={() => onDeleteAction(action)}
                 />
@@ -37,7 +37,7 @@ export default ({
         <Form horizontal onSubmit={e => e.preventDefault()}>
           <SelectWithButton
             label=""
-            options={availableActions.map(a => ({ text: a, value: a }))}
+            options={availableActions.map(a => ({ text: a.text, value: a.id }))}
             buttonText="Add"
             onChoose={value => onAddAction(value)}
           />

@@ -11,7 +11,7 @@ export default ({ bindings, actions, addBinding }) => (
         <Form horizontal onSubmit={e => e.preventDefault()}>
           <SelectWithButton
             label="Action"
-            options={actions.map(a => ({ text: a, value: a }))}
+            options={actions.map(a => ({ text: a.text, value: a.id }))}
             buttonText="Add"
             onChoose={value => addBinding(value)}
           />
