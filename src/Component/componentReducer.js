@@ -1,4 +1,4 @@
-import clone from 'clone';
+import cloneDeep from 'lodash/cloneDeep';
 
 export default (state, action) => {
   if (action.type === 'COMPONENT_ADD') {
@@ -9,7 +9,7 @@ export default (state, action) => {
     };
   }
   if (action.type === 'COMPONENT_CHANGE_PARAM') {
-    const cloned = clone(state);
+    const cloned = cloneDeep(state);
     cloned.params[action.param] = action.value;
     return cloned;
   }

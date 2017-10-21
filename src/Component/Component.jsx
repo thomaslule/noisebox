@@ -3,7 +3,7 @@ import { ListGroupItem, Form } from 'react-bootstrap';
 import { Label, Button, ParamField } from '../Shared';
 
 export default ({
-  component, paramFields, onChangeParam, onDelete,
+  component, paramFields, componentChangeParam, componentDelete,
 }) => (
   <ListGroupItem>
     <Form horizontal onSubmit={e => e.preventDefault()}>
@@ -12,11 +12,11 @@ export default ({
         <ParamField
           param={param}
           value={component.params[param.name]}
-          onChange={onChangeParam}
+          onChange={(name, value) => componentChangeParam(component.id, param.name, value)}
           key={param.name}
         />
       ))}
-      <Button onClick={onDelete} text="Delete" />
+      <Button onClick={() => componentDelete(component.id)} text="Delete" />
     </Form>
   </ListGroupItem>
 );

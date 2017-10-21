@@ -9,3 +9,8 @@ export const componentAdd = componentType => (dispatch, getState) => {
     params: get(componentType).defaultParams,
   });
 };
+
+export const componentDelete = id => ({
+  type: 'COMPONENT_DELETE',
+  id,
+});

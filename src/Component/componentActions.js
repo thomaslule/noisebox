@@ -1,11 +1,6 @@
-export const changeParam = (componentId, param, value) => ({
+export const componentChangeParam = (id, param, value) => ({
   type: 'COMPONENT_CHANGE_PARAM',
-  componentId,
+  id,
   param,
   value,
-});
-
-export const remove = id => ({
-  type: 'COMPONENT_DELETE',
-  id,
 });
