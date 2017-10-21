@@ -1,9 +1,11 @@
 import { componentsGetNextId } from '../reducer';
+import { get } from '../componentTypesDictionary';
 
-export const componentAdd = componentTypeId => (dispatch, getState) => {
+export const componentAdd = componentType => (dispatch, getState) => {
   dispatch({
     type: 'COMPONENT_ADD',
-    componentId: componentsGetNextId(getState(), componentTypeId),
-    componentTypeId,
+    id: componentsGetNextId(getState(), componentType),
+    componentType,
+    params: get(componentType).defaultParams,
   });
 };
