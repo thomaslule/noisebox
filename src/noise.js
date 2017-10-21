@@ -2,7 +2,6 @@ import Tone from 'tone';
 import { createNoiseComponent } from './componentTypesDictionary';
 import { createEffect } from './effectTypesDictionary';
 import { resetBindings, onPress, onRelease, onMove } from './controller';
-import { getConnections } from './reducer';
 
 let noiseComponents = [];
 
@@ -21,7 +20,7 @@ export default (params) => {
     currentParams: {},
   });
 
-  getConnections(params).forEach(({ fromComponentId, toComponentId, toInput }) => {
+  params.connections.forEach(({ fromComponentId, toComponentId, toInput }) => {
     const from = noiseComponents.find(c => c.id === fromComponentId);
     const to = noiseComponents.find(c => c.id === toComponentId);
     if (toInput === 'main') {
