@@ -1,35 +1,28 @@
-import { setCurrentId } from './connectionsId';
+import omit from 'lodash/omit';
+import omitBy from 'lodash/omitBy';
+import connectionReducer, * as fromConnection from '../Connection/connectionReducer';
 
-export default (state = [], action) => {
-  if (action.type === 'CONNECTION_ADD') {
-    return [...state, {
-      id: action.connectionId,
-      fromComponentId: action.fromComponentId,
-      toComponentId: action.toComponentId,
-      toInput: action.toInput,
-    }];
-  }
-  if (action.type === 'CONNECTION_CHANGE_FROM') {
-    return state.map(c => (c.id === action.connectionId
-      ? { ...c, fromComponentId: action.fromComponentId }
-      : c));
-  }
-  if (action.type === 'CONNECTION_CHANGE_TO') {
-    return state.map(c => (c.id === action.connectionId
-      ? { ...c, toComponentId: action.toComponentId, toInput: action.toInput }
-      : c));
-  }
+export default (state = {}, action) => {
   if (action.type === 'CONNECTION_DELETE') {
-    return state.filter(c => (c.id !== action.connectionId));
+    return omit(state, action.id);
+  }
+  if (action.type.startsWith('CONNECTION_')) {
+    return {
+      ...state,
+      [action.id]: connectionReducer(state[action.id], action),
+    };
   }
   if (action.type === 'COMPONENT_DELETE') {
-    return state
-      .filter(c => (c.fromComponentId !== action.component && c.toComponentId !== action.component));
-  }
-  if (action.type === 'STATE_JSON_CHANGED') {
-    const maxId = state.map(b => b.id).reduce((a, b) => (a > b ? a : b), 0);
-    setCurrentId(maxId);
-    return state;
+    return omitBy(state, c => c.componentFrom === action.id || c.componentTo === action.id);
   }
   return state;
 };
+
+export const connectionsGetAll = state =>
+  Object.keys(state).map(id => fromConnection.connectionGetById(state[id]));
+
+export const connectionsGetById = (state, id) =>
+  fromConnection.connectionGetById(state[id]);
+
+export const connectionsGetMaxId = state =>
+  Math.max(Object.keys(state).map(id => Number(id))) || 0;

@@ -1,27 +1,18 @@
-import { newId } from './connectionsId';
+import { connectionsGetMaxId } from '../reducer';
 
-export const addConnection = (fromComponentId, toComponentId, toInput) => ({
-  type: 'CONNECTION_ADD',
-  connectionId: newId(),
-  fromComponentId,
-  toComponentId,
-  toInput,
-});
+export const connectionsAdd = () => (dispatch, getState) => {
+  if (getState().components.length > 0) {
+    dispatch({
+      type: 'CONNECTION_ADD',
+      id: connectionsGetMaxId(getState()) + 1,
+      fromComponent: getState().components[0].id,
+      toComponent: 'master',
+      toInput: 'main',
+    });
+  }
+};
 
-export const changeFrom = (connectionId, fromComponentId) => ({
-  type: 'CONNECTION_CHANGE_FROM',
-  connectionId,
-  fromComponentId,
-});
-
-export const changeTo = (connectionId, toComponentId, toInput) => ({
-  type: 'CONNECTION_CHANGE_TO',
-  connectionId,
-  toComponentId,
-  toInput,
-});
-
-export const deleteConnection = connectionId => ({
+export const connectionsDelete = id => ({
   type: 'CONNECTION_DELETE',
-  connectionId,
+  id,
 });

@@ -1,4 +1,5 @@
 import Tone from 'tone';
+import { connectionsGetAll } from './reducer';
 import { createNoiseComponent } from './componentTypesDictionary';
 import { createEffect } from './effectTypesDictionary';
 import { resetBindings, onPress, onRelease, onMove } from './controller';
@@ -20,9 +21,9 @@ export default (params) => {
     currentParams: {},
   });
 
-  params.connections.forEach(({ fromComponentId, toComponentId, toInput }) => {
-    const from = noiseComponents.find(c => c.id === fromComponentId);
-    const to = noiseComponents.find(c => c.id === toComponentId);
+  connectionsGetAll(params).forEach(({ fromComponent, toComponent, toInput }) => {
+    const from = noiseComponents.find(c => c.id === fromComponent);
+    const to = noiseComponents.find(c => c.id === toComponent);
     if (toInput === 'main') {
       from.toneComponent.connect(to.toneComponent);
     } else {

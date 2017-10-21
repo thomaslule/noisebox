@@ -1,5 +1,6 @@
 import { applyMiddleware, createStore } from 'redux';
 import logger from 'redux-logger';
+import thunk from 'redux-thunk';
 import reducer from './reducer';
 import noise from './noise';
 import { errorAction, noErrorAction } from './Error/errorActions';
@@ -7,7 +8,7 @@ import { changeStateJson } from './StateJson/stateJsonActions';
 import { unzip } from './zip';
 
 export default () => {
-  const store = createStore(reducer, applyMiddleware(logger));
+  const store = createStore(reducer, applyMiddleware(thunk, logger));
 
   store.subscribe(() => {
     const state = store.getState();
