@@ -19,10 +19,10 @@ export default (state = {}, action) => {
 };
 
 export const connectionsGetAll = state =>
-  Object.keys(state).map(id => fromConnection.connectionGetById(state[id]));
+  Object.keys(state).map(id => fromConnection.connectionGet(state[id]));
 
 export const connectionsGetById = (state, id) =>
-  fromConnection.connectionGetById(state[id]);
+  fromConnection.connectionGet(state[id]);
 
 export const connectionsGetNextId = (state) => {
   const currentId = Math.max(Object.keys(state).map(id => Number(id))) || 0;

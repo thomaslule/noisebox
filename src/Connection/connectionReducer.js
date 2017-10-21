@@ -16,4 +16,4 @@ export default (state = {}, action) => {
   return state;
 };
 
-export const connectionGetById = state => state;
+export const connectionGet = state => state;
