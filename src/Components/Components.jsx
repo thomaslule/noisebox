@@ -7,7 +7,7 @@ export default ({ components, componentTypes, componentAdd }) => (
   <Panel header="Components">
     <ListGroup fill>
       {components.map(component =>
-        <Component key={component.id} component={component} />)}
+        <Component key={component.id} id={component.id} />)}
       <ListGroupItem>
         <Form horizontal onSubmit={e => e.preventDefault()}>
           <SelectWithButton
