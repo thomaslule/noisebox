@@ -46,12 +46,8 @@ export default ({
     }
     </Well>
     {binding.effects.map(effect => (
-      <Well bsSize="small" key={effect.id}>
-        <Effect
-          effect={effect}
-          bindingId={binding.id}
-          actionType={binding.actionType}
-        />
+      <Well bsSize="small" key={effect}>
+        <Effect id={effect} />
       </Well>
     ))}
     <Form horizontal onSubmit={e => e.preventDefault()}>

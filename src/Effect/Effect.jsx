@@ -3,35 +3,35 @@ import { Form } from 'react-bootstrap';
 import { Select, ParamField, Button } from '../Shared';
 
 export default ({
-  availableEffectTypeIds,
   effect,
+  availableEffectTypeIds,
   paramFields,
   allComponentIds,
-  onChangeComponentId,
-  onChangeEffectType,
-  onChangeParam,
-  onDelete,
+  effectChangeComponent,
+  effectChangeEffectType,
+  effectChangeParam,
+  effectDelete,
 }) => (
   <Form horizontal onSubmit={e => e.preventDefault()}>
     <Select
       label="Component"
       value={effect.componentId}
-      onChange={e => onChangeComponentId(e.target.value)}
+      onChange={e => effectChangeComponent(effect.id, e.target.value)}
       options={allComponentIds.map(e => ({ text: e, value: e }))}
     />
     <Select
       label="Effect type"
       value={effect.effectTypeId}
-      onChange={e => onChangeEffectType(e.target.value)}
+      onChange={e => effectChangeEffectType(effect.id, e.target.value)}
       options={availableEffectTypeIds.map(e => ({ text: e, value: e }))}
     />
     {paramFields.map(param => (
       <ParamField
         param={param}
         value={effect.params[param.name]}
-        onChange={value => onChangeParam(param.name, value)}
+        onChange={value => effectChangeParam(effect.id, param.name, value)}
         key={param.name}
       />))}
-    <Button text="Delete" onClick={() => onDelete()} />
+    <Button text="Delete" onClick={() => effectDelete(effect.id, effect.binding)} />
   </Form>
 );

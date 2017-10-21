@@ -1,5 +1,3 @@
-import effectReducer from '../Effect/effectReducer';
-
 export default (state = [], action) => {
   if (action.type === 'BINDING_ADD') {
     return {
@@ -21,22 +19,16 @@ export default (state = [], action) => {
       actions: state.actions.filter(a => a !== action.action),
     };
   }
-  if (action.type === 'BINDING_EFFECT_ADD') {
+  if (action.type === 'EFFECT_ADD') {
     return {
       ...state,
-      effects: [...state.effects, effectReducer(null, action)],
+      effects: [...state.effects, action.id],
     };
   }
-  if (action.type === 'BINDING_EFFECT_DELETE') {
+  if (action.type === 'EFFECT_DELETE') {
     return {
       ...state,
-      effects: state.effects.filter(e => e.id !== action.effectId),
-    };
-  }
-  if (action.type.startsWith('BINDING_EFFECT_')) {
-    return {
-      ...state,
-      effects: state.effects.map(e => (e.id === action.effectId ? effectReducer(e, action) : e)),
+      effects: state.effects.filter(e => e !== action.id),
     };
   }
   if (action.type === 'COMPONENT_DELETE') {

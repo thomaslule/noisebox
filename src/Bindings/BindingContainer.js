@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Binding from './Binding';
-import { addAction, deleteAction, addEffect, remove } from './bindingActions';
+import { addAction, deleteAction, remove } from './bindingActions';
+import actions from '../actions';
 import { getAll } from './../actionsDictionary';
 
 const mapStateToProps = (state, { binding }) => {
@@ -18,7 +19,7 @@ const mapStateToProps = (state, { binding }) => {
 const mapDispatchToProps = (dispatch, { binding }) => ({
   onAddAction: action => dispatch(addAction(binding.id, action)),
   onDeleteAction: action => dispatch(deleteAction(binding.id, action)),
-  onAddEffect: () => dispatch(addEffect(binding.id)),
+  onAddEffect: () => dispatch(actions.effectAdd(binding.id, binding.actionType)),
   onDelete: () => dispatch(remove(binding.id)),
 });
 

@@ -12,6 +12,9 @@ export default (state = [], action) => {
   if (action.type.startsWith('BINDING_')) {
     return state.map(b => (b.id === action.bindingId ? bindingReducer(b, action) : b));
   }
+  if (action.type === 'EFFECT_ADD' || action.type === 'EFFECT_DELETE') {
+    return state.map(b => (b.id === action.binding ? bindingReducer(b, action) : b));
+  }
   if (action.type === 'COMPONENT_DELETE') {
     return state.map(b => bindingReducer(b, action));
   }

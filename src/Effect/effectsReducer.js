@@ -1,0 +1,61 @@
+import cloneDeep from 'lodash/cloneDeep';
+import omit from 'lodash/omit';
+import omitBy from 'lodash/omitBy';
+import { get } from '../effectTypesDictionary';
+
+const effectReducer = (state = {}, action) => {
+  if (action.type === 'EFFECT_ADD') {
+    return {
+      id: action.id,
+      binding: action.binding,
+      actionType: action.actionType,
+      component: 'none',
+      effectType: 'none',
+      params: [],
+    };
+  }
+  if (action.type === 'EFFECT_CHANGE_COMPONENT') {
+    return {
+      ...state,
+      component: action.component,
+      effectType: 'none',
+      params: [],
+    };
+  }
+  if (action.type === 'EFFECT_CHANGE_EFFECT_TYPE') {
+    return {
+      ...state,
+      effectType: action.effectType,
+      params: get(action.effectType).initParams,
+    };
+  }
+  if (action.type === 'EFFECT_CHANGE_PARAM') {
+    const newState = cloneDeep(state);
+    newState.params[action.param] = action.value;
+    return newState;
+  }
+  return state;
+};
+
+export default (state = [], action) => {
+  if (action.type === 'EFFECT_DELETE') {
+    return omit(state, action.id);
+  }
+  if (action.type.startsWith('EFFECT_')) {
+    return {
+      ...state,
+      [action.id]: effectReducer(state[action.id], action),
+    };
+  }
+  if (action.type === 'BINDING_DELETE') {
+    return omitBy(state, e => e.binding === action.bindingId);
+  }
+  return state;
+};
+
+export const effectGetById = (state, id) => state[id];
+
+export const effectGetNextId = (state) => {
+  const currentId = Math.max(Object.keys(state).map(id => Number(id))) || 0;
+  return currentId + 1;
+};

@@ -3,6 +3,7 @@ import muteAllReducer from './MuteAll/muteAllReducer';
 import componentsReducer, * as fromComponents from './Components/componentsReducer';
 import connectionsReducer, * as fromConnections from './Connections/connectionsReducer';
 import bindingsReducer from './Bindings/bindingsReducer';
+import effectsReducer, * as fromEffects from './Effect/effectsReducer';
 import stateJson from './StateJson/stateJsonReducer';
 import errorReducer from './Error/errorReducer';
 
@@ -11,6 +12,7 @@ const rest = combineReducers({
   components: componentsReducer,
   connections: connectionsReducer,
   bindings: bindingsReducer,
+  effects: effectsReducer,
   error: errorReducer,
 });
 
@@ -28,3 +30,7 @@ export const connectionsGetById = (state, id) =>
   fromConnections.connectionsGetById(state.connections, id);
 export const connectionsGetNextId = state =>
   fromConnections.connectionsGetNextId(state.connections);
+export const effectGetById = (state, id) =>
+  fromEffects.effectGetById(state.effects, id);
+export const effectGetNextId = state =>
+  fromEffects.effectGetNextId(state.effects);

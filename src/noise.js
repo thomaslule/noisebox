@@ -1,5 +1,5 @@
 import Tone from 'tone';
-import { componentsGetAll, connectionsGetAll } from './reducer';
+import { componentsGetAll, connectionsGetAll, effectGetById } from './reducer';
 import { createNoiseComponent } from './componentTypesDictionary';
 import { createEffect } from './effectTypesDictionary';
 import { resetBindings, onPress, onRelease, onMove } from './controller';
@@ -35,9 +35,10 @@ export default (params) => {
 
   params.bindings.forEach((binding) => {
     binding.actions.forEach((action) => {
-      binding.effects.forEach((effect) => {
-        const comp = noiseComponents.find(c => c.id === effect.componentId);
-        const effectToApply = createEffect(effect.effectTypeId, effect.params, comp);
+      binding.effects.forEach((effectId) => {
+        const effect = effectGetById(params, effectId);
+        const comp = noiseComponents.find(c => c.id === effect.component);
+        const effectToApply = createEffect(effect.effectType, effect.params, comp);
         const [gesture, button] = action.split(' ');
         if (gesture === 'press') onPress(button, effectToApply);
         if (gesture === 'release') onRelease(button, effectToApply);
