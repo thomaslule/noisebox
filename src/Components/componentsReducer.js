@@ -1,5 +1,21 @@
+import cloneDeep from 'lodash/cloneDeep';
 import omit from 'lodash/omit';
-import componentReducer, * as fromComponent from '../Component/componentReducer';
+
+const componentReducer = (state, action) => {
+  if (action.type === 'COMPONENT_ADD') {
+    return {
+      id: action.id,
+      typeId: action.componentType,
+      params: action.params,
+    };
+  }
+  if (action.type === 'COMPONENT_CHANGE_PARAM') {
+    const cloned = cloneDeep(state);
+    cloned.params[action.param] = action.value;
+    return cloned;
+  }
+  return state;
+};
 
 export default (state = [], action) => {
   if (action.type === 'COMPONENT_DELETE') {
@@ -14,14 +30,12 @@ export default (state = [], action) => {
   return state;
 };
 
-export const componentsGetAll = state =>
-  Object.keys(state).map(id => fromComponent.componentGet(state[id]));
+export const componentsGetAll = state => Object.keys(state).map(id => state[id]);
 
-export const componentsGetById = (state, id) =>
-  fromComponent.componentGet(state[id]);
+export const componentsGetById = (state, id) => state[id];
 
 export const componentsGetNextId = (state, type) => {
-  const currentId = Math.max(state
+  const currentId = Math.max(componentsGetAll(state)
     .filter(c => c.typeId === type)
     .map(c => Number(c.id.split(' ').pop())))
     || 0;
