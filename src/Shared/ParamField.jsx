@@ -8,7 +8,7 @@ export default ({ param, value, onChange }) => {
         key={param.name}
         label={param.text}
         value={value}
-        onChange={e => onChange(param.name, e.target.value)}
+        onChange={e => onChange(e.target.value)}
       />
     );
   }
@@ -18,7 +18,7 @@ export default ({ param, value, onChange }) => {
         key={param.name}
         label={param.text}
         value={value}
-        onChange={e => onChange(param.name, e.target.value)}
+        onChange={e => onChange(e.target.value)}
         options={param.options.map(o => ({ text: o, value: o }))}
       />
     );
@@ -31,7 +31,7 @@ export default ({ param, value, onChange }) => {
         labelTrue={param.textTrue}
         labelFalse={param.textFalse}
         value={value}
-        onChange={newValue => onChange(param.name, newValue)}
+        onChange={newValue => onChange(newValue)}
       />
     );
   }

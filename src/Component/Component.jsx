@@ -12,7 +12,7 @@ export default ({
         <ParamField
           param={param}
           value={component.params[param.name]}
-          onChange={(name, value) => componentChangeParam(component.id, param.name, value)}
+          onChange={value => componentChangeParam(component.id, param.name, value)}
           key={param.name}
         />
       ))}

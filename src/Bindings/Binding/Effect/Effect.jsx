@@ -29,7 +29,7 @@ export default ({
       <ParamField
         param={param}
         value={effect.params[param.name]}
-        onChange={onChangeParam}
+        onChange={value => onChangeParam(param.name, value)}
         key={param.name}
       />))}
     <Button text="Delete" onClick={() => onDelete()} />
