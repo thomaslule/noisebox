@@ -1,8 +1,8 @@
 import React from 'react';
 import { ListGroupItem, Form, Well, Col, ControlLabel, ButtonGroup, ButtonToolbar, FormGroup, Button } from 'react-bootstrap';
 import Action from './Action';
-import Effect from './Effect';
-import { SelectWithButton } from '../../Shared';
+import Effect from '../Effect';
+import { SelectWithButton } from '../Shared';
 
 export default ({
   binding,

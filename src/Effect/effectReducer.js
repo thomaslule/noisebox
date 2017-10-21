@@ -1,5 +1,5 @@
 import cloneDeep from 'lodash/cloneDeep';
-import { get } from '../../../effectTypesDictionary';
+import { get } from '../effectTypesDictionary';
 
 export default (state = {}, action) => {
   if (action.type === 'BINDING_EFFECT_ADD') {

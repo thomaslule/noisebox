@@ -1,6 +1,6 @@
 import React from 'react';
 import { Panel, ListGroup, ListGroupItem, Form } from 'react-bootstrap';
-import Binding from './Binding';
+import Binding from './BindingContainer';
 import { SelectWithButton } from '../Shared';
 
 export default ({ bindings, actions, addBinding }) => (

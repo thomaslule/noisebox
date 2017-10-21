@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
-import { Select, ParamField, Button } from '../../../Shared';
+import { Select, ParamField, Button } from '../Shared';
 
 export default ({
   availableEffectTypeIds,

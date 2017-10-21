@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import Effect from './Effect';
-import { componentsGetById, componentsGetAll } from '../../../reducer';
+import { componentsGetById, componentsGetAll } from '../reducer';
 import { changeComponentId, changeEffectType, changeParam, remove } from './effectActions';
-import { get, effectTypesFor } from '../../../effectTypesDictionary';
+import { get, effectTypesFor } from '../effectTypesDictionary';
 
 const mapStateToProps = (state, { effect, actionType }) => {
   const component = componentsGetById(state, effect.componentId) || { typeId: 'none' };

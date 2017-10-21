@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Binding from './Binding';
 import { addAction, deleteAction, addEffect, remove } from './bindingActions';
-import { getAll } from './../../actionsDictionary';
+import { getAll } from './../actionsDictionary';
 
 const mapStateToProps = (state, { binding }) => {
   const availableActions = getAll()

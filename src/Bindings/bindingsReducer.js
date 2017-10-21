@@ -1,6 +1,6 @@
-import bindingReducer from './Binding/bindingReducer';
+import bindingReducer from './bindingReducer';
 import { setCurrentId as setBindingCurrentId } from './bindingsId';
-import { setCurrentId as setEffectCurrentId } from './Binding/effectsId';
+import { setCurrentId as setEffectCurrentId } from './effectsId';
 
 export default (state = [], action) => {
   if (action.type === 'BINDING_ADD') {

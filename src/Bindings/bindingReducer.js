@@ -1,4 +1,4 @@
-import effectReducer from './Effect/effectReducer';
+import effectReducer from '../Effect/effectReducer';
 
 export default (state = [], action) => {
   if (action.type === 'BINDING_ADD') {
