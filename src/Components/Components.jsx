@@ -3,7 +3,7 @@ import { Panel, ListGroup, ListGroupItem, Form } from 'react-bootstrap';
 import Component from '../Component';
 import { SelectWithButton } from '../Shared';
 
-export default ({ components, componentTypes, addComponent }) => (
+export default ({ components, componentTypes, componentAdd }) => (
   <Panel header="Components">
     <ListGroup fill>
       {components.map(component =>
@@ -14,7 +14,7 @@ export default ({ components, componentTypes, addComponent }) => (
             label="Type"
             options={componentTypes.map(c => ({ text: c.text, value: c.id }))}
             buttonText="Add"
-            onChoose={value => addComponent(value)}
+            onChoose={value => componentAdd(value)}
           />
         </Form>
       </ListGroupItem>

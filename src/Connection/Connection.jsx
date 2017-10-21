@@ -8,7 +8,7 @@ export default ({
   allInputs,
   connectionChangeFrom,
   connectionChangeTo,
-  connectionsDelete,
+  connectionDelete,
 }) => {
   const toSelectValueIndex = allInputs
     .findIndex(c => c.componentId === connection.toComponent && c.input === connection.toInput);
@@ -33,7 +33,7 @@ export default ({
           )}
           options={toSelectOptions}
         />
-        <Button onClick={() => connectionsDelete(connection.id)} text="Delete" />
+        <Button onClick={() => connectionDelete(connection.id)} text="Delete" />
       </Form>
     </ListGroupItem>
   );

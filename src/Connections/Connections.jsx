@@ -3,7 +3,7 @@ import { Panel, ListGroup, ListGroupItem, Form } from 'react-bootstrap';
 import { Button } from '../Shared';
 import Connection from '../Connection';
 
-export default ({ connections, connectionsAdd }) => (
+export default ({ connections, connectionAdd }) => (
   <Panel header="Connections">
     <ListGroup fill>
       {connections.map(connection => (
@@ -14,7 +14,7 @@ export default ({ connections, connectionsAdd }) => (
       ))}
       <ListGroupItem>
         <Form horizontal onSubmit={e => e.preventDefault()}>
-          <Button onClick={connectionsAdd} text="Add" />
+          <Button onClick={connectionAdd} text="Add" />
         </Form>
       </ListGroupItem>
     </ListGroup>

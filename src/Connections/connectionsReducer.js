@@ -24,5 +24,7 @@ export const connectionsGetAll = state =>
 export const connectionsGetById = (state, id) =>
   fromConnection.connectionGetById(state[id]);
 
-export const connectionsGetMaxId = state =>
-  Math.max(Object.keys(state).map(id => Number(id))) || 0;
+export const connectionsGetNextId = (state) => {
+  const currentId = Math.max(Object.keys(state).map(id => Number(id))) || 0;
+  return currentId + 1;
+};

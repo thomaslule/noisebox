@@ -1,10 +1,10 @@
-import { connectionsGetMaxId } from '../reducer';
+import { connectionsGetNextId } from '../reducer';
 
-export const connectionsAdd = () => (dispatch, getState) => {
+export const connectionAdd = () => (dispatch, getState) => {
   if (getState().components.length > 0) {
     dispatch({
       type: 'CONNECTION_ADD',
-      id: connectionsGetMaxId(getState()) + 1,
+      id: connectionsGetNextId(getState()),
       fromComponent: getState().components[0].id,
       toComponent: 'master',
       toInput: 'main',
@@ -12,7 +12,7 @@ export const connectionsAdd = () => (dispatch, getState) => {
   }
 };
 
-export const connectionsDelete = id => ({
+export const connectionDelete = id => ({
   type: 'CONNECTION_DELETE',
   id,
 });

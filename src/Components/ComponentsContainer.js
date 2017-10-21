@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Components from './Components';
-import { addComponent } from './componentsActions';
+import actions from '../actions';
 import { getAll } from '../componentTypesDictionary';
 
 const mapStateToProps = state => ({
@@ -8,8 +8,4 @@ const mapStateToProps = state => ({
   componentTypes: getAll(),
 });
 
-const mapDispatchToProps = {
-  addComponent,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Components);
+export default connect(mapStateToProps, actions)(Components);

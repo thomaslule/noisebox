@@ -1,5 +1,4 @@
 import componentReducer from '../Component/componentReducer';
-import { setCurrentId } from './componentsId';
 
 export default (state = [], action) => {
   if (action.type === 'COMPONENT_ADD') {
@@ -11,15 +10,13 @@ export default (state = [], action) => {
   if (['COMPONENT_CHANGE_PARAM'].includes(action.type)) {
     return state.map(c => (c.id === action.componentId ? componentReducer(c, action) : c));
   }
-  if (action.type === 'STATE_JSON_CHANGED') {
-    state.map(c => c.typeId).forEach((typeId) => {
-      const maxId = state
-        .filter(c => c.typeId === typeId)
-        .map(c => Number(c.id.split(' ').pop()))
-        .reduce((a, b) => (a > b ? a : b), 0);
-      setCurrentId(typeId, maxId);
-    });
-    return state;
-  }
   return state;
+};
+
+export const componentsGetNextId = (state, type) => {
+  const currentId = Math.max(state
+    .filter(c => c.typeId === type)
+    .map(c => Number(c.id.split(' ').pop())))
+    || 0;
+  return `${type} ${currentId + 1}`;
 };
