@@ -1,7 +1,7 @@
 import React from 'react';
 import { Panel, ListGroup, ListGroupItem, Form } from 'react-bootstrap';
 import { Button } from '../Shared';
-import Connection from '../Connection';
+import Connection from './ConnectionContainer';
 
 export default ({ connections, connectionAdd }) => (
   <Panel header="Connections">

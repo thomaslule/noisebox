@@ -1,6 +1,23 @@
 import omit from 'lodash/omit';
 import omitBy from 'lodash/omitBy';
-import connectionReducer, * as fromConnection from '../Connection/connectionReducer';
+
+const connectionReducer = (state = {}, action) => {
+  if (action.type === 'CONNECTION_ADD') {
+    return {
+      id: action.id,
+      fromComponent: action.fromComponent,
+      toComponent: action.toComponent,
+      toInput: action.toInput,
+    };
+  }
+  if (action.type === 'CONNECTION_CHANGE_FROM') {
+    return { ...state, fromComponent: action.fromComponent };
+  }
+  if (action.type === 'CONNECTION_CHANGE_TO') {
+    return { ...state, toComponent: action.toComponent, toInput: action.toInput };
+  }
+  return state;
+};
 
 export default (state = {}, action) => {
   if (action.type === 'CONNECTION_DELETE') {
@@ -18,11 +35,9 @@ export default (state = {}, action) => {
   return state;
 };
 
-export const connectionsGetAll = state =>
-  Object.keys(state).map(id => fromConnection.connectionGet(state[id]));
+export const connectionsGetAll = state => Object.keys(state).map(id => state[id]);
 
-export const connectionsGetById = (state, id) =>
-  fromConnection.connectionGet(state[id]);
+export const connectionsGetById = (state, id) => state[id];
 
 export const connectionsGetNextId = (state) => {
   const currentId = Math.max(Object.keys(state).map(id => Number(id))) || 0;
