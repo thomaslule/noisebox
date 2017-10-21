@@ -1,5 +1,5 @@
 import Tone from 'tone';
-import { connectionsGetAll } from './reducer';
+import { componentsGetAll, connectionsGetAll } from './reducer';
 import { createNoiseComponent } from './componentTypesDictionary';
 import { createEffect } from './effectTypesDictionary';
 import { resetBindings, onPress, onRelease, onMove } from './controller';
@@ -14,7 +14,7 @@ export default (params) => {
     });
   }
 
-  noiseComponents = params.components.map(component => createNoiseComponent(component));
+  noiseComponents = componentsGetAll(params).map(component => createNoiseComponent(component));
   noiseComponents.push({
     id: 'master',
     toneComponent: Tone.Master,

@@ -15,3 +15,5 @@ export default (state, action) => {
   }
   return state;
 };
+
+export const componentGet = state => state;

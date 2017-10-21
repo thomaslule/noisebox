@@ -18,6 +18,10 @@ export default (state, action) => rest(stateJson(state, action), action);
 
 export const componentsGetNextId = (state, type) =>
   fromComponents.componentsGetNextId(state.components, type);
+export const componentsGetAll = state =>
+  fromComponents.componentsGetAll(state.components);
+export const componentsGetById = (state, id) =>
+  fromComponents.componentsGetById(state.components, id);
 export const connectionsGetAll = state =>
   fromConnections.connectionsGetAll(state.connections);
 export const connectionsGetById = (state, id) =>

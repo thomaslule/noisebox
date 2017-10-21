@@ -1,17 +1,24 @@
-import componentReducer from '../Component/componentReducer';
+import omit from 'lodash/omit';
+import componentReducer, * as fromComponent from '../Component/componentReducer';
 
 export default (state = [], action) => {
-  if (action.type === 'COMPONENT_ADD') {
-    return [...state, componentReducer(null, action)];
-  }
   if (action.type === 'COMPONENT_DELETE') {
-    return state.filter(c => c.id !== action.componentId);
+    return omit(state, action.id);
   }
-  if (['COMPONENT_CHANGE_PARAM'].includes(action.type)) {
-    return state.map(c => (c.id === action.componentId ? componentReducer(c, action) : c));
+  if (action.type.startsWith('COMPONENT_')) {
+    return {
+      ...state,
+      [action.id]: componentReducer(state[action.id], action),
+    };
   }
   return state;
 };
+
+export const componentsGetAll = state =>
+  Object.keys(state).map(id => fromComponent.componentGet(state[id]));
+
+export const componentsGetById = (state, id) =>
+  fromComponent.componentGet(state[id]);
 
 export const componentsGetNextId = (state, type) => {
   const currentId = Math.max(state

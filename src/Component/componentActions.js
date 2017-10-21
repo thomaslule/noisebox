@@ -5,7 +5,7 @@ export const changeParam = (componentId, param, value) => ({
   value,
 });
 
-export const remove = componentId => ({
+export const remove = id => ({
   type: 'COMPONENT_DELETE',
-  componentId,
+  id,
 });
