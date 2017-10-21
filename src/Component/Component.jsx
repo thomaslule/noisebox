@@ -1,6 +1,6 @@
 import React from 'react';
 import { ListGroupItem, Form } from 'react-bootstrap';
-import { Label, Button, ParamField } from '../../Shared';
+import { Label, Button, ParamField } from '../Shared';
 
 export default ({
   component, paramFields, onChangeParam, onDelete,

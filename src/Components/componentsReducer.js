@@ -1,4 +1,4 @@
-import componentReducer from './Component/componentReducer';
+import componentReducer from '../Component/componentReducer';
 import { setCurrentId } from './componentsId';
 
 export default (state = [], action) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Panel, ListGroup, ListGroupItem, Form } from 'react-bootstrap';
-import Component from './Component';
+import Component from '../Component';
 import { SelectWithButton } from '../Shared';
 
 export default ({ components, componentTypes, addComponent }) => (
