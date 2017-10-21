@@ -1,4 +1,4 @@
-import clone from 'clone';
+import cloneDeep from 'lodash/cloneDeep';
 import Tone from 'tone';
 
 const dic = [
@@ -244,7 +244,7 @@ const dic = [
 
 export const get = componentTypeId => dic.find(ct => ct.id === componentTypeId);
 
-export const getAll = () => clone(dic);
+export const getAll = () => cloneDeep(dic);
 
 export const createNoiseComponent = (component) => {
   const c = new (get(component.typeId).constructor)(component.params);

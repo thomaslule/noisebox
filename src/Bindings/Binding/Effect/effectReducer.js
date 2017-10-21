@@ -1,4 +1,4 @@
-import clone from 'clone';
+import cloneDeep from 'lodash/cloneDeep';
 import { get } from '../../../effectTypesDictionary';
 
 export default (state = {}, action) => {
@@ -26,7 +26,7 @@ export default (state = {}, action) => {
     };
   }
   if (action.type === 'BINDING_EFFECT_CHANGE_PARAM') {
-    const newState = clone(state);
+    const newState = cloneDeep(state);
     newState.params[action.param] = action.value;
     return newState;
   }

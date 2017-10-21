@@ -1,4 +1,4 @@
-import clone from 'clone';
+import cloneDeep from 'lodash/cloneDeep';
 import { buttonsList, axisList } from './controller';
 
 const axisActions = axisList().map(a => ({ type: 'move', id: `move ${a.standard}`, text: `move ${a.xbox360}` }));
@@ -11,6 +11,6 @@ const buttonActions = buttonsList()
 
 const actions = axisActions.concat(buttonActions);
 
-export const getAll = () => clone(actions);
+export const getAll = () => cloneDeep(actions);
 
 export const get = id => actions.find(a => a.id === id);

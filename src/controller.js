@@ -1,4 +1,4 @@
-const clone = require('clone');
+const cloneDeep = require('lodash/cloneDeep');
 
 const gamepad = new window.Gamepad();
 
@@ -56,6 +56,6 @@ export const resetBindings = () => {
   gamepad.unbind();
 };
 
-export const buttonsList = () => clone(buttons);
+export const buttonsList = () => cloneDeep(buttons);
 
-export const axisList = () => clone(axis);
+export const axisList = () => cloneDeep(axis);

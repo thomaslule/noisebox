@@ -2,8 +2,15 @@
   "name": "noisebox",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
   "dependencies": {
-    "clone": "^2.1.1",
     "gzip-js": "^0.3.2",
     "lodash": "^4.17.4",
     "react": "^16.0.0",
@@ -15,14 +22,6 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "tone": "^0.11.11"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "eslint": "^4.8.0",
