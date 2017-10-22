@@ -5,7 +5,7 @@ import connectionsReducer, * as fromConnections from './Connections/connectionsR
 import bindingsReducer, * as fromBindings from './Bindings/bindingsReducer';
 import effectsReducer, * as fromEffects from './Effect/effectsReducer';
 import stateJson from './StateJson/stateJsonReducer';
-import errorReducer from './Error/errorReducer';
+import errorReducer, * as fromErrors from './Error/errorReducer';
 
 const rest = combineReducers({
   muteAll: muteAllReducer,
@@ -52,3 +52,6 @@ export const effectsGetByBinding = (state, component) =>
   fromEffects.effectsGetByBinding(state.effects, component);
 export const effectGetNextId = state =>
   fromEffects.effectGetNextId(state.effects);
+
+export const errorIsPresent = state =>
+  fromErrors.errorIsPresent(state.error);

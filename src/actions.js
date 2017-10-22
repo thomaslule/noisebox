@@ -4,6 +4,7 @@ import * as connectionsActions from './Connections/connectionsActions';
 import * as effectsActions from './Effect/effectsActions';
 import * as muteAllActions from './MuteAll/muteAllActions';
 import * as stateJsonActions from './StateJson/stateJsonActions';
+import * as errorActions from './Error/errorActions';
 
 export default {
   ...bindingsActions,
@@ -12,4 +13,5 @@ export default {
   ...effectsActions,
   ...muteAllActions,
   ...stateJsonActions,
+  ...errorActions,
 };

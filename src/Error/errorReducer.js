@@ -1,9 +1,11 @@
 export default (state = null, action) => {
-  if (action.type === 'ERROR') {
+  if (action.type === 'ERROR_SHOW') {
     return action.error;
   }
-  if (action.type === 'NO_ERROR') {
+  if (action.type === 'ERROR_HIDE') {
     return null;
   }
   return state;
 };
+
+export const errorIsPresent = state => state !== null;
