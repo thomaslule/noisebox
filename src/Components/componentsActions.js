@@ -1,4 +1,5 @@
-import { componentsGetNextId } from '../reducer';
+import { componentsGetNextId, effectsGetByComponent } from '../reducer';
+import actions from '../actions';
 import { get } from '../componentTypesDictionary';
 
 export const componentAdd = componentType => (dispatch, getState) => {
@@ -10,10 +11,15 @@ export const componentAdd = componentType => (dispatch, getState) => {
   });
 };
 
-export const componentDelete = id => ({
-  type: 'COMPONENT_DELETE',
-  id,
-});
+export const componentDelete = id => (dispatch, getState) => {
+  effectsGetByComponent(getState(), id).forEach((effect) => {
+    dispatch(actions.effectDelete(effect.id, effect.binding));
+  });
+  dispatch({
+    type: 'COMPONENT_DELETE',
+    id,
+  });
+};
 
 export const componentChangeParam = (id, param, value) => ({
   type: 'COMPONENT_CHANGE_PARAM',

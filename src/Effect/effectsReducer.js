@@ -55,7 +55,11 @@ export default (state = [], action) => {
 
 export const effectGetById = (state, id) => state[id];
 
+export const effectsGetByComponent = (state, component) =>
+  Object.values(state).filter(e => e.component === component);
+
 export const effectGetNextId = (state) => {
-  const currentId = Math.max(Object.keys(state).map(id => Number(id))) || 0;
+  const ids = Object.keys(state).length > 0 ? Object.keys(state).map(id => Number(id)) : [0];
+  const currentId = Math.max(...ids);
   return currentId + 1;
 };

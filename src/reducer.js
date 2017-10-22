@@ -24,13 +24,17 @@ export const componentsGetAll = state =>
   fromComponents.componentsGetAll(state.components);
 export const componentsGetById = (state, id) =>
   fromComponents.componentsGetById(state.components, id);
+
 export const connectionsGetAll = state =>
   fromConnections.connectionsGetAll(state.connections);
 export const connectionsGetById = (state, id) =>
   fromConnections.connectionsGetById(state.connections, id);
 export const connectionsGetNextId = state =>
   fromConnections.connectionsGetNextId(state.connections);
+
 export const effectGetById = (state, id) =>
   fromEffects.effectGetById(state.effects, id);
+export const effectsGetByComponent = (state, component) =>
+  fromEffects.effectsGetByComponent(state.effects, component);
 export const effectGetNextId = state =>
   fromEffects.effectGetNextId(state.effects);
