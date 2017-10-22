@@ -1,5 +1,5 @@
 export default (state = false, action) => {
-  if (action.type === 'SWITCH_MUTE_ALL') {
+  if (action.type === 'MUTE_ALL_SWITCH') {
     return !state;
   }
   return state;

@@ -1,13 +1,9 @@
 import { connect } from 'react-redux';
 import MuteAll from './MuteAll';
-import { switchMute } from './muteAllActions';
+import actions from '../actions';
 
 const mapStateToProps = state => ({
   muted: state.muteAll,
 });
 
-const mapDispatchToProps = {
-  switchMute,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MuteAll);
+export default connect(mapStateToProps, actions)(MuteAll);

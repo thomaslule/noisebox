@@ -1,3 +1,3 @@
-export const switchMute = (id, value) => ({
-  type: 'SWITCH_MUTE_ALL',
+export const muteAllSwitch = () => ({
+  type: 'MUTE_ALL_SWITCH',
 });
