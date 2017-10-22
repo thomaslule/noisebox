@@ -1,6 +1,5 @@
 import cloneDeep from 'lodash/cloneDeep';
 import omit from 'lodash/omit';
-import omitBy from 'lodash/omitBy';
 import { get } from '../effectTypesDictionary';
 
 const effectReducer = (state = {}, action) => {
@@ -47,16 +46,19 @@ export default (state = [], action) => {
       [action.id]: effectReducer(state[action.id], action),
     };
   }
-  if (action.type === 'BINDING_DELETE') {
-    return omitBy(state, e => e.binding === action.bindingId);
-  }
   return state;
 };
 
 export const effectGetById = (state, id) => state[id];
 
+export const effectsGetAll = state =>
+  Object.values(state);
+
 export const effectsGetByComponent = (state, component) =>
   Object.values(state).filter(e => e.component === component);
+
+export const effectsGetByBinding = (state, binding) =>
+  Object.values(state).filter(e => e.binding === binding);
 
 export const effectGetNextId = (state) => {
   const ids = Object.keys(state).length > 0 ? Object.keys(state).map(id => Number(id)) : [0];

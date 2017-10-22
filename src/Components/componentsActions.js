@@ -13,7 +13,7 @@ export const componentAdd = componentType => (dispatch, getState) => {
 
 export const componentDelete = id => (dispatch, getState) => {
   effectsGetByComponent(getState(), id).forEach((effect) => {
-    dispatch(actions.effectDelete(effect.id, effect.binding));
+    dispatch(actions.effectDelete(effect.id));
   });
   dispatch({
     type: 'COMPONENT_DELETE',

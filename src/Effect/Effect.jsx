@@ -32,6 +32,6 @@ export default ({
         onChange={value => effectChangeParam(effect.id, param.name, value)}
         key={param.name}
       />))}
-    <Button text="Delete" onClick={() => effectDelete(effect.id, effect.binding)} />
+    <Button text="Delete" onClick={() => effectDelete(effect.id)} />
   </Form>
 );

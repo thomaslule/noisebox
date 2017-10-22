@@ -7,7 +7,6 @@ const bindingReducer = (state = [], action) => {
       id: action.bindingId,
       actions: [action.action],
       actionType: action.actionType,
-      effects: [],
     };
   }
   if (action.type === 'BINDING_ACTION_ADD') {
@@ -20,24 +19,6 @@ const bindingReducer = (state = [], action) => {
     return {
       ...state,
       actions: state.actions.filter(a => a !== action.action),
-    };
-  }
-  if (action.type === 'EFFECT_ADD') {
-    return {
-      ...state,
-      effects: [...state.effects, action.id],
-    };
-  }
-  if (action.type === 'EFFECT_DELETE') {
-    return {
-      ...state,
-      effects: state.effects.filter(e => e !== action.id),
-    };
-  }
-  if (action.type === 'COMPONENT_DELETE') {
-    return {
-      ...state,
-      effects: state.effects.filter(e => e.componentId === action.id),
     };
   }
   return state;
@@ -53,12 +34,6 @@ export default (state = [], action) => {
   }
   if (action.type.startsWith('BINDING_')) {
     return state.map(b => (b.id === action.bindingId ? bindingReducer(b, action) : b));
-  }
-  if (action.type === 'EFFECT_ADD' || action.type === 'EFFECT_DELETE') {
-    return state.map(b => (b.id === action.binding ? bindingReducer(b, action) : b));
-  }
-  if (action.type === 'COMPONENT_DELETE') {
-    return state.map(b => bindingReducer(b, action));
   }
   if (action.type === 'STATE_JSON_CHANGED') {
     const maxBindingId = state.map(b => b.id).reduce((a, b) => (a > b ? a : b), 0);

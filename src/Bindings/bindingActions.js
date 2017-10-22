@@ -1,3 +1,6 @@
+import { effectsGetByBinding } from '../reducer';
+import actions from '../actions';
+
 export const addAction = (bindingId, action) => ({
   type: 'BINDING_ACTION_ADD',
   bindingId,
@@ -10,7 +13,12 @@ export const deleteAction = (bindingId, action) => ({
   action,
 });
 
-export const remove = bindingId => ({
-  type: 'BINDING_DELETE',
-  bindingId,
-});
+export const remove = bindingId => (dispatch, getState) => {
+  effectsGetByBinding(getState(), bindingId).forEach((e) => {
+    dispatch(actions.effectDelete(e.id));
+  });
+  dispatch({
+    type: 'BINDING_DELETE',
+    bindingId,
+  });
+};

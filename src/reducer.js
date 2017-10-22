@@ -34,7 +34,11 @@ export const connectionsGetNextId = state =>
 
 export const effectGetById = (state, id) =>
   fromEffects.effectGetById(state.effects, id);
+export const effectsGetAll = state =>
+  fromEffects.effectsGetAll(state.effects);
 export const effectsGetByComponent = (state, component) =>
   fromEffects.effectsGetByComponent(state.effects, component);
+export const effectsGetByBinding = (state, component) =>
+  fromEffects.effectsGetByBinding(state.effects, component);
 export const effectGetNextId = state =>
   fromEffects.effectGetNextId(state.effects);

@@ -1,5 +1,5 @@
 import Tone from 'tone';
-import { componentsGetAll, connectionsGetAll, effectGetById } from './reducer';
+import { componentsGetAll, connectionsGetAll, effectsGetAll } from './reducer';
 import { createNoiseComponent } from './componentTypesDictionary';
 import { createEffect } from './effectTypesDictionary';
 import { resetBindings, onPress, onRelease, onMove } from './controller';
@@ -33,17 +33,14 @@ export default (params) => {
 
   resetBindings();
 
-  params.bindings.forEach((binding) => {
-    binding.actions.forEach((action) => {
-      binding.effects.forEach((effectId) => {
-        const effect = effectGetById(params, effectId);
-        const comp = noiseComponents.find(c => c.id === effect.component);
-        const effectToApply = createEffect(effect.effectType, effect.params, comp);
-        const [gesture, button] = action.split(' ');
-        if (gesture === 'press') onPress(button, effectToApply);
-        if (gesture === 'release') onRelease(button, effectToApply);
-        if (gesture === 'move') onMove(button, effectToApply);
-      });
+  effectsGetAll(params).forEach((effect) => {
+    const comp = noiseComponents.find(c => c.id === effect.component);
+    const effectToApply = createEffect(effect.effectType, effect.params, comp);
+    params.bindings.find(b => b.id === effect.binding).actions.forEach((action) => {
+      const [gesture, button] = action.split(' ');
+      if (gesture === 'press') onPress(button, effectToApply);
+      if (gesture === 'release') onRelease(button, effectToApply);
+      if (gesture === 'move') onMove(button, effectToApply);
     });
   });
 };

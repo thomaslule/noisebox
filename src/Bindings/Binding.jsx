@@ -9,6 +9,7 @@ export default ({
   availableActions,
   onAddAction,
   canDeleteAction,
+  effects,
   onDeleteAction,
   onAddEffect,
   onDelete,
@@ -45,7 +46,7 @@ export default ({
       ) : null
     }
     </Well>
-    {binding.effects.map(effect => (
+    {effects.map(effect => (
       <Well bsSize="small" key={effect}>
         <Effect id={effect} />
       </Well>

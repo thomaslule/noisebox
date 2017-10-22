@@ -9,10 +9,9 @@ export const effectAdd = (binding, actionType) => (dispatch, getState) => {
   });
 };
 
-export const effectDelete = (id, binding) => ({
+export const effectDelete = id => ({
   type: 'EFFECT_DELETE',
   id,
-  binding,
 });
 
 export const effectChangeComponent = (id, component) => ({
