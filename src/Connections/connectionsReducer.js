@@ -1,5 +1,4 @@
 import omit from 'lodash/omit';
-import omitBy from 'lodash/omitBy';
 
 const connectionReducer = (state = {}, action) => {
   if (action.type === 'CONNECTION_ADD') {
@@ -29,15 +28,15 @@ export default (state = {}, action) => {
       [action.id]: connectionReducer(state[action.id], action),
     };
   }
-  if (action.type === 'COMPONENT_DELETE') {
-    return omitBy(state, c => c.componentFrom === action.id || c.componentTo === action.id);
-  }
   return state;
 };
 
-export const connectionsGetAll = state => Object.keys(state).map(id => state[id]);
+export const connectionsGetAll = state => Object.values(state);
 
 export const connectionsGetById = (state, id) => state[id];
+
+export const connectionsGetByComponent = (state, component) =>
+  Object.values(state).filter(c => c.fromComponent === component || c.toComponent === component);
 
 export const connectionsGetNextId = (state) => {
   const currentId = Math.max(Object.keys(state).map(id => Number(id))) || 0;

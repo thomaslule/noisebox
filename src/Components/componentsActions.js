@@ -1,4 +1,4 @@
-import { componentsGetNextId, effectsGetByComponent } from '../reducer';
+import { componentsGetNextId, effectsGetByComponent, connectionsGetByComponent } from '../reducer';
 import actions from '../actions';
 import { get } from '../componentTypesDictionary';
 
@@ -14,6 +14,9 @@ export const componentAdd = componentType => (dispatch, getState) => {
 export const componentDelete = id => (dispatch, getState) => {
   effectsGetByComponent(getState(), id).forEach((effect) => {
     dispatch(actions.effectDelete(effect.id));
+  });
+  connectionsGetByComponent(getState(), id).forEach((connection) => {
+    dispatch(actions.connectionDelete(connection.id));
   });
   dispatch({
     type: 'COMPONENT_DELETE',

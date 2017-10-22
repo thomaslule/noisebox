@@ -29,6 +29,8 @@ export const connectionsGetAll = state =>
   fromConnections.connectionsGetAll(state.connections);
 export const connectionsGetById = (state, id) =>
   fromConnections.connectionsGetById(state.connections, id);
+export const connectionsGetByComponent = (state, component) =>
+  fromConnections.connectionsGetByComponent(state.connections, component);
 export const connectionsGetNextId = state =>
   fromConnections.connectionsGetNextId(state.connections);
 
