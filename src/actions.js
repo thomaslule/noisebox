@@ -3,7 +3,7 @@ import * as bindingsActions from './Bindings/bindingsActions';
 import * as connectionsActions from './Connections/connectionsActions';
 import * as effectsActions from './Effect/effectsActions';
 import * as muteAllActions from './MuteAll/muteAllActions';
-import * as stateJsonActions from './StateJson/stateJsonActions';
+import * as setupJsonActions from './SetupJson/setupJsonActions';
 import * as errorActions from './Error/errorActions';
 
 export default {
@@ -12,6 +12,6 @@ export default {
   ...connectionsActions,
   ...effectsActions,
   ...muteAllActions,
-  ...stateJsonActions,
+  ...setupJsonActions,
   ...errorActions,
 };

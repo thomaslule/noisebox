@@ -6,25 +6,28 @@ import connectionsReducer, * as fromConnections from './Connections/connectionsR
 import bindingsReducer, * as fromBindings from './Bindings/bindingsReducer';
 import effectsReducer, * as fromEffects from './Effect/effectsReducer';
 import errorReducer, * as fromErrors from './Error/errorReducer';
-import stateJson, * as fromStateJson from './StateJson/stateJsonReducer';
+import setupJsonReducer, * as fromSetupJson from './SetupJson/setupJsonReducer';
 
-const rest = combineReducers({
-  muteAll: muteAllReducer,
+const setupReducer = combineReducers({
   components: componentsReducer,
   connections: connectionsReducer,
   bindings: bindingsReducer,
   effects: effectsReducer,
+});
+
+const setupWithJsonReducer = (state, action) =>
+  setupReducer(setupJsonReducer(state, action), action);
+
+export default combineReducers({
+  setup: setupWithJsonReducer,
+  muteAll: muteAllReducer,
   error: errorReducer,
 });
 
-export default (state, action) => rest(stateJson(state, action), action);
-
+export const setupJson = reExport(fromSetupJson, 'setup');
+export const components = reExport(fromComponents, 'setup', 'components');
+export const bindings = reExport(fromBindings, 'setup', 'bindings');
+export const connections = reExport(fromConnections, 'setup', 'connections');
+export const effects = reExport(fromEffects, 'setup', 'effects');
 export const muteAll = reExport(fromMuteAll, 'muteAll');
-export const components = reExport(fromComponents, 'components');
-export const bindings = reExport(fromBindings, 'bindings');
-export const connections = reExport(fromConnections, 'connections');
-export const effects = reExport(fromEffects, 'effects');
 export const error = reExport(fromErrors, 'error');
-
-export const stateJsonGet = state =>
-  fromStateJson.stateJsonGet(state);

@@ -4,12 +4,16 @@ export const getNextId = (obj) => {
   return currentId + 1;
 };
 
-export const reExport = (from, applyTo) => {
+export const reExport = (exportsObject, ...pathInState) => {
   const toExport = {};
-  Object.keys(from)
-    .filter(f => f !== 'default')
-    .forEach((f) => {
-      toExport[f] = (state, ...args) => from[f](state[applyTo], ...args);
+  Object.keys(exportsObject)
+    .filter(exportName => exportName !== 'default')
+    .forEach((exportName) => {
+      toExport[exportName] = (state, ...args) => {
+        let where = state;
+        pathInState.forEach((key) => { where = where[key]; });
+        return exportsObject[exportName](where, ...args);
+      };
     });
   return toExport;
 };
