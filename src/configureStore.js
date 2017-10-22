@@ -5,6 +5,7 @@ import reducer, { error } from './reducer';
 import noise from './noise';
 import actions from './actions';
 import { unzip } from './zip';
+import { onConnect, onDisconnect } from './controller';
 
 export default () => {
   const store = createStore(reducer, applyMiddleware(thunk, logger));
@@ -24,6 +25,9 @@ export default () => {
     window.history.pushState('', document.title, window.location.pathname + window.location.search);
     store.dispatch(actions.stateJsonChange(stateJson));
   }
+
+  onConnect(gamepad => store.dispatch(actions.gamepadsConnected(gamepad)));
+  onDisconnect(gamepad => store.dispatch(actions.gamepadsDisconnected(gamepad)));
 
   noise(store.getState());
 

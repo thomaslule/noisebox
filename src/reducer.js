@@ -7,6 +7,7 @@ import bindingsReducer, * as fromBindings from './Bindings/bindingsReducer';
 import effectsReducer, * as fromEffects from './Effect/effectsReducer';
 import errorReducer, * as fromErrors from './Error/errorReducer';
 import setupJsonReducer, * as fromSetupJson from './SetupJson/setupJsonReducer';
+import gamepadsReducer, * as fromGamepads from './Gamepads/gamepadsReducer';
 
 const setupReducer = combineReducers({
   components: componentsReducer,
@@ -22,6 +23,7 @@ export default combineReducers({
   setup: setupWithJsonReducer,
   muteAll: muteAllReducer,
   error: errorReducer,
+  gamepads: gamepadsReducer,
 });
 
 export const setupJson = reExport(fromSetupJson, 'setup');
@@ -31,3 +33,4 @@ export const connections = reExport(fromConnections, 'setup', 'connections');
 export const effects = reExport(fromEffects, 'setup', 'effects');
 export const muteAll = reExport(fromMuteAll, 'muteAll');
 export const error = reExport(fromErrors, 'error');
+export const gamepads = reExport(fromGamepads, 'gamepads');

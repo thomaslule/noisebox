@@ -1,5 +1,6 @@
 import React from 'react';
 import { PageHeader, Grid, Row, Col } from 'react-bootstrap';
+import Gamepads from './Gamepads';
 import MuteAll from './MuteAll';
 import Error from './Error';
 import Components from './Components';
@@ -10,7 +11,7 @@ import SetupJson from './SetupJson';
 
 export default () => (
   <Grid>
-    <PageHeader>noisebox <MuteAll /></PageHeader>
+    <PageHeader>noisebox <Gamepads /><MuteAll /></PageHeader>
     <Error />
     <Row>
       <Col md={6}><Components /><Connections /></Col>

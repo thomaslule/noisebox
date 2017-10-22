@@ -5,6 +5,7 @@ import * as effectsActions from './Effect/effectsActions';
 import * as muteAllActions from './MuteAll/muteAllActions';
 import * as setupJsonActions from './SetupJson/setupJsonActions';
 import * as errorActions from './Error/errorActions';
+import * as gamepadsActions from './Gamepads/gamepadsActions';
 
 export default {
   ...bindingsActions,
@@ -14,4 +15,5 @@ export default {
   ...muteAllActions,
   ...setupJsonActions,
   ...errorActions,
+  ...gamepadsActions,
 };

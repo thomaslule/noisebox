@@ -52,10 +52,25 @@ export const onMove = (controlName, callback) => {
   });
 };
 
+let onConnectHandler;
+let onDisconnectHandler;
+
+export const onConnect = (callback) => {
+  onConnectHandler = callback;
+};
+
+export const onDisconnect = (callback) => {
+  onDisconnectHandler = callback;
+};
+
 export const resetBindings = () => {
   gamepad.unbind();
+  gamepad.bind(Gamepad.Event.CONNECTED, onConnectHandler);
+  gamepad.bind(Gamepad.Event.DISCONNECTED, onDisconnectHandler);
 };
 
 export const buttonsList = () => cloneDeep(buttons);
 
 export const axisList = () => cloneDeep(axis);
+
+resetBindings();
