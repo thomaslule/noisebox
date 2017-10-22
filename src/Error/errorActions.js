@@ -2,7 +2,7 @@ export const errorShow = (error) => {
   console.error(error);
   return {
     type: 'ERROR_SHOW',
-    error,
+    error: error.message,
   };
 };
 
