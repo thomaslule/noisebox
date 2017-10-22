@@ -1,5 +1,6 @@
 import cloneDeep from 'lodash/cloneDeep';
 import omit from 'lodash/omit';
+import { getNextId } from '../util';
 import { get } from '../effectTypesDictionary';
 
 const effectReducer = (state = {}, action) => {
@@ -60,8 +61,4 @@ export const effectsGetByComponent = (state, component) =>
 export const effectsGetByBinding = (state, binding) =>
   Object.values(state).filter(e => e.binding === binding);
 
-export const effectGetNextId = (state) => {
-  const ids = Object.keys(state).length > 0 ? Object.keys(state).map(id => Number(id)) : [0];
-  const currentId = Math.max(...ids);
-  return currentId + 1;
-};
+export const effectGetNextId = state => getNextId(state);

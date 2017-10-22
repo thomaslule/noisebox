@@ -1,4 +1,5 @@
 import omit from 'lodash/omit';
+import { getNextId } from '../util';
 
 const connectionReducer = (state = {}, action) => {
   if (action.type === 'CONNECTION_ADD') {
@@ -38,7 +39,4 @@ export const connectionsGetById = (state, id) => state[id];
 export const connectionsGetByComponent = (state, component) =>
   Object.values(state).filter(c => c.fromComponent === component || c.toComponent === component);
 
-export const connectionsGetNextId = (state) => {
-  const currentId = Math.max(Object.keys(state).map(id => Number(id))) || 0;
-  return currentId + 1;
-};
+export const connectionsGetNextId = state => getNextId(state);

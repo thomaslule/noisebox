@@ -1,15 +1,12 @@
 import { connect } from 'react-redux';
 import Bindings from './Bindings';
-import { addBinding } from './bindingsActions';
+import { bindingsGetAll } from '../reducer';
+import actions from '../actions';
 import { getAll } from './../actionsDictionary';
 
 const mapStateToProps = state => ({
-  bindings: state.bindings,
+  bindings: bindingsGetAll(state),
   actions: getAll(),
 });
 
-const mapDispatchToProps = {
-  addBinding,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Bindings);
+export default connect(mapStateToProps, actions)(Bindings);

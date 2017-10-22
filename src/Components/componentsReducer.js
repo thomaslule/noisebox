@@ -35,9 +35,9 @@ export const componentsGetAll = state => Object.keys(state).map(id => state[id])
 export const componentsGetById = (state, id) => state[id];
 
 export const componentsGetNextId = (state, type) => {
-  const currentId = Math.max(componentsGetAll(state)
+  const ids = componentsGetAll(state)
     .filter(c => c.typeId === type)
-    .map(c => Number(c.id.split(' ').pop())))
-    || 0;
+    .map(c => Number(c.id.split(' ').pop()));
+  const currentId = ids.length > 0 ? Math.max(...ids) : 0;
   return `${type} ${currentId + 1}`;
 };

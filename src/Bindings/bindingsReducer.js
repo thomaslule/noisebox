@@ -1,10 +1,10 @@
-import { setCurrentId as setBindingCurrentId } from './bindingsId';
-import { setCurrentId as setEffectCurrentId } from './effectsId';
+import omit from 'lodash/omit';
+import { getNextId } from '../util';
 
-const bindingReducer = (state = [], action) => {
+const bindingReducer = (state = {}, action) => {
   if (action.type === 'BINDING_ADD') {
     return {
-      id: action.bindingId,
+      id: action.id,
       actions: [action.action],
       actionType: action.actionType,
     };
@@ -24,27 +24,21 @@ const bindingReducer = (state = [], action) => {
   return state;
 };
 
-
-export default (state = [], action) => {
-  if (action.type === 'BINDING_ADD') {
-    return [...state, bindingReducer(null, action)];
-  }
+export default (state = {}, action) => {
   if (action.type === 'BINDING_DELETE') {
-    return state.filter(b => b.id !== action.bindingId);
+    return omit(state, action.id);
   }
   if (action.type.startsWith('BINDING_')) {
-    return state.map(b => (b.id === action.bindingId ? bindingReducer(b, action) : b));
-  }
-  if (action.type === 'STATE_JSON_CHANGED') {
-    const maxBindingId = state.map(b => b.id).reduce((a, b) => (a > b ? a : b), 0);
-    setBindingCurrentId(maxBindingId);
-    const maxEffectsId = state
-      .map(b => b.effects)
-      .reduce((a, b) => a.concat(b), [])
-      .map(e => e.id)
-      .reduce((a, b) => (a > b ? a : b), 0);
-    setEffectCurrentId(maxEffectsId);
-    return state;
+    return {
+      ...state,
+      [action.id]: bindingReducer(state[action.id], action),
+    };
   }
   return state;
 };
+
+export const bindingsGetAll = state => Object.values(state);
+
+export const bindingsGetById = (state, id) => state[id];
+
+export const bindingsGetNextId = state => getNextId(state);

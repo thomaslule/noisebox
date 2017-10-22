@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import muteAllReducer from './MuteAll/muteAllReducer';
 import componentsReducer, * as fromComponents from './Components/componentsReducer';
 import connectionsReducer, * as fromConnections from './Connections/connectionsReducer';
-import bindingsReducer from './Bindings/bindingsReducer';
+import bindingsReducer, * as fromBindings from './Bindings/bindingsReducer';
 import effectsReducer, * as fromEffects from './Effect/effectsReducer';
 import stateJson from './StateJson/stateJsonReducer';
 import errorReducer from './Error/errorReducer';
@@ -24,6 +24,14 @@ export const componentsGetAll = state =>
   fromComponents.componentsGetAll(state.components);
 export const componentsGetById = (state, id) =>
   fromComponents.componentsGetById(state.components, id);
+
+export const bindingsGetAll = state =>
+  fromBindings.bindingsGetAll(state.bindings);
+
+export const bindingsGetById = (state, id) =>
+  fromBindings.bindingsGetById(state.bindings, id);
+export const bindingsGetNextId = state =>
+  fromBindings.bindingsGetNextId(state.bindings);
 
 export const connectionsGetAll = state =>
   fromConnections.connectionsGetAll(state.connections);

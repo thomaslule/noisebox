@@ -7,12 +7,12 @@ import { SelectWithButton } from '../Shared';
 export default ({
   binding,
   availableActions,
-  onAddAction,
+  bindingActionAdd,
   canDeleteAction,
   effects,
-  onDeleteAction,
-  onAddEffect,
-  onDelete,
+  bindingActionDelete,
+  effectAdd,
+  bindingDelete,
 }) => (
   <ListGroupItem>
     <Well bsSize="small">
@@ -26,7 +26,7 @@ export default ({
                   key={action}
                   actionId={action}
                   canDelete={canDeleteAction}
-                  onDelete={() => onDeleteAction(action)}
+                  onDelete={() => bindingActionDelete(binding.id, action)}
                 />
             ))}
             </ButtonGroup>
@@ -40,7 +40,7 @@ export default ({
             label=""
             options={availableActions.map(a => ({ text: a.text, value: a.id }))}
             buttonText="Add"
-            onChoose={value => onAddAction(value)}
+            onChoose={value => bindingActionAdd(binding.id, value)}
           />
         </Form>
       ) : null
@@ -55,8 +55,8 @@ export default ({
       <FormGroup>
         <Col mdOffset={3} md={9}>
           <ButtonToolbar>
-            <Button onClick={() => onAddEffect()}>Add effect</Button>
-            <Button onClick={() => onDelete()}>Delete binding</Button>
+            <Button onClick={() => effectAdd(binding.id, binding.actionType)}>Add effect</Button>
+            <Button onClick={() => bindingDelete(binding.id)}>Delete binding</Button>
           </ButtonToolbar>
         </Col>
       </FormGroup>
