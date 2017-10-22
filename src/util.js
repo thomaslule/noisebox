@@ -3,3 +3,13 @@ export const getNextId = (obj) => {
   const currentId = Math.max(...ids);
   return currentId + 1;
 };
+
+export const reExport = (from, applyTo) => {
+  const toExport = {};
+  Object.keys(from)
+    .filter(f => f !== 'default')
+    .forEach((f) => {
+      toExport[f] = (state, ...args) => from[f](state[applyTo], ...args);
+    });
+  return toExport;
+};

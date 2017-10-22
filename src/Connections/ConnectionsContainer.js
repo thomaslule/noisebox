@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import Connections from './Connections';
 import actions from '../actions';
-import { connectionsGetAll } from '../reducer';
+import { connections } from '../reducer';
 
 const mapStateToProps = state => ({
-  connections: connectionsGetAll(state),
+  connections: connections.getAll(state),
 });
 
 export default connect(mapStateToProps, actions)(Connections);

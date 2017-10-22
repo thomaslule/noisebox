@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import Bindings from './Bindings';
-import { bindingsGetAll } from '../reducer';
+import { bindings } from '../reducer';
 import actions from '../actions';
 import { getAll } from './../actionsDictionary';
 
 const mapStateToProps = state => ({
-  bindings: bindingsGetAll(state),
+  bindings: bindings.getAll(state),
   actions: getAll(),
 });
 

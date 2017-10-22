@@ -30,12 +30,12 @@ export default (state = [], action) => {
   return state;
 };
 
-export const componentsGetAll = state => Object.keys(state).map(id => state[id]);
+export const getAll = state => Object.keys(state).map(id => state[id]);
 
-export const componentsGetById = (state, id) => state[id];
+export const getById = (state, id) => state[id];
 
-export const componentsGetNextId = (state, type) => {
-  const ids = componentsGetAll(state)
+export const nextId = (state, type) => {
+  const ids = getAll(state)
     .filter(c => c.typeId === type)
     .map(c => Number(c.id.split(' ').pop()));
   const currentId = ids.length > 0 ? Math.max(...ids) : 0;

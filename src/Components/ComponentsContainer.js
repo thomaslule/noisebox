@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import Components from './Components';
-import { componentsGetAll } from '../reducer';
+import { components } from '../reducer';
 import actions from '../actions';
 import { getAll } from '../componentTypesDictionary';
 
 const mapStateToProps = state => ({
-  components: componentsGetAll(state),
+  components: components.getAll(state),
   componentTypes: getAll(),
 });
 

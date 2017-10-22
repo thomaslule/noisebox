@@ -37,8 +37,8 @@ export default (state = {}, action) => {
   return state;
 };
 
-export const bindingsGetAll = state => Object.values(state);
+export const getAll = state => Object.values(state);
 
-export const bindingsGetById = (state, id) => state[id];
+export const getById = (state, id) => state[id];
 
-export const bindingsGetNextId = state => getNextId(state);
+export const nextId = state => getNextId(state);

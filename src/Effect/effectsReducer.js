@@ -50,15 +50,15 @@ export default (state = [], action) => {
   return state;
 };
 
-export const effectGetById = (state, id) => state[id];
+export const getById = (state, id) => state[id];
 
-export const effectsGetAll = state =>
+export const getAll = state =>
   Object.values(state);
 
-export const effectsGetByComponent = (state, component) =>
+export const getByComponent = (state, component) =>
   Object.values(state).filter(e => e.component === component);
 
-export const effectsGetByBinding = (state, binding) =>
+export const getByBinding = (state, binding) =>
   Object.values(state).filter(e => e.binding === binding);
 
-export const effectGetNextId = state => getNextId(state);
+export const nextId = state => getNextId(state);

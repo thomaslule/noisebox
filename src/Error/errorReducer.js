@@ -13,4 +13,4 @@ export default (state = { error: false }, action) => {
   return state;
 };
 
-export const errorIsPresent = state => state.error;
+export const isPresent = state => state.error;

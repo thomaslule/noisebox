@@ -1,9 +1,9 @@
-import { effectGetNextId } from '../reducer';
+import { effects } from '../reducer';
 
 export const effectAdd = (binding, actionType) => (dispatch, getState) => {
   dispatch({
     type: 'EFFECT_ADD',
-    id: effectGetNextId(getState()),
+    id: effects.nextId(getState()),
     binding,
     actionType,
   });

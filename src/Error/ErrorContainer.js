@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import Error from './Error';
-import { errorIsPresent } from '../reducer';
+import { error } from '../reducer';
 
 const mapStateToProps = state => ({
-  show: errorIsPresent(state),
+  show: error.isPresent(state),
 });
 
 export default connect(mapStateToProps)(Error);

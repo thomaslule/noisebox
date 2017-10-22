@@ -1,19 +1,19 @@
 import { connect } from 'react-redux';
 import Connection from './Connection';
-import { connectionsGetById, componentsGetAll } from '../reducer';
+import { connections, components } from '../reducer';
 import actions from '../actions';
 import { get } from '../componentTypesDictionary';
 
 const mapStateToProps = (state, { id }) => {
   const allInputs = [{ componentId: 'master', input: 'main' }];
-  componentsGetAll(state).forEach((c) => {
+  components.getAll(state).forEach((c) => {
     get(c.typeId).inputs.forEach((i) => {
       allInputs.push({ componentId: c.id, input: i });
     });
   });
   return {
-    connection: connectionsGetById(state, id),
-    allComponentIds: componentsGetAll(state).map(c => c.id),
+    connection: connections.getById(state, id),
+    allComponentIds: components.getAll(state).map(c => c.id),
     allInputs,
   };
 };

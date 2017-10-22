@@ -1,5 +1,5 @@
 import Tone from 'tone';
-import { componentsGetAll, connectionsGetAll, effectsGetAll, bindingsGetById } from './reducer';
+import { components, connections, effects, bindings, muteAll, error } from './reducer';
 import { createNoiseComponent } from './componentTypesDictionary';
 import { createEffect } from './effectTypesDictionary';
 import { resetBindings, onPress, onRelease, onMove } from './controller';
@@ -7,21 +7,21 @@ import { resetBindings, onPress, onRelease, onMove } from './controller';
 let noiseComponents = [];
 
 export default (params) => {
-  Tone.Master.mute = params.muteAll;
-  if (!params.error) {
+  Tone.Master.mute = muteAll.isActive(params);
+  if (!error.isPresent(params)) {
     noiseComponents.forEach((c) => {
       if (c.id !== 'master') c.toneComponent.dispose();
     });
   }
 
-  noiseComponents = componentsGetAll(params).map(component => createNoiseComponent(component));
+  noiseComponents = components.getAll(params).map(component => createNoiseComponent(component));
   noiseComponents.push({
     id: 'master',
     toneComponent: Tone.Master,
     currentParams: {},
   });
 
-  connectionsGetAll(params).forEach(({ fromComponent, toComponent, toInput }) => {
+  connections.getAll(params).forEach(({ fromComponent, toComponent, toInput }) => {
     const from = noiseComponents.find(c => c.id === fromComponent);
     const to = noiseComponents.find(c => c.id === toComponent);
     if (toInput === 'main') {
@@ -33,10 +33,10 @@ export default (params) => {
 
   resetBindings();
 
-  effectsGetAll(params).forEach((effect) => {
+  effects.getAll(params).forEach((effect) => {
     const comp = noiseComponents.find(c => c.id === effect.component);
     const effectToApply = createEffect(effect.effectType, effect.params, comp);
-    bindingsGetById(params, effect.binding).actions.forEach((action) => {
+    bindings.getById(params, effect.binding).actions.forEach((action) => {
       const [gesture, button] = action.split(' ');
       if (gesture === 'press') onPress(button, effectToApply);
       if (gesture === 'release') onRelease(button, effectToApply);

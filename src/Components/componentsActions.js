@@ -1,21 +1,21 @@
-import { componentsGetNextId, effectsGetByComponent, connectionsGetByComponent } from '../reducer';
+import { components, effects, connections } from '../reducer';
 import actions from '../actions';
 import { get } from '../componentTypesDictionary';
 
 export const componentAdd = componentType => (dispatch, getState) => {
   dispatch({
     type: 'COMPONENT_ADD',
-    id: componentsGetNextId(getState(), componentType),
+    id: components.nextId(getState(), componentType),
     componentType,
     params: get(componentType).defaultParams,
   });
 };
 
 export const componentDelete = id => (dispatch, getState) => {
-  effectsGetByComponent(getState(), id).forEach((effect) => {
+  effects.getByComponent(getState(), id).forEach((effect) => {
     dispatch(actions.effectDelete(effect.id));
   });
-  connectionsGetByComponent(getState(), id).forEach((connection) => {
+  connections.getByComponent(getState(), id).forEach((connection) => {
     dispatch(actions.connectionDelete(connection.id));
   });
   dispatch({

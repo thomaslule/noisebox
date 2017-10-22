@@ -1,11 +1,11 @@
-import { connectionsGetNextId, componentsGetAll } from '../reducer';
+import { connections, components } from '../reducer';
 
 export const connectionAdd = () => (dispatch, getState) => {
-  if (componentsGetAll(getState()).length > 0) {
+  if (components.getAll(getState()).length > 0) {
     dispatch({
       type: 'CONNECTION_ADD',
-      id: connectionsGetNextId(getState()),
-      fromComponent: componentsGetAll(getState())[0].id,
+      id: connections.nextId(getState()),
+      fromComponent: components.getAll(getState())[0].id,
       toComponent: 'master',
       toInput: 'main',
     });

@@ -32,11 +32,11 @@ export default (state = {}, action) => {
   return state;
 };
 
-export const connectionsGetAll = state => Object.values(state);
+export const getAll = state => Object.values(state);
 
-export const connectionsGetById = (state, id) => state[id];
+export const getById = (state, id) => state[id];
 
-export const connectionsGetByComponent = (state, component) =>
+export const getByComponent = (state, component) =>
   Object.values(state).filter(c => c.fromComponent === component || c.toComponent === component);
 
-export const connectionsGetNextId = state => getNextId(state);
+export const nextId = state => getNextId(state);

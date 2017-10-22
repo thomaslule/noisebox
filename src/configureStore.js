@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore } from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
-import reducer, { errorIsPresent } from './reducer';
+import reducer, { error } from './reducer';
 import noise from './noise';
 import actions from './actions';
 import { unzip } from './zip';
@@ -13,9 +13,9 @@ export default () => {
     const state = store.getState();
     try {
       noise(state);
-      if (errorIsPresent(state)) store.dispatch(actions.errorHide());
+      if (error.isPresent(state)) store.dispatch(actions.errorHide());
     } catch (e) {
-      if (!errorIsPresent(state)) store.dispatch(actions.errorShow(e));
+      if (!error.isPresent(state)) store.dispatch(actions.errorShow(e));
     }
   });
 

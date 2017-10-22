@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Binding from './Binding';
-import { effectsGetByBinding } from '../reducer';
+import { effects } from '../reducer';
 import actions from '../actions';
 import { getAll } from './../actionsDictionary';
 
@@ -13,7 +13,7 @@ const mapStateToProps = (state, { binding }) => {
     binding,
     availableActions,
     canDeleteAction,
-    effects: effectsGetByBinding(state, binding.id).map(e => e.id),
+    effects: effects.getByBinding(state, binding.id).map(e => e.id),
   });
 };
 

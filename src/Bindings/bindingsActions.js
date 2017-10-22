@@ -1,11 +1,11 @@
 import { get } from '../actionsDictionary';
-import { bindingsGetNextId, effectsGetByBinding } from '../reducer';
+import { bindings, effects } from '../reducer';
 import actions from '../actions';
 
 export const bindingAdd = action => (dispatch, getState) => {
   dispatch({
     type: 'BINDING_ADD',
-    id: bindingsGetNextId(getState()),
+    id: bindings.nextId(getState()),
     action,
     actionType: get(action).type,
   });
@@ -24,7 +24,7 @@ export const bindingActionDelete = (id, action) => ({
 });
 
 export const bindingDelete = id => (dispatch, getState) => {
-  effectsGetByBinding(getState(), id).forEach((e) => {
+  effects.getByBinding(getState(), id).forEach((e) => {
     dispatch(actions.effectDelete(e.id));
   });
   dispatch({
