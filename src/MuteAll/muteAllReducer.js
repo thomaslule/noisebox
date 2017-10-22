@@ -4,3 +4,5 @@ export default (state = false, action) => {
   }
   return state;
 };
+
+export const muteAllActive = state => state;

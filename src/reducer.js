@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import muteAllReducer from './MuteAll/muteAllReducer';
+import muteAllReducer, * as fromMuteAll from './MuteAll/muteAllReducer';
 import componentsReducer, * as fromComponents from './Components/componentsReducer';
 import connectionsReducer, * as fromConnections from './Connections/connectionsReducer';
 import bindingsReducer, * as fromBindings from './Bindings/bindingsReducer';
@@ -17,6 +17,9 @@ const rest = combineReducers({
 });
 
 export default (state, action) => rest(stateJson(state, action), action);
+
+export const muteAllActive = state =>
+  fromMuteAll.muteAllActive(state.muteAll);
 
 export const componentsGetNextId = (state, type) =>
   fromComponents.componentsGetNextId(state.components, type);
