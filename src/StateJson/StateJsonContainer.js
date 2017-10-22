@@ -1,13 +1,9 @@
 import { connect } from 'react-redux';
-import { changeStateJson } from './stateJsonActions';
+import actions from '../actions';
 import StateJson from './StateJson';
 
 const mapStateToProps = state => ({
-  state: JSON.stringify(state),
+  stateJson: JSON.stringify(state),
 });
 
-const mapDispatchToProps = {
-  onChange: changeStateJson,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(StateJson);
+export default connect(mapStateToProps, actions)(StateJson);

@@ -1,4 +1,4 @@
-export const changeStateJson = value => ({
-  type: 'STATE_JSON_CHANGED',
-  value,
+export const stateJsonChange = stateJson => ({
+  type: 'STATE_JSON_CHANGE',
+  stateJson,
 });

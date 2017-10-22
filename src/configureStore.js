@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import reducer from './reducer';
 import noise from './noise';
 import { errorAction, noErrorAction } from './Error/errorActions';
-import { changeStateJson } from './StateJson/stateJsonActions';
+import actions from './actions';
 import { unzip } from './zip';
 
 export default () => {
@@ -23,7 +23,7 @@ export default () => {
   if (window.location.hash.length > 1) {
     const stateJson = unzip(window.location.hash.substring(1));
     window.history.pushState('', document.title, window.location.pathname + window.location.search);
-    store.dispatch(changeStateJson(stateJson));
+    store.dispatch(actions.stateJsonChange(stateJson));
   }
 
   noise(store.getState());

@@ -1,4 +1,4 @@
 export default (state, action) => {
-  if (action.type === 'STATE_JSON_CHANGED') return JSON.parse(action.value);
+  if (action.type === 'STATE_JSON_CHANGE') return JSON.parse(action.stateJson);
   return state;
 };
