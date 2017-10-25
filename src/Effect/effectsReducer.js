@@ -37,7 +37,7 @@ const effectReducer = (state = {}, action) => {
   return state;
 };
 
-export default (state = [], action) => {
+export default (state = {}, action) => {
   if (action.type === 'EFFECT_DELETE') {
     return omit(state, action.id);
   }

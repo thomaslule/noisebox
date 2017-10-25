@@ -17,7 +17,7 @@ const componentReducer = (state, action) => {
   return state;
 };
 
-export default (state = [], action) => {
+export default (state = {}, action) => {
   if (action.type === 'COMPONENT_DELETE') {
     return omit(state, action.id);
   }
