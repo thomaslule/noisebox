@@ -20,16 +20,16 @@ export default ({
         <Select
           label="From"
           value={connection.fromComponent}
-          onChange={e => connectionChangeFrom(connection.id, e.target.value)}
+          onChange={value => connectionChangeFrom(connection.id, value)}
           options={allComponentIds.map(c => ({ text: c, value: c }))}
         />
         <Select
           label="To"
           value={toSelectValueIndex}
-          onChange={e => connectionChangeTo(
+          onChange={value => connectionChangeTo(
             connection.id,
-            allInputs[e.target.value].componentId,
-            allInputs[e.target.value].input,
+            allInputs[value].componentId,
+            allInputs[value].input,
           )}
           options={toSelectOptions}
         />

@@ -16,13 +16,13 @@ export default ({
     <Select
       label="Component"
       value={effect.componentId}
-      onChange={e => effectChangeComponent(effect.id, e.target.value)}
+      onChange={value => effectChangeComponent(effect.id, value)}
       options={allComponentIds.map(e => ({ text: e, value: e }))}
     />
     <Select
       label="Effect type"
       value={effect.effectTypeId}
-      onChange={e => effectChangeEffectType(effect.id, e.target.value)}
+      onChange={value => effectChangeEffectType(effect.id, value)}
       options={availableEffectTypeIds.map(e => ({ text: e, value: e }))}
     />
     {paramFields.map(param => (
