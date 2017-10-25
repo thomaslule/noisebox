@@ -1,14 +1,16 @@
-import { applyMiddleware, createStore } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
-import reducer, { error } from './reducer';
+import persistState from 'redux-localstorage';
+import reducer, { persistPaths, error } from './reducer';
 import noise from './noise';
 import actions from './actions';
 import { unzip } from './zip';
 import { onConnect, onDisconnect } from './controller';
 
 export default () => {
-  const store = createStore(reducer, applyMiddleware(thunk, logger));
+  const enhancer = compose(applyMiddleware(thunk, logger), persistState(persistPaths()));
+  const store = createStore(reducer, enhancer);
 
   store.subscribe(() => {
     const state = store.getState();

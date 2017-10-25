@@ -28,6 +28,7 @@ export default combineReducers({
   deadzone: deadzoneReducer,
 });
 
+export const persistPaths = () => ['setup', 'muteAll', 'deadzone'];
 export const setupJson = reExport(fromSetupJson, 'setup');
 export const components = reExport(fromComponents, 'setup', 'components');
 export const bindings = reExport(fromBindings, 'setup', 'bindings');
