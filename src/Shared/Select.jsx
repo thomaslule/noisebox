@@ -9,7 +9,7 @@ export default ({
     <Col md={9}>
       <FormControl
         value={value}
-        onChange={onChange}
+        onChange={e => onChange(e.target.value)}
         componentClass="select"
       >
         {options.map(o => <option value={o.value} key={o.value}>{o.text}</option>)}

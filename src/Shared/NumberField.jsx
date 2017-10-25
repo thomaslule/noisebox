@@ -9,7 +9,7 @@ export default ({
     <Col md={9}>
       <FormControl
         type="number"
-        onChange={onChange}
+        onChange={e => onChange(Number(e.target.value))}
         {...rest}
       />
     </Col>

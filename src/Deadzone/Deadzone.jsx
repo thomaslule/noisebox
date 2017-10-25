@@ -6,7 +6,7 @@ export default ({ deadzone, deadzoneChange }) => (
   <Panel header="Deadzone">
     <Form horizontal onSubmit={e => e.preventDefault()}>
       <NumberField
-        onChange={e => deadzoneChange(e.target.value)}
+        onChange={deadzoneChange}
         value={deadzone}
         step={0.01}
         min={0}
