@@ -1,7 +1,7 @@
 import React from 'react';
 import { Badge } from 'react-bootstrap';
 
-export const Gamepad = ({ id }) =>
+const Gamepad = ({ id }) =>
   <span><span role="img" aria-label="gamepad">🎮</span><Badge>{id}</Badge></span>;
 
 export default ({
