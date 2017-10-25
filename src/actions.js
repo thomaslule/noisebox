@@ -6,6 +6,7 @@ import * as muteAllActions from './MuteAll/muteAllActions';
 import * as setupJsonActions from './SetupJson/setupJsonActions';
 import * as errorActions from './Error/errorActions';
 import * as gamepadsActions from './Gamepads/gamepadsActions';
+import * as deadzoneActions from './Deadzone/deadzoneActions';
 
 export default {
   ...bindingsActions,
@@ -16,4 +17,5 @@ export default {
   ...setupJsonActions,
   ...errorActions,
   ...gamepadsActions,
+  ...deadzoneActions,
 };

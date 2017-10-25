@@ -32,8 +32,6 @@ if (!gamepad.init()) {
   console.error('unsupported browser');
 }
 
-gamepad.deadzone = 0.1;
-
 export const onPress = (gamepadIndex, buttonName, callback) => {
   gamepad.bind(Gamepad.Event.BUTTON_DOWN, (e) => {
     if (e.gamepad.index === gamepadIndex && e.control === buttonName) callback();
@@ -67,6 +65,10 @@ export const resetBindings = () => {
   gamepad.unbind();
   gamepad.bind(Gamepad.Event.CONNECTED, onConnectHandler);
   gamepad.bind(Gamepad.Event.DISCONNECTED, onDisconnectHandler);
+};
+
+export const setDeadzone = (value) => {
+  gamepad.deadzone = value;
 };
 
 export const buttonsList = () => cloneDeep(buttons);

@@ -1,8 +1,8 @@
 import Tone from 'tone';
-import { components, connections, effects, bindings, muteAll, error } from './reducer';
+import { components, connections, effects, bindings, muteAll, error, deadzone } from './reducer';
 import { createNoiseComponent } from './componentTypesDictionary';
 import { createEffect } from './effectTypesDictionary';
-import { resetBindings, onPress, onRelease, onMove } from './controller';
+import { resetBindings, setDeadzone, onPress, onRelease, onMove } from './controller';
 import { get } from './actionsDictionary';
 
 let noiseComponents = [];
@@ -33,6 +33,7 @@ export default (params) => {
   });
 
   resetBindings();
+  setDeadzone(deadzone.get(params));
 
   effects.getAll(params).forEach((effect) => {
     const comp = noiseComponents.find(c => c.id === effect.component);
