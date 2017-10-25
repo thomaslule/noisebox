@@ -1,15 +1,19 @@
 import React from 'react';
-import { Form, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { Panel, Form, FormGroup, Col, ControlLabel, FormControl } from 'react-bootstrap';
 
 export default ({ stateJson, stateJsonChange }) => (
-  <Form onSubmit={e => e.preventDefault()}>
-    <FormGroup controlId="state">
-      <ControlLabel>Config</ControlLabel>
-      <FormControl
-        componentClass="textarea"
-        value={stateJson}
-        onChange={e => stateJsonChange(e.target.value)}
-      />
-    </FormGroup>
-  </Form>
+  <Panel header="Config">
+    <Form onSubmit={e => e.preventDefault()}>
+      <FormGroup controlId="state">
+        <Col componentClass={ControlLabel} md={3}>Config as json</Col>
+        <Col md={9}>
+          <FormControl
+            componentClass="textarea"
+            value={stateJson}
+            onChange={e => stateJsonChange(e.target.value)}
+          />
+        </Col>
+      </FormGroup>
+    </Form>
+  </Panel>
 );
