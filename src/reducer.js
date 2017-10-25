@@ -9,6 +9,7 @@ import errorReducer, * as fromErrors from './Error/errorReducer';
 import setupJsonReducer, * as fromSetupJson from './SetupJson/setupJsonReducer';
 import gamepadsReducer, * as fromGamepads from './Gamepads/gamepadsReducer';
 import deadzoneReducer, * as fromDeadzone from './Deadzone/deadzoneReducer';
+import clearSetupReducer from './ClearSetup/clearSetupReducer';
 
 const setupReducer = combineReducers({
   components: componentsReducer,
@@ -17,16 +18,18 @@ const setupReducer = combineReducers({
   effects: effectsReducer,
 });
 
-const setupWithJsonReducer = (state, action) =>
+const rootSetupReducer = (state, action) =>
   setupReducer(setupJsonReducer(state, action), action);
 
-export default combineReducers({
-  setup: setupWithJsonReducer,
+const appReducer = combineReducers({
+  setup: rootSetupReducer,
   muteAll: muteAllReducer,
   error: errorReducer,
   gamepads: gamepadsReducer,
   deadzone: deadzoneReducer,
 });
+
+export default (state, action) => appReducer(clearSetupReducer(state, action), action);
 
 export const persistPaths = () => ['setup', 'muteAll', 'deadzone'];
 export const setupJson = reExport(fromSetupJson, 'setup');

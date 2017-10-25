@@ -9,10 +9,11 @@ import Deadzone from './Deadzone';
 import Bindings from './Bindings';
 import ShareLink from './ShareLink';
 import SetupJson from './SetupJson';
+import ClearSetup from './ClearSetup';
 
 export default () => (
   <Grid>
-    <PageHeader>noisebox <Gamepads /></PageHeader>
+    <PageHeader>noisebox <Gamepads /><ClearSetup /></PageHeader>
     <Error />
     <Row>
       <Col md={6}><MuteAll /><Components /><Connections /></Col>

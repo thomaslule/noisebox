@@ -7,6 +7,7 @@ import * as setupJsonActions from './SetupJson/setupJsonActions';
 import * as errorActions from './Error/errorActions';
 import * as gamepadsActions from './Gamepads/gamepadsActions';
 import * as deadzoneActions from './Deadzone/deadzoneActions';
+import * as clearSetupActions from './ClearSetup/clearSetupActions';
 
 export default {
   ...bindingsActions,
@@ -18,4 +19,5 @@ export default {
   ...errorActions,
   ...gamepadsActions,
   ...deadzoneActions,
+  ...clearSetupActions,
 };
