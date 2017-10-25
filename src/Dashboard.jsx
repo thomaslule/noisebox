@@ -11,10 +11,10 @@ import SetupJson from './SetupJson';
 
 export default () => (
   <Grid>
-    <PageHeader>noisebox <Gamepads /><MuteAll /></PageHeader>
+    <PageHeader>noisebox <Gamepads /></PageHeader>
     <Error />
     <Row>
-      <Col md={6}><Components /><Connections /></Col>
+      <Col md={6}><MuteAll /><Components /><Connections /></Col>
       <Col md={6}><Bindings /></Col>
     </Row>
     <Row>
