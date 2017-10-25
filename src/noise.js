@@ -3,6 +3,7 @@ import { components, connections, effects, bindings, muteAll, error } from './re
 import { createNoiseComponent } from './componentTypesDictionary';
 import { createEffect } from './effectTypesDictionary';
 import { resetBindings, onPress, onRelease, onMove } from './controller';
+import { get } from './actionsDictionary';
 
 let noiseComponents = [];
 
@@ -36,11 +37,11 @@ export default (params) => {
   effects.getAll(params).forEach((effect) => {
     const comp = noiseComponents.find(c => c.id === effect.component);
     const effectToApply = createEffect(effect.effectType, effect.params, comp);
-    bindings.getById(params, effect.binding).actions.forEach((action) => {
-      const [gesture, button] = action.split(' ');
-      if (gesture === 'press') onPress(button, effectToApply);
-      if (gesture === 'release') onRelease(button, effectToApply);
-      if (gesture === 'move') onMove(button, effectToApply);
+    bindings.getById(params, effect.binding).actions.forEach((actionId) => {
+      const action = get(actionId);
+      if (action.gesture === 'press') onPress(action.gamepad - 1, action.button, effectToApply);
+      if (action.gesture === 'release') onRelease(action.gamepad - 1, action.button, effectToApply);
+      if (action.gesture === 'move') onMove(action.gamepad - 1, action.button, effectToApply);
     });
   });
 };

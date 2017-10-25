@@ -34,21 +34,21 @@ if (!gamepad.init()) {
 
 gamepad.deadzone = 0.1;
 
-export const onPress = (buttonName, callback) => {
+export const onPress = (gamepadIndex, buttonName, callback) => {
   gamepad.bind(Gamepad.Event.BUTTON_DOWN, (e) => {
-    if (e.control === buttonName) callback();
+    if (e.gamepad.index === gamepadIndex && e.control === buttonName) callback();
   });
 };
 
-export const onRelease = (buttonName, callback) => {
+export const onRelease = (gamepadIndex, buttonName, callback) => {
   gamepad.bind(Gamepad.Event.BUTTON_UP, (e) => {
-    if (e.control === buttonName) callback();
+    if (e.gamepad.index === gamepadIndex && e.control === buttonName) callback();
   });
 };
 
-export const onMove = (controlName, callback) => {
+export const onMove = (gamepadIndex, controlName, callback) => {
   gamepad.bind(Gamepad.Event.AXIS_CHANGED, (e) => {
-    if (e.axis === controlName) callback(e.value);
+    if (e.gamepad.index === gamepadIndex && e.axis === controlName) callback(e.value);
   });
 };
 
