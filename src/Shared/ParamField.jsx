@@ -1,10 +1,10 @@
 import React from 'react';
-import { Select, NumberField, SwitchButton } from './';
+import { Select, TextField, SwitchButton } from './';
 
 export default ({ param, value, onChange }) => {
   if (param.type === 'number') {
     return (
-      <NumberField
+      <TextField
         key={param.name}
         label={param.text}
         value={value}
